@@ -68,4 +68,6 @@ theme: cactus-dark
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
-  type:
+  type: github
+  repository: https://github.com/tarunbatra/tarunbatra.github.io.git
+  branch: master
