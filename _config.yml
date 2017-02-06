@@ -71,6 +71,6 @@ cname: tarunbatra.com
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
-  type: github
+  type: git
   repository: https://github.com/tarunbatra/tarunbatra.github.io.git
   branch: master
