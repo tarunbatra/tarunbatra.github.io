@@ -65,6 +65,9 @@ pagination_dir: page
 ## Themes: https://hexo.io/themes/
 theme: cactus-dark
 
+# Set the domain for CNAME record
+cname: tarunbatra.com
+
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
