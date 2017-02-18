@@ -9,6 +9,6 @@ subtitle: This article does not exist...
 ---
 <br/>
 <br/>
-![Not Found](/images/404.png)
+![Not Found](/data/images/404.png)
 
 # Nothing here! Check if the URL is correct.
