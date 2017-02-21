@@ -65,6 +65,14 @@ pagination_dir: page
 ## Themes: https://hexo.io/themes/
 theme: cactus-dark
 
+#RSS by hexo-generator-feed plugin
+feed:
+  type: atom
+  path: atom.xml
+  limit: 20
+  hub:
+  content:
+
 # Set the domain for CNAME record
 cname: tarunbatra.com
 
