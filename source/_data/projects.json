@@ -1,12 +1,12 @@
 [
     {
-       "name":"pub-sub-amqp",
-       "url":"https://tarunbatra.github.io/pub-sub-amqp",
-       "desc":"An easy to use, no frills module allowing inter-process publish/subscribe communication"
+       "name":"password-validator",
+       "url":"/password-validator",
+       "desc":"Simple and intuitive module to validate passwords"
     },
     {
-       "name":"password-validator",
-       "url":"https://npmjs.com/package/password-validator",
-       "desc":"Simple and intuitive module to validate passwords"
+      "name":"pub-sub-amqp",
+      "url":"/pub-sub-amqp",
+      "desc":"An easy to use, no frills module allowing inter-process publish/subscribe communication"
     }
 ]
