@@ -1,12 +1,12 @@
 ---
-title: Why should you use named functions in JavaScript
+title: Why you should use named functions in JavaScript
 date: 2017-02-27 00:59:36
 tags:
   - javascript
   - styleguide
 category:
   - javascript
-photos: data/images/why-should-you-use-named-functions-in-javascript/cover.jpeg
+photos: data/images/why-you-should-use-named-functions-in-javascript/cover.jpeg
 ---
 
 JavaScript functions can be categorized into *named* or *anonymous* on the basis of the value of their __name__ property. A named function can be declared as follows:
