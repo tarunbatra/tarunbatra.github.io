@@ -1,12 +1,12 @@
 ---
-title: Why you should use named JavaScript functions
+title: Why should you use named functions in JavaScript
 date: 2017-02-27 00:59:36
 tags:
   - javascript
   - styleguide
 category:
   - javascript
-photos: data/images/why-you-should-use-named-javaScript-functions/cover.jpeg
+photos: data/images/why-should-you-use-named-functions-in-javascript/cover.jpeg
 ---
 
 JavaScript functions can be categorized into *named* or *anonymous* on the basis of the value of their __name__ property. A named function can be declared as follows:
@@ -15,16 +15,16 @@ function add(a, b) {
   return a + b;
 }
 
-console.log(add.name) // -> "add"
+console.log(add.name) // => "add"
 ```
 <br>
-All other ways, including much touted ES2015's [Arrow functions](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Functions/Arrow_functions) produce anonymous functions. One of these ways is:
+All other ways, including ES2015's much-touted [Arrow functions](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Functions/Arrow_functions) produce anonymous functions. One of these ways is:
 ```js
 var add = function (a, b) {
   return a + b;
 }
 
-console.log(add.name) // -> ""
+console.log(add.name) // => ""
 ```
 __NOTE__: If you tried the above code in Chrome Dev Tools, you would've noticed that the __name__ of the function is "add" even in the case of anonymous function. That's because modern-day interpreters are smart enough to recognize the name from the expression.
 
@@ -32,9 +32,9 @@ Now, what's special about __named functions__?
 
 ## Make sense with error stacks
 
-Error and call stacks are a great help in debugging code. But the use of anonymous functions, reduces the usefulness of the call stacks. We all have seen the infamous __(anonymous)__ littered over the stack trace.
+Error and call stacks are a great help in debugging code. But the use of anonymous functions reduces the usefulness of the call stacks. We all have seen the infamous __(anonymous)__ littered over the stack trace.
 
-Of course, one can always look at the line number of the error, but with the ever increasing pre-processing on the code (read Babel, WebPack, Browserify), this is not a reliable method.
+Of course, one can always look at the line number of the error, but with the ever-increasing pre-processing on the code (read Babel, WebPack, Browserify), this is not a reliable method.
 
 ### Error stack using anonymous function
 <p data-height="252" data-theme-id="dark" data-slug-hash="OpVLwZ" data-default-tab="js" data-user="tbking" data-embed-version="2" data-pen-title="Anon Func" class="codepen">See the Pen <a href="https://codepen.io/tbking/pen/OpVLwZ/">Anon Func</a> by Tarun Batra (<a href="http://codepen.io/tbking">@tbking</a>) on <a href="http://codepen.io">CodePen</a>.</p>
@@ -48,7 +48,7 @@ JavaScript ecosystem is [already confusing](https://hackernoon.com/how-it-feels-
 
 ## Use methods before declaration
 
-JavaScript while interpreting code looks for statements starting with __function__ keyword (i.e. named function expressions) and move them on the top, before running the code. This is called [Hoisting](https://developer.mozilla.org/en-US/docs/Glossary/Hoisting).
+While interpreting code, JavaScript looks for statements starting with __function__ keyword (i.e. named function expressions) and move them to the top. This is called [Hoisting](https://developer.mozilla.org/en-US/docs/Glossary/Hoisting).
 
 So practically, a named function is available even before it's declared, making the following code valid.
 
@@ -68,7 +68,7 @@ var add = function (a, b) {
 }
 ```
 
-## Better readability
+## Improves readability
 
 It's fairly difficult to understand a callback function's purpose in first glance. That's what makes [callback hell](http://callbackhell.com/) the problem it is.
 Look at the following jQuery code.
@@ -86,7 +86,7 @@ $('form').submit(function hitAPI () {
 
 ## Conclusion
 
-In my opinion there's no reason why one should not use named functions whenever possible. Most of the JavaScript style guides out there don't give due importance to them. [ESLint](http://eslint.org/) users can use [func-name](http://eslint.org/docs/rules/func-names) rule in their projects to require the use of named functions.
+In my opinion, there's no reason one should not use named functions when possible. Most of the JavaScript style guides out there don't give due importance to them. [ESLint](http://eslint.org/) users can use [func-names](http://eslint.org/docs/rules/func-names) rule in their projects to require the use of named functions, and enjoy the benefits.
 
 <br>
 
