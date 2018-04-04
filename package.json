@@ -26,7 +26,8 @@
     "clean": "hexo clean",
     "build": "hexo generate",
     "start": "hexo server",
-    "deploy": "hexo deploy"
+    "deploy": "hexo deploy",
+    "test": "exit 0"
   },
   "repository": {
     "type": "git",
