@@ -14,5 +14,6 @@ I explained cryptocurrencies, their tech and financial sides in an article for [
 [codebrahma-url]: https://codebrahma.com
 [blog-url]: https://codebrahma.com/introduction-to-cryptocurrencies/
 
+<br>
 **❤️ code**
 

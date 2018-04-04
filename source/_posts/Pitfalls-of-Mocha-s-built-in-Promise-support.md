@@ -125,9 +125,7 @@ describe('the promise resolves unexpectedly', () => {
 The above test tries to assert that the catch block was called using [Chai][chai-url] and [Sinon][sinon-url], and fails.
 
 If you know other elegant ways to avoid this behavior, please let me know in the comments!
-<br>
 
-**❤️ code**
 [mocha-url]: https://mochajs.org
 [node-url]: https://nodejs.org
 [chai-url]: http://chaijs.com/
@@ -135,3 +133,6 @@ If you know other elegant ways to avoid this behavior, please let me know in the
 [mocha-promise]: https://mochajs.org/#working-with-promises
 [mocha-done]: https://mochajs.org/#asynchronous-code
 [negative-testing]: https://en.wikipedia.org/wiki/Negative_Testing
+
+<br>
+**❤️ code**
