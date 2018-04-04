@@ -20,6 +20,4 @@ A Computer Science and Engineering graduate from **SRM University**, Chennai.
 
 ## Contact
 
-Reach out to me at [me@tarunbatra.com](mailto:me@tarunbatra.com)
-
-Find my public key [here](/public-key).
+Reach out to me at [me@tarunbatra.com](mailto:me@tarunbatra.com).
