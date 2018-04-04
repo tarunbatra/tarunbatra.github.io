@@ -1,6 +1,6 @@
 ---
 title: Introduction to Cryptocurrencies
-date: 2017-08-17 00:50:00
+date: 2016-08-17 00:50:00
 tags:
   - cryptocurrencies
   - blockchain
