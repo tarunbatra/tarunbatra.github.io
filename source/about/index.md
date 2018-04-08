@@ -11,13 +11,13 @@ I support [open source ideology](https://en.wikipedia.org/wiki/Open-source_softw
 
 ### Software Developer at Smallcase [Nov 2017 - Present]
 
-At Smallcase, I look after the order placement flow of smallcases to the existing integrations along with adding new integrations to the platform.
+At [Smallcase](https://smallcase.com), I look after the order placement flow of smallcases to the existing integrations along with adding new integrations to the platform.
 
 Apart from that I'm also responsible for the timely execution of scheduled housekeeping jobs on the servers.
 
 ### Software Developer at Codebrahma [Apr 2016 - Oct 2017]
 
-During my time at Codebrahma, I worked on various projects mostly in the [Node.js](https://nodejs.org) realm. Projects ranged from mortgage settlement platform for a client in US to a generic game server for a popular mobile gaming client.
+During my time at [Codebrahma](https://codebrahma.com), I worked on various projects mostly in the [Node.js](https://nodejs.org) realm. Projects ranged from mortgage settlement platform for a client in US to a generic game server for a popular mobile gaming client.
 
 I got my hands dirty in Express, Hapi.js, Meteor, MongoDB, DynamoDB, Blaze, AWS Elasticbeanstalk, AWS Lambda, etc.
 
