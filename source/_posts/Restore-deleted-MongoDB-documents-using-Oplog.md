@@ -10,7 +10,7 @@ photos: data/images/Restore-deleted-MongoDB-documents-using-Oplog/cover.png
 ---
 <sup>Source: [Dilbert][dilbert-url]</sup>
 
-Recently I found myself in a team trying to restore corrupted data. A query gone wrong had erased valuable data and it needed to be restored. I'm writing this blog to jot down my learnings from that incident for my future self and others.
+Recently I found myself trying to restore corrupted data to it's original form. A query gone wrong had erased valuable data from a MongoDB collection and it needed to be restored. This blog is a means to note my learnings from that incident for my future self and others.
 
 #### Oplog is amazing
 
@@ -76,8 +76,9 @@ Hope this helps!
 <br>
 
 ---
-<sub>*This post is inpired from resources like [Asya's stackoverflow answer](https://stackoverflow.com/a/15451297/2751596) which we used to solve the problem at hand.*</sub>
+<sub>*This post is inpired from resources like [Asya's stackoverflow answer][so-answer-url] which was used to solve the problem at hand.*</sub>
 
 [dilbert-url]: http://dilbert.com/strip/2013-07-05
 [mongo-docs-url]: https://docs.mongodb.com/manual/core/replica-set-oplog/
 [oplog-dump-anchor-url]: #Take-a-dump-of-oplog
+[so-answer-url]: https://stackoverflow.com/a/15451297/2751596
