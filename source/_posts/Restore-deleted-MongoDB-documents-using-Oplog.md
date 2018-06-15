@@ -27,7 +27,7 @@ Restore whatever latest backup you have before the the data was corrupted. It'll
 ## Find the faulty query/queries
 
 Now you need to browse the contents of the Oplog and look for the query which corrupted the data in the first place. Oplog is a special collection, but still a collection. So, you can query it to narrow down your results like this:
-```sh mongo shell
+```mongo mongodb shell
 Replica:PRIMARY> use local
 switched to db local
 Replica:PRIMARY> db.oplog.rs.find()
