@@ -63,7 +63,56 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: cactus-dark
+theme: cactus
+
+theme_config:
+  #look and nav
+  colorscheme: classic
+  post_count: 5
+  highlight: github
+  projects_url: https://github.com/tarunbatra
+  nav:
+    Home: /
+    About: /about/
+    Blog: /blog/
+    Projects: https://github.com/tarunbatra
+    # Contact: mailto:me@tarunbatra.com
+  social_links:
+    github: https://github.com/tarunbatra
+    stack-overflow: https://stackoverflow.com/users/story/2751596
+    twitter: https://twitter.com/tarunbatra
+    linkedin: https://www.linkedin.com/in/tarunbatra00
+  gravatar:
+      email: tarun.batra00@gmail.com
+
+  #meta
+  logo:
+      enabled: true
+      width: 50
+      height: 50
+      url: # /meta/logo.png
+      gravatar: true
+  favicon:
+    # eg. generate with http://realfavicongenerator.net/
+    desktop:
+      url: /meta/favicon.ico
+      gravatar: false
+    android:
+      url: /meta/favicon-192x192.png
+      gravator: false
+    apple:
+      url: /meta/apple-touch-icon.png
+      gravator: false
+
+  # Plugins
+  google_analytics:
+    enabled: true
+    id: 'UA-47797084-2'
+  disqus:
+    enabled: true
+    shortname: tarunbatra
+  rss:
+
 
 #RSS by hexo-generator-feed plugin
 feed:
