@@ -3,15 +3,17 @@ title: about
 date: 2018-04-08 15:00:00
 ---
 
-I'm a tech enthusiast, fascinated by Computer Science, and currently a Node.js developer. Apart from that, I'm also into roadtrips on cruisers.
+I'm a tech enthusiast, a Computer Science grad and currently a Node.js developer. Apart from that, I'm also into roadtrips on cruisers.
 
 I support [open source ideology](https://en.wikipedia.org/wiki/Open-source_software_movement), projects and community. Find source code for this site [here](https://github.com/tarunbatra/tarunbatra.github.io). 🙂
+
+å![Me](/data/images/about.png)
 
 ## Work
 
 ### Software Developer at Smallcase [Nov 2017 - Present]
 
-At [Smallcase](https://smallcase.com), I look after the order placement flow of smallcases to the existing integrations along with adding new integrations to the platform.
+At [Smallcase](https://smallcase.com), I look after the order placement and transactional flow of smallcases with the existing broker integrations along with adding new broker integrations to the platform.
 
 Apart from that I'm also responsible for the timely execution of scheduled housekeeping jobs on the servers.
 
