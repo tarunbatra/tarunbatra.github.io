@@ -7,7 +7,7 @@ I'm a tech enthusiast, a Computer Science grad and currently a Node.js developer
 
 I support [open source ideology](https://en.wikipedia.org/wiki/Open-source_software_movement), projects and community. Find source code for this site [here](https://github.com/tarunbatra/tarunbatra.github.io). 🙂
 
-å![Me](/data/images/about.png)
+![Me](/data/images/about.png)
 
 ## Work
 
