@@ -6,7 +6,7 @@ tags:
   - tests
 category:
   - javascript
-photos: data/images/Pitfalls-of-Mocha-s-built-in-Promise-support/cover.png
+photos: /data/images/Pitfalls-of-Mocha-s-built-in-Promise-support/cover.png
 ---
 
 [Mocha][mocha-url] is the leader when it comes to testing frameworks in [Node][node-url], and it's great. I use it in all my projects, and I'm sure many others do too.

@@ -6,7 +6,7 @@ tags:
   - mongo
 category:
   - data
-photos: data/images/Restore-deleted-MongoDB-documents-using-Oplog/cover.png
+photos: /data/images/Restore-deleted-MongoDB-documents-using-Oplog/cover.png
 ---
 <sup>Source: [Dilbert][dilbert-url]</sup>
 

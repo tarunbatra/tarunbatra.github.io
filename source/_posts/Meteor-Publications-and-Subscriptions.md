@@ -6,7 +6,7 @@ tags:
   - javascript
 category:
   - javascript
-photos: data/images/Meteor-Publications-and-Subscriptions/cover.jpeg
+photos: /data/images/Meteor-Publications-and-Subscriptions/cover.jpeg
 ---
 
 I explained Meteor publications and subscriptions in an article for [Codebrahma][codebrahma-url] here: [Meteor Publications and Subscriptions][blog-url].

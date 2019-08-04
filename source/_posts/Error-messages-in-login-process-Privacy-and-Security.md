@@ -6,7 +6,7 @@ tags:
   - architecture
 category:
   - security
-photos: data/images/Error-messages-in-login-process-Privacy-and-Security/cover.jpeg
+photos: /data/images/Error-messages-in-login-process-Privacy-and-Security/cover.jpeg
 ---
 
 Most of us, while developing sites swear to the rule of making error messages shown to the end-user as specific as possible, which goes a long way in creating a friendly UX. But the same rule if used in the login flow, can have significant privacy and security implications. On entering wrong login credentials, most sites show variations of `Invalid username/password` error at the login screen.

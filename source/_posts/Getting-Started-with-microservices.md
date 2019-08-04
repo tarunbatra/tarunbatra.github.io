@@ -6,7 +6,7 @@ tags:
   - architecture
 category:
   - architecture
-photos: data/images/Getting-Started-with-Microservices/cover.jpeg
+photos: /data/images/Getting-Started-with-Microservices/cover.jpeg
 ---
 I documented my understanding of microservices, their pros and cons in an article for [Codebrahma][codebrahma-url] here: [Microservices for beginners, how to get started with right tools][blog-url].
 
