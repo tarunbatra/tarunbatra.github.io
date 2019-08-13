@@ -85,10 +85,7 @@ theme_config:
   gravatar:
       email: tarun.batra00@gmail.com
   open_graph:
-    fb_app_id: 526267004783173
-    fb_admins: 10219915283575236
-    twitter_id: @tarunbatra
-    google_plus:
+    twitter_id: tarunbatra
 
 
   #meta
