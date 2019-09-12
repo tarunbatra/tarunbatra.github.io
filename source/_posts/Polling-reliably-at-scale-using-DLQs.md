@@ -9,7 +9,7 @@ category:
   - architecture
 photos: /data/images/Polling-reliably-at-scale-using-DLQs/cover.png
 description: How we bid goodbye to long waiting times during order execution on smallcase platform.
-canonical_path: https://blog.smallcase.com/polling-reliably-at-scale-using-dlqs/
+canonical_url: https://blog.smallcase.com/polling-reliably-at-scale-using-dlqs/
 ---
 <sub>Originally published at [blog.smallcase.com][smallcase-blog-url] on July 16, 2019.</sub>
 <br>
