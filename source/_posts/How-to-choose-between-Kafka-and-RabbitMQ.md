@@ -22,6 +22,8 @@ With respect to message routing capabilities, Kafka is very light. Producers pro
 
 **RabbitMQ has very strong routing capabilities**. It can route the messages through a complex system of exchanges and queues. Producers send messages to exchanges which act according to their configuration. For example, they can broadcast the message to every queue connected with them, or deliver the message to some selected queues, or even expire the messages if not read in a stipulated time. Exchanges can also pass messages to other exchanges, making a wide variety of permutations possible. Consumers can listen to messages in a queue or a pattern of queues. Unlike Kafka, RabbitMQ pushes the messages to the consumers, so the consumers don't need to keep track of what they have read.
 
+!['RabbitMQ routing simulation'][rabbitmq-system-gif]
+<center><sup>RabbitMQ routing simulated using http://tryrabbitmq.com</sup></center>
 - - -
 
 ## Delivery guarantee
@@ -85,3 +87,5 @@ RabbitMQ offers complex use-cases which can not be realized with Kafka's simple 
 [kafka-transcations blog]: https://www.confluent.io/blog/transactions-apache-kafka/
 [kafka-streams-blog]: https://www.confluent.io/blog/enabling-exactly-once-kafka-streams/
 [smallcase-url]: https://smallcase.com
+
+[rabbitmq-system-gif]: /data/images/How-to-choose-between-Kafka-and-RabbitMQ/rabbitmq-system.gif
