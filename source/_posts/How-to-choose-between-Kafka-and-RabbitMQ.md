@@ -20,7 +20,8 @@ _Spoiler: We ended up using both for different use-cases._
 
 With respect to message routing capabilities, Kafka is very light. Producers produce messages to topics. Kafka logs the messages in its very simple data structure which resembles... a log! It can scale as much as the disk can. Topics can further have partitions (like sharding). Consumers connect to these partitions to read the messages. Kafka uses a pull-based approach. So, the onus of fetching messages and tracking offsets of read messages lies on consumers.
 
-**RabbitMQ has very strong routing capabilities**. It can route the messages through a complex system of exchanges and queues. Producers send messages to exchanges which act according to their configuration. For example, they can broadcast the message to every queue connected with them, or deliver the message to some selected queues, or even expire the messages if not read in a stipulated time. Exchanges can also pass messages to other exchanges, making a wide variety of permutations possible. Consumers can listen to messages in a queue or a pattern of queues. Unlike Kafka, RabbitMQ pushes the messages to the consumers, so the consumers don't need to keep track of what they have read.
+**RabbitMQ has very strong routing capabilities**. It can route the messages through a complex system of exchanges and queues. Producers send messages to exchanges which act according to their configuration. For example, they can broadcast the message to every queue connected with them, or deliver the message to some selected queues, or even expire the messages if not read in a stipulated time.
+Exchanges can also pass messages to other exchanges, making a wide variety of permutations possible. Consumers can listen to messages in a queue or a pattern of queues. Unlike Kafka, RabbitMQ pushes the messages to the consumers, so the consumers don't need to keep track of what they have read.
 
 !['RabbitMQ routing simulation'][rabbitmq-system-gif]
 <center><sup>RabbitMQ routing simulated using http://tryrabbitmq.com</sup></center>
@@ -68,9 +69,24 @@ Kafka uses sequential disk I/O to read chunks of the log in an orderly fashion. 
 
 - - -
 
+## Persistence
+Persistence of messages is another front where both of these tools can not be more different.
+
+Kafka is designed with persistent (or retention as they call it) in mind. A Kafka system can be configured to retain messages -- both delivered and undelivered, by either defining `log.retention.hours` or `log.retention.bytes`.
+Retaining messages doesn't effect the performance of Kafka. The consumers can then replay retained messages by changing the offset of messages they have read.
+
+RabbitMQ on the other hand, works very differently. Messages when inserted multiple queues, are duplicated in these queues. These copies are then governed independently of each other by the policy of the queues they are in, and the exchanges they are passing. So to persist the messages in RabbitMQ:
+  * queues and exchanges need to be made durable,
+  * messages produced need to be tagged as persistent by the producer
+Not to mention, this will have performance impact since disk is involved in an otherwise memory operation.
+
+- - -
+
 ## Conclusion
 
-RabbitMQ offers complex use-cases which can not be realized with Kafka's simple architecture. However, Kafka provides higher throughput in almost all cases. Apart from these differences, both of them provide similar capabilities like fault-tolerance, high availability, scalable, etc. Keeping this in mind, we at [smallcase][smallcase-url] used RabbitMQ for [consistent polling in our transactions system][rabbitmq-blog] and Kafka for making our notifications system quick and snappy.
+> RabbitMQ offers complex routing use-cases which can not be realized with Kafka's simple architecture. However, Kafka provides higher throughput and persistence of messages.
+
+Apart from these differences, both of them provide similar capabilities like fault-tolerance, high availability, scalable, etc. Keeping this in mind, we at [smallcase][smallcase-url] used RabbitMQ for [consistent polling in our transactions system][rabbitmq-blog] and Kafka for making our notifications system quick and snappy.
 
 ## References
 
