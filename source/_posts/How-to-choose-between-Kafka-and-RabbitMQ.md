@@ -86,7 +86,7 @@ Not to mention, this will have performance impact since disk is involved in an o
 
 > RabbitMQ offers complex routing use-cases which can not be realized with Kafka's simple architecture. However, Kafka provides higher throughput and persistence of messages.
 
-Apart from these differences, both of them provide similar capabilities like fault-tolerance, high availability, scalable, etc. Keeping this in mind, we at [smallcase][smallcase-url] used RabbitMQ for [consistent polling in our transactions system][rabbitmq-blog] and Kafka for making our notifications system quick and snappy.
+Apart from these differences, both of them provide similar capabilities like fault-tolerance, high availability, scalability, etc. Keeping this in mind, we at [smallcase][smallcase-url] used RabbitMQ for [consistent polling in our transactions system][rabbitmq-blog] and Kafka for making our notifications system quick and snappy.
 
 ## References
 
