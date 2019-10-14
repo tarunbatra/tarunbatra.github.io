@@ -18,7 +18,7 @@ _Spoiler: We ended up using both for different use-cases._
 
 ## Message Routing
 
-With respect to message routing capabilities, Kafka is very light. Producers produce messages to topics. Kafka logs the messages in its very simple data structure which resembles... a log! It can scale as much as the disk can. Topics can further have partitions (like sharding).
+With respect to message routing capabilities, Kafka is very light. Producers produce messages to topics. Topics can further have partitions (like sharding). Kafka logs the messages in its very simple data structure which resembles... a log! It can scale as much as the disk can.
 Consumers connect to these partitions to read the messages. Kafka uses a pull-based approach, so the onus of fetching messages and tracking offsets of read messages lies on consumers.
 
 **RabbitMQ has very strong routing capabilities**. It can route the messages through a complex system of exchanges and queues. Producers send messages to exchanges which act according to their configurations. For example, they can broadcast the message to every queue connected with them, or deliver the message to some selected queues, or even expire the messages if not read in a stipulated time.
@@ -48,7 +48,7 @@ Distributed systems can have 3 delivery semantics:
 Kafka provides exactly-once delivery between producer to the broker using idempotent producers (`enable.idempotence=true`). Exactly-once message delivery to the consumers is more complex. It is achieved at consumers end by using transactions API and only reading messages belonging to committed transactions (`isolation.level=read_committed`).
 To truly achieve this, consumers would need to avoid non-idempotent processing of messages in case a transaction has to be aborted, which is not always possible. **So, Kafka transactions are not very useful in my opinion.**
 
-In RabbitMQ, exactly-once delivery is not supported due to the combination of complex routing and the push-based delivery. Generally, it's recommended to use at-lease-once delivery with idempotent consumers.
+In RabbitMQ, exactly-once delivery is not supported due to the combination of complex routing and the push-based delivery. Generally, it's recommended to use at-least-once delivery with idempotent consumers.
 
 <sub><em>
 NOTE: Kafka Streams is an example of truely idempotent system, which it achieves by eliminating non-idempotent operations in a transaction. It, however is out of the scope of this article. I recommend reading ["Enabling Exactly-Once in Kafka Streams" by Confluent][kafka-streams-blog] if you want to dig in it further.
@@ -77,7 +77,7 @@ Persistence of messages is another front where both of these tools can not be mo
 Kafka is designed with persistent (or retention as they call it) in mind. A Kafka system can be configured to retain messages -- both delivered and undelivered, by configuring either `log.retention.hours` or `log.retention.bytes`.
 Retaining messages doesn't effect the performance of Kafka. The consumers can replay retained messages by changing the offset of messages they have read.
 
-RabbitMQ on the other hand, works very differently. Messages when inserted multiple queues, are duplicated in these queues. These copies are then governed independently of each other by the policy of the queues they are in, and the exchanges they are passing. So to persist the messages in RabbitMQ:
+RabbitMQ on the other hand, works very differently. Messages when delivered to multiple queues, are duplicated in these queues. These copies are then governed independently of each other by the policy of the queues they are in, and the exchanges they are passing. So to persist the messages in RabbitMQ:
   * queues and exchanges need to be made durable,
   * messages produced need to be tagged as persistent by the producer
 
