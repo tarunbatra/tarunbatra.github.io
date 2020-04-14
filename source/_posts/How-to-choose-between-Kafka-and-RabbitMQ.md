@@ -7,7 +7,7 @@ tags:
   - message-queue
 category:
   - comparison
-photos: https://res.cloudinary.com/tbking/image/upload/v1570820935/blog/rabbitmq-vs-kafka.jpg
+photos: /data/images/How-to-choose-between-Kafka-and-RabbitMQ/cover.jpg
 description: Kafka and RabbitMQ are two very popular message queues based on very different design principles. Which one of these suits your project?
 ---
 <sup>Image sourced from "[Comparison: Apache Kafka VS RabbitMQ](https://www.cloudamqp.com/blog/2017-01-09-apachekafka-vs-rabbitmq.html)" by [CloudAMQP](https://www.cloudamqp.com/).</sup>
