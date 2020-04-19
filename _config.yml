@@ -72,7 +72,7 @@ theme_config:
   highlight: github
   projects_url: https://github.com/tarunbatra
   nav:
-    Home: ./
+    Home: /
     About: ./about/
     Blog: ./blog/
     Projects: https://github.com/tarunbatra
