@@ -11,11 +11,9 @@ I support [open source ideology](https://en.wikipedia.org/wiki/Open-source_softw
 
 ## Work
 
-### Software Developer at Smallcase [Nov 2017 - Present]
+### Senior Software Developer at Smallcase [Nov 2017 - Present]
 
-At [Smallcase](https://smallcase.com), I look after the order placement and transactional flow of smallcases with the existing broker integrations along with adding new broker integrations to the platform.
-
-Apart from that I'm also responsible for the timely execution of scheduled housekeeping jobs on the servers.
+At [Smallcase](https://smallcase.com), we integrate with India's stock brokers to make investing easy. I look after these integrations and lead a team that make these integrations possible. Apart from that I'm also responsible for the transactions system and execution of scheduled jobs.
 
 ### Software Developer at Codebrahma [Apr 2016 - Oct 2017]
 
@@ -29,7 +27,7 @@ A Computer Science and Engineering graduate from **SRM University**, Chennai.
 
 * Been part of a research team aiming for a moonshot, literally. A nano-satellite to reach and orbit moon.
 
-* Presented a paper on [Addressing Security and Privacy Concerns on the Internet using HTTPS and TOR](http://slides.com/tarunbatra/onion_routing).
+* Presented my research on [Addressing Security and Privacy Concerns on the Internet using HTTPS and TOR](http://slides.com/tarunbatra/onion_routing).
 
 ## Contact
 
