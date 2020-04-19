@@ -75,7 +75,7 @@ theme_config:
     Home: /
     About: ./about/
     Blog: ./blog/
-    Projects: https://github.com/tarunbatra
+    # Projects: https://github.com/tarunbatra
     # Contact: mailto:me@tarunbatra.com
   social_links:
     github: https://github.com/tarunbatra
