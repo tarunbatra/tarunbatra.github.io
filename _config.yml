@@ -72,9 +72,9 @@ theme_config:
   highlight: github
   projects_url: https://github.com/tarunbatra
   nav:
-    Home: /
-    About: /about/
-    Blog: /blog/
+    Home: ./
+    About: ./about/
+    Blog: ./blog/
     Projects: https://github.com/tarunbatra
     # Contact: mailto:me@tarunbatra.com
   social_links:
@@ -98,13 +98,13 @@ theme_config:
   favicon:
     # eg. generate with http://realfavicongenerator.net/
     desktop:
-      url: /meta/favicon.ico
+      url: ./meta/favicon.ico
       gravatar: false
     android:
-      url: /meta/favicon-192x192.png
+      url: ./meta/favicon-192x192.png
       gravator: false
     apple:
-      url: /meta/apple-touch-icon.png
+      url: ./meta/apple-touch-icon.png
       gravator: false
 
   # Plugins
@@ -120,7 +120,7 @@ theme_config:
 #RSS by hexo-generator-feed plugin
 feed:
   type: atom
-  path: atom.xml
+  path: ./atom.xml
   limit: 20
   hub:
   content: true
