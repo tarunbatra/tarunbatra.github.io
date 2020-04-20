@@ -120,7 +120,7 @@ theme_config:
 #RSS by hexo-generator-feed plugin
 feed:
   type: atom
-  path: ./atom.xml
+  path: /atom.xml
   limit: 20
   hub:
   content: true
