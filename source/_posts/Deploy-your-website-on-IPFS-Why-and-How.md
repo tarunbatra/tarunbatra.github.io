@@ -99,9 +99,9 @@ IPNS (Inter-Planetary Name Service) also exists and is similar to DNSLink but it
 
 ![ENS records for tbking.eth][ens-records-image]
 
-I bought the domain `tbking.eth` and pointed it to the IPFS content of this site. It still needs to be updated every time I change the contents of my website. I'm not sure if there's any way to automate this yet. However, as of now, Fleek is working on ENS domains integration. I'll update here once that's out. If you know another way, let me know in the comments.
+I bought the domain `tbking.eth` and pointed it to the IPFS CID of this site. With changing content, the resolver record of the domain also needs to be updated every time to point at the new CID. Good thing is, Fleek has [recently][fleek-ens-release-link] integrated ENS. You can set Fleek as a controller for the domain and they will update the record automatically on each deploy.
 
-This was it. IPFS is perfect as the storage layer of the `Web 3.0`. Try for yourself, and if you liked this blog, share it and maybe pin it! :)
+Sweet! This was it. IPFS is perfect as the storage layer of the `Web 3.0`. Try for yourself, and if you liked this blog, share it, and maybe pin it! :)
 
 [tbking-eth-link]: http://tbking.eth.link
 [hosting-anchor-link]: #Hosting-on-IPFS
@@ -116,6 +116,7 @@ This was it. IPFS is perfect as the storage layer of the `Web 3.0`. Try for your
 [ipfs-companion-link]: https://github.com/ipfs-shipyard/ipfs-companion
 [ens-link]: https://ens.domains/
 [metamask-link]: https://metamask.io/
+[fleek-ens-release-link]: https://blog.fleek.co/posts/Fleek-Release-ENS-Domains
 
 [ipfs-desktop-image]: /data/images/Deploy-your-website-on-IPFS-Why-and-How/ipfs-desktop-file-add.png
 [pinata-pin-example-image]: /data/images/Deploy-your-website-on-IPFS-Why-and-How/pinata-pin-example.png
