@@ -116,6 +116,13 @@ theme_config:
     shortname: tarunbatra
   rss:
 
+  #ad
+  ad:
+    enabled: true,
+    network: 'codefund'
+    url: 'https://app.codefund.io/properties/867/funder.js'
+
+
 
 #RSS by hexo-generator-feed plugin
 feed:
