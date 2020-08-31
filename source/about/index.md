@@ -9,19 +9,25 @@ I support [open source ideology](https://en.wikipedia.org/wiki/Open-source_softw
 
 ![Me](https://tarunbatra.com/data/images/about.png)
 
-## Work
+# Work
 
-### Senior Software Developer at Smallcase [Nov 2017 - Present]
+## Back End Developer at Instabox, Stockholm [July 2020 - Present]
 
-At [Smallcase](https://smallcase.com), we integrate with India's stock brokers to make investing easy. I look after these integrations and lead a team that make these integrations possible. Apart from that I'm also responsible for the transactions system and execution of scheduled jobs.
+At [Instabox](https://instabox.se), I am looking after scaling and refactoring the merchant integrations using Node.js, Postgres and Bull Queue.
 
-### Software Developer at Codebrahma [Apr 2016 - Oct 2017]
+## Senior Software Developer at Smallcase, Bangalore [Nov 2017 - July 2020]
+
+At [Smallcase](https://smallcase.com), I worked closely with business and partner brokers to integrate with them. I lead a team of 3 developers that made these integrations possible. Apart from that I was also responsible for the transactions system and execution of scheduled background jobs.
+
+Used Node.js, MongoDB, Redis and RabbitMQ heavily along with some Kafka and Elasticsearch.
+
+## Software Developer at Codebrahma, Bangalore [Apr 2016 - Oct 2017]
 
 During my time at [Codebrahma](https://codebrahma.com), I worked on various projects mostly in the [Node.js](https://nodejs.org) realm. Projects ranged from mortgage settlement platform for a client in US to a generic game server for a popular mobile gaming client.
 
 I got my hands dirty in Express, Hapi.js, Meteor, MongoDB, DynamoDB, Blaze, AWS Elasticbeanstalk, AWS Lambda, etc.
 
-## Education
+# Education
 
 A Computer Science and Engineering graduate from **SRM University**, Chennai.
 
@@ -29,6 +35,6 @@ A Computer Science and Engineering graduate from **SRM University**, Chennai.
 
 * Presented my research on [Addressing Security and Privacy Concerns on the Internet using HTTPS and TOR](http://slides.com/tarunbatra/onion_routing).
 
-## Contact
+# Contact
 
 Reach out to me at [me@tarunbatra.com](mailto:me@tarunbatra.com).
