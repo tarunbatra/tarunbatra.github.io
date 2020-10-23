@@ -8,7 +8,9 @@ tags:
 category:
   - cryptocurrencies
 photos: /data/images/Introduction-to-Cryptocurrencies/cover.jpeg
+canonical_url: https://codebrahma.com/introduction-to-cryptocurrencies/
 ---
+<sub>Originally published for [Codebrahma](https://codebrahma.com/introduction-to-cryptocurrencies/) on Aug 17, 2016.</sub>
 
 Unless you've been living under a rock, you'd have heard about cryptocurrencies or Bitcoin atleast. There's a lot of buzz around it, but disproportionately less clarity regarding what it actually is. In this article we'll introduce ourselves to the fundamental principles of cryptocurrencies, clear the mist of confusion which surrounds them, and debunking some myths along the way too.
 
@@ -128,7 +130,7 @@ Rewards from coinbase transactions are halved after every 210,000 transactions. 
 
 **51% attack** is a largely feared attack in Bitcoin, where an attacker controls 51% of the computational resources of the network, allowing it to alter the "immutable" blockchain. It ain't plain theory, Read about Bitcoin's brush with it [here](http://www.coindesk.com/51-attacks-real-threat-bitcoin/).
 
-### Altcoins
+## Altcoins
 
 Cryptocurrencies other than Bitcoin are know as **altcoins**, or alternative to Bitcoin. Most of the altcoins are similar in principle to Bitcoin with some minor differences. [Litecoin](https://litecoin.org/), [Dogecoin](http://dogecoin.com/), [Namecoin](https://www.namecoin.org/) and Nxt are some prominent altcoins.
 
@@ -147,7 +149,7 @@ You can see stark difference in my bitcoin wallet app shown above, and my Ethere
 
 My Ethereum wallet
 
-### Conclusion
+## Conclusion
 
 Cryptocurrencies are really trending and have a lot of buzz. The future of cryptocurrencies is very promising. Many people have made a fortune out of cryptocurrencies, however they should not be looked merely as an investment. The ideas which these cryptocurrencies represent and the future possibilities they hold are of far greater value than their monetary value.
 
