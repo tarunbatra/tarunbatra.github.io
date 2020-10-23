@@ -68,7 +68,9 @@ theme: cactus
 theme_config:
   #look and nav
   colorscheme: classic
-  post_count: 5
+  posts_overview:
+    show_all_posts: false
+    post_count: 10
   highlight: github
   projects_url: https://github.com/tarunbatra
   nav:
