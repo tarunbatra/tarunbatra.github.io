@@ -118,7 +118,7 @@ theme_config:
 
   #ad
   ad:
-    enabled: true,
+    enabled: false
     network: 'codefund'
     url: 'https://app.codefund.io/properties/867/funder.js'
 
