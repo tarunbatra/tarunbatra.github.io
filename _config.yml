@@ -67,11 +67,11 @@ theme: cactus
 
 theme_config:
   #look and nav
-  colorscheme: classic
+  colorscheme: dark
   posts_overview:
     show_all_posts: false
     post_count: 10
-  highlight: github
+  # highlight: dark
   projects_url: https://github.com/tarunbatra
   nav:
     Home: /
