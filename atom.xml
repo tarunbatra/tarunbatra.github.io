@@ -18,8 +18,8 @@
   
   <entry>
     <title>Git before Github</title>
-    <link href="https://tarunbatra.com/blog/_/git-before-github/"/>
-    <id>https://tarunbatra.com/blog/_/git-before-github/</id>
+    <link href="https://tarunbatra.com/blog/x/git-before-github/"/>
+    <id>https://tarunbatra.com/blog/x/git-before-github/</id>
     <published>2020-10-24T20:17:54.000Z</published>
     <updated>2020-10-24T21:52:11.317Z</updated>
     
@@ -200,9 +200,9 @@
       <category term="security" scheme="https://tarunbatra.com/categories/security/"/>
     
     
-      <category term="security" scheme="https://tarunbatra.com/tags/security/"/>
-    
       <category term="architecture" scheme="https://tarunbatra.com/tags/architecture/"/>
+    
+      <category term="security" scheme="https://tarunbatra.com/tags/security/"/>
     
   </entry>
   
@@ -228,9 +228,9 @@
       <category term="architecture" scheme="https://tarunbatra.com/categories/architecture/"/>
     
     
-      <category term="architecture" scheme="https://tarunbatra.com/tags/architecture/"/>
-    
       <category term="microservices" scheme="https://tarunbatra.com/tags/microservices/"/>
+    
+      <category term="architecture" scheme="https://tarunbatra.com/tags/architecture/"/>
     
   </entry>
   
