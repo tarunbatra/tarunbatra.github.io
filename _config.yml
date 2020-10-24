@@ -44,7 +44,7 @@ highlight:
   tab_replace:
 
 # Category & Tag
-default_category: misc
+default_category: "~"
 category_map:
 tag_map:
 
