@@ -15,7 +15,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://tarunbatra.com/data/images/git-before-github/cover.png">
 <meta property="article:published_time" content="2020-10-24T20:17:54.000Z">
-<meta property="article:modified_time" content="2020-10-24T22:10:59.067Z">
+<meta property="article:modified_time" content="2020-10-25T06:57:55.725Z">
 <meta property="article:author" content="Tarun Batra">
 <meta property="article:tag" content="git">
 <meta property="article:tag" content="github">
@@ -155,7 +155,7 @@
   
 <div class="article-gallery">
     
-    <a class="gallery-item" href="../../../data/images/git-before-github/cover.png" rel="gallery_ckgoa1fon000nuvci3d7ta66j">
+    <a class="gallery-item" href="../../../data/images/git-before-github/cover.png" rel="gallery_ckgorru0y000ljbci66pmgldz">
         <img src="../../../data/images/git-before-github/cover.png" itemprop="image" />
     </a>
     
@@ -164,12 +164,12 @@
 
   <div class="content" itemprop="articleBody">
     <p>Back when I was studying CS at university, we had assignments to code various algorithms. When the assignments were due we were supposed to execute the code in laboratory systems and get the output checked by the professors. I liked coding and tinkering with the algorithms; some of my classmates didn’t. They used to copy the code from my system on a USB stick and execute them on their system and get done with it. I didn’t judge them but I was tired of giving each one their copy and sometimes also instructing them how to execute that piece of code. In one such assignment, I uploaded the code on GitHub and shared the <a href="https://github.com/tarunbatra/re2nfa" target="_blank" rel="noopener">link</a> with anybody who asked. <strong>Unknowingly, I had made my first open source contribution.</strong></p>
-<p>A lot of people have similar stories and for most, Github is synonymous with Open Source. One thing that is also used interchangeably with Github is git. Even though these are three different entities, a lot of developers including me have never contributed to open source or used git without Github. Thus I was surprised when I learned that famous open source projects like Linux were not on Github even though they used git. I wondered how did it work but didn’t do anything about it until recently when I decided to experience a git development workflow without Github.</p>
-<h2 id="Git-server-access"><a href="#Git-server-access" class="headerlink" title="Git server access"></a>Git server access</h2><p>We use version control systems broadly for two use cases – to contribute to a repository where we have write access; to contribute to a public repository where we don’t have write access. To collaborate with developers to whom access can be given, Github or other platforms are not necessary. Anybody can host a [Git server][git-server-guids] that can be used to host repositories. Developers can clone, push to, and pull from these remote repositories once access is granted to their ssh identity.</p>
+<p>A lot of people have similar stories and for most, Github is synonymous with Open Source. One thing that is also used interchangeably with Github is git. Even though these are three different entities, a lot of developers including me have never contributed to open source or used git without Github. Thus I was surprised when I learned that famous open source projects like Linux were not on Github even though they used git. Also, git was around before Github, so there must be other more native ways in git to get things done. I wondered how it worked but didn’t do anything about it until recently when I decided to experience a git only development workflow.</p>
+<h2 id="Git-server-access"><a href="#Git-server-access" class="headerlink" title="Git server access"></a>Git server access</h2><p>We use version control systems broadly for two use cases – to contribute to a repository where we have write access; to contribute to a public repository where we don’t have write access. To collaborate with developers to whom access can be given, Github or other platforms are not necessary. Anybody can host a <a href="https://git-scm.com/book/en/v2/Git-on-the-Server-Setting-Up-the-Server" target="_blank" rel="noopener">Git server</a> that can be used to host repositories. Developers can clone, push to, and pull from these remote repositories once access is granted to their ssh identity.</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone origin git@&lt;host&gt;&#x2F;&lt;repo&gt;.git</span><br></pre></td></tr></table></figure>
 
 <p>This is similar to how we upload our SSH keys to Github or other platforms for being able to clone the repositories using SSH.</p>
-<h2 id="Pull-requests"><a href="#Pull-requests" class="headerlink" title="Pull requests"></a>Pull requests</h2><p>One thing which is missing in the above-mentioned method is the ability to create Pull Requests, get them reviewed and merged into the code. It becomes a big issue when the developers don’t have write access to the repositories as is the case in open source development. General open source flow is to fork a repository, push the changes in your forked repositories, and create a <strong>pull request</strong> to the original repository from where the maintainers can review and merge. Pull request is not a feature of git, but of the platforms like Github. A similar workflow in git can be done by:</p>
+<h2 id="Pull-requests"><a href="#Pull-requests" class="headerlink" title="Pull requests"></a>Pull requests</h2><p>One thing which is missing in the above-mentioned method is the ability to create Pull Requests, get them reviewed and merged into the code. It becomes a big issue when the developers don’t have write access to the repositories as is the case in open source development. General open source flow is to fork a repository, push the changes in your forked repositories, and create a <strong>pull request</strong> to the original repository from where the maintainers can review and merge. Pull request is not a feature of git, but of platforms like Github. Collaborative development in git has the following steps:</p>
 <ol>
 <li>Clone the original repository</li>
 <li>Create a patch</li>
