@@ -87,9 +87,9 @@ We have a patch file which we can send to the maintainers so that they can apply
 
 `git apply <patch file>` is a command which applies the changes described in the patch file locally but does not commit them. They will appear in our workspace and we can stage them and commit them. This is not ideal as even though we get the changes, the commit metadata like author name and message is lost. A better way to apply patches is `git am` (abbrev. for "apply mailbox").
 ```
-git am --sign-off <patch file>
+git am --signoff <patch file>
 ```
-The flag `--sign-off` is used if the commit message needs to be appended with a "Signed-off-by" line to indicate who applied the commit. Below is the signed-off and applied commit for the patch we generated as an exercise in the last section.
+The flag `--signoff` is used if the commit message needs to be appended with a "Signed-off-by" line to indicate who applied the commit. Below is the signed-off and applied commit for the patch we generated as an exercise in the last section.
 ```sh git log
 Author: Tarun Batra <tarun.batra00@gmail.com>
 Date:   Tue Oct 20 23:15:32 2020 +0200
