@@ -136,6 +136,7 @@ __NOTE:__ _Sender email addresses can be spoofed quite easily and this raises th
 So what can we do with this newly acquired knowledge?
 1. Git patches often [float][lkml-1] [around][lkml-2] in the Linux development mailing list and it gives me satisfaction that I understand how they work a little better now than before.
 2. When platforms like Github and Gitlab have an outage, work in most of the development teams stall. Now I know a way to get my code reviewed even in these situations. (Okay, that might be a stretch)
+3. EDIT: About when this article was published, [`youtube-dl`][youtube-dl-homepage] was taken down by Github due to [a DMCA request][riaa-dmca-request]. The whole episode brings ot light that Github being a platform is subject to censorship, unlike git which is distributed.
 
 You can practice for yourself by adding your name to the `CONTRIBUTORS.txt` file of the [git-before-github][git-before-github-repo] repository, committing it, and then sending me the patch. I would readily ~merge~ apply it. 😀
 
@@ -147,4 +148,6 @@ You can practice for yourself by adding your name to the `CONTRIBUTORS.txt` file
 [google-less-secure-setting]: https://myaccount.google.com/lesssecureapps
 [lkml-1]: https://lkml.org/lkml/2020/10/16/629
 [lkml-2]: https://lkml.org/lkml/2020/10/19/82
+[youtube-dl-homepage]: https://yt-dl.org/about.html
+[riaa-dmca-request]: https://github.com/github/dmca/blob/master/2020/10/2020-10-23-RIAA.md
 
