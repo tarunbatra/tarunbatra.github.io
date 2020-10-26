@@ -117,9 +117,9 @@ It will upload the email to an IMAP folder from where it can be sent. To use it 
 ```
 Gmail allows its IMAP server to be used if the [Less secure app access][google-less-secure-setting] setting is turned on.
 
-1. send-mail
+1. send-email
 ```sh
-git send-mail --to=<email> <patch file>
+git send-email --to=<email> <patch file>
 ```
 It will use an SMTP server to send email. The corresponding config to use this command is:
 ```ini
@@ -136,7 +136,7 @@ __NOTE:__ _Sender email addresses can be spoofed quite easily and this raises th
 So what can we do with this newly acquired knowledge?
 1. Git patches often [float][lkml-1] [around][lkml-2] in the Linux development mailing list and it gives me satisfaction that I understand how they work a little better now than before.
 2. When platforms like Github and Gitlab have an outage, work in most of the development teams stall. Now I know a way to get my code reviewed even in these situations. (Okay, that might be a stretch)
-3. EDIT: About when this article was published, [`youtube-dl`][youtube-dl-homepage] was taken down by Github due to [a DMCA request][riaa-dmca-request]. The whole episode brings ot light that Github being a platform is subject to censorship, unlike git which is distributed.
+3. EDIT: About when this article was published, [`youtube-dl`][youtube-dl-homepage] was taken down by Github due to [a DMCA request][riaa-dmca-request]. The whole episode brings to light that Github being a platform is subject to censorship, unlike git which is distributed.
 
 You can practice for yourself by adding your name to the `CONTRIBUTORS.txt` file of the [git-before-github][git-before-github-repo] repository, committing it, and then sending me the patch. I would readily ~merge~ apply it. 😀
 
