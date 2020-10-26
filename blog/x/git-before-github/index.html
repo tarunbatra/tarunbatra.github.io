@@ -15,7 +15,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://tarunbatra.com/data/images/git-before-github/cover.png">
 <meta property="article:published_time" content="2020-10-24T20:17:54.000Z">
-<meta property="article:modified_time" content="2020-10-25T06:57:55.725Z">
+<meta property="article:modified_time" content="2020-10-26T20:32:54.122Z">
 <meta property="article:author" content="Tarun Batra">
 <meta property="article:tag" content="git">
 <meta property="article:tag" content="github">
@@ -155,7 +155,7 @@
   
 <div class="article-gallery">
     
-    <a class="gallery-item" href="../../../data/images/git-before-github/cover.png" rel="gallery_ckgorru0y000ljbci66pmgldz">
+    <a class="gallery-item" href="../../../data/images/git-before-github/cover.png" rel="gallery_ckgr00mbx000luuci3puga12j">
         <img src="../../../data/images/git-before-github/cover.png" itemprop="image" />
     </a>
     
@@ -194,8 +194,8 @@
 <hr>
 <h3 id="Apply"><a href="#Apply" class="headerlink" title="Apply"></a>Apply</h3><p>We have a patch file which we can send to the maintainers so that they can apply the patch. We can either use traditional ways to send the patch or use git itself, but more on it later. In this section, we will explore the process to apply a patch.</p>
 <p><code>git apply &lt;patch file&gt;</code> is a command which applies the changes described in the patch file locally but does not commit them. They will appear in our workspace and we can stage them and commit them. This is not ideal as even though we get the changes, the commit metadata like author name and message is lost. A better way to apply patches is <code>git am</code> (abbrev. for “apply mailbox”).</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git am --sign-off &lt;patch file&gt;</span><br></pre></td></tr></table></figure>
-<p>The flag <code>--sign-off</code> is used if the commit message needs to be appended with a “Signed-off-by” line to indicate who applied the commit. Below is the signed-off and applied commit for the patch we generated as an exercise in the last section.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git am --signoff &lt;patch file&gt;</span><br></pre></td></tr></table></figure>
+<p>The flag <code>--signoff</code> is used if the commit message needs to be appended with a “Signed-off-by” line to indicate who applied the commit. Below is the signed-off and applied commit for the patch we generated as an exercise in the last section.</p>
 <figure class="highlight sh"><figcaption><span>git log</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Author: Tarun Batra &lt;tarun.batra00@gmail.com&gt;</span><br><span class="line">Date:   Tue Oct 20 23:15:32 2020 +0200</span><br><span class="line"></span><br><span class="line">    Added Tarun Batra to contributors</span><br><span class="line"></span><br><span class="line">    Signed-off-by: Tarun Batra &lt;tarun.batra00@gmail.com&gt;</span><br></pre></td></tr></table></figure>
 <hr>
 <h3 id="Sending-the-patch"><a href="#Sending-the-patch" class="headerlink" title="Sending the patch"></a>Sending the patch</h3><p>Now we can explore how to send a patch file to a maintainer in the “git” way. There are two ways that I know of –</p>
@@ -206,8 +206,8 @@
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[imap]</span></span><br><span class="line">	folder = "[Gmail]/Drafts"</span><br><span class="line">	host = imaps://imap.gmail.com</span><br><span class="line">	user = email@gmail.com</span><br><span class="line">	pass = yourpassword</span><br><span class="line">	port = 993</span><br></pre></td></tr></table></figure>
 <p>Gmail allows its IMAP server to be used if the <a href="https://myaccount.google.com/lesssecureapps" target="_blank" rel="noopener">Less secure app access</a> setting is turned on.</p>
 </li>
-<li><p>send-mail</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git send-mail --to=&lt;email&gt; &lt;patch file&gt;</span><br></pre></td></tr></table></figure>
+<li><p>send-email</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git send-email --to=&lt;email&gt; &lt;patch file&gt;</span><br></pre></td></tr></table></figure>
 <p>It will use an SMTP server to send email. The corresponding config to use this command is:</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[sendemail]</span></span><br><span class="line">	smtpEncryption = tls</span><br><span class="line">	smtpServer = &lt;host&gt;</span><br><span class="line">	smtpUser = &lt;user&gt;</span><br><span class="line">	smtpServerPort = 587</span><br></pre></td></tr></table></figure>
 <p>Both of these methods can be used to send an email per patch file. The subject of the commit by default is of the format <code>[PATCH] &lt;commit message&gt;</code>.</p>
@@ -218,6 +218,7 @@
 <ol>
 <li>Git patches often <a href="https://lkml.org/lkml/2020/10/16/629" target="_blank" rel="noopener">float</a> <a href="https://lkml.org/lkml/2020/10/19/82" target="_blank" rel="noopener">around</a> in the Linux development mailing list and it gives me satisfaction that I understand how they work a little better now than before.</li>
 <li>When platforms like Github and Gitlab have an outage, work in most of the development teams stall. Now I know a way to get my code reviewed even in these situations. (Okay, that might be a stretch)</li>
+<li>EDIT: About when this article was published, <a href="https://yt-dl.org/about.html" target="_blank" rel="noopener"><code>youtube-dl</code></a> was taken down by Github due to <a href="https://github.com/github/dmca/blob/master/2020/10/2020-10-23-RIAA.md" target="_blank" rel="noopener">a DMCA request</a>. The whole episode brings to light that Github being a platform is subject to censorship, unlike git which is distributed.</li>
 </ol>
 <p>You can practice for yourself by adding your name to the <code>CONTRIBUTORS.txt</code> file of the <a href="https://github.com/tarunbatra/git-before-github" target="_blank" rel="noopener">git-before-github</a> repository, committing it, and then sending me the patch. I would readily <del>merge</del> apply it. 😀</p>
 
