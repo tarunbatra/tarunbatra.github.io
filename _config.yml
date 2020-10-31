@@ -113,6 +113,9 @@ theme_config:
   google_analytics:
     enabled: true
     id: 'UA-47797084-2'
+  microsoft_clarity:
+    enabled: true
+    id: 3w9d6u9uag
   disqus:
     enabled: true
     shortname: tarunbatra
