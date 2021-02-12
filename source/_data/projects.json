@@ -1,12 +1,17 @@
 [
     {
        "name":"password-validator",
-       "url":"https://tarunbatra.github.io/password-validator",
-       "desc":"Simple and intuitive module to validate passwords"
+       "url":"https://github.com/tarunbatra/password-validator",
+       "desc":"An npm package to validate password (or any string) based on configurable rules."
     },
     {
-      "name":"pub-sub-amqp",
-      "url":"https://tarunbatra.github.io/pub-sub-amqp",
-      "desc":"An easy to use, no frills module allowing inter-process publish/subscribe communication"
+      "name":"know-your-kisaan",
+      "url":"https://github.com/tarunbatra/know-your-kisaan",
+      "desc":"A web app built using Svelte. It simulates the effects of predatory pricing models in a market. "
+    },
+    {
+      "name":"zindagi",
+      "url":"https://github.com/tarunbatra/zindagi",
+      "desc":" A library to easily program and render life-like cellular automata. Can be used as a cli or in browser."
     }
 ]

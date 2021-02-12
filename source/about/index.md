@@ -11,9 +11,11 @@ I support [open source ideology](https://en.wikipedia.org/wiki/Open-source_softw
 
 # Work
 
-## Back End Developer at Instabox, Stockholm [July 2020 - Present]
+## Backend Developer at Instabox, Stockholm [July 2020 - Present]
 
-At [Instabox](https://instabox.se), I am looking after scaling and refactoring the merchant integrations using Node.js, Postgres and Bull Queue.
+At [Instabox](https://instabox.se), I primarily look at the integrations with the merchants. My team is responsible to develop and maintain APIs to be used by our partners.
+
+Stability and scalability are main areas of our focus and we have been using Node.js (Express, Fastify), Postgres and Redis to get desirable perfomance.
 
 ## Senior Software Developer at Smallcase, Bangalore [Nov 2017 - July 2020]
 
