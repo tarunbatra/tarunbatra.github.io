@@ -81,10 +81,12 @@ theme_config:
     # Projects: https://github.com/tarunbatra
     # Contact: mailto:me@tarunbatra.com
   social_links:
-    github: https://github.com/tarunbatra
+    github-alt: https://github.com/tarunbatra
     stack-overflow: https://stackoverflow.com/users/story/2751596
     twitter: https://twitter.com/tarunbatra
     linkedin: https://www.linkedin.com/in/tarunbatra00
+    rss: ./atom.xml
+    ethereum: https://etherscan.io/address/0x0Df6A27fb3E68D4F329E886Ab18e44fc0dAb2918
   gravatar:
       email: tarun.batra00@gmail.com
   open_graph:
