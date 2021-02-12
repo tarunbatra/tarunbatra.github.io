@@ -77,7 +77,7 @@ theme_config:
     Home: /
     About: ./about/
     Blog: ./blog/
-    Subscribe: ./atom.xml
+    Search: /search/
     # Projects: https://github.com/tarunbatra
     # Contact: mailto:me@tarunbatra.com
   social_links:
