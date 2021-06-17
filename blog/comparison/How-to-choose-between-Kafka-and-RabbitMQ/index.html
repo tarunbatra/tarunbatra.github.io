@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
     <meta name="description" content="Kafka and RabbitMQ are two very popular message queues based on very different design principles. Which one of these suits your project?">
 <meta property="og:type" content="article">
 <meta property="og:title" content="How to choose between Kafka and RabbitMQ">
@@ -15,7 +15,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://tarunbatra.com/data/images/How-to-choose-between-Kafka-and-RabbitMQ/cover.jpg">
 <meta property="article:published_time" content="2019-10-12T02:00:00.000Z">
-<meta property="article:modified_time" content="2021-02-13T21:11:01.417Z">
+<meta property="article:modified_time" content="2021-06-01T18:54:48.766Z">
 <meta property="article:author" content="Tarun Batra">
 <meta property="article:tag" content="rabbitmq">
 <meta property="article:tag" content="kafka">
@@ -49,23 +49,21 @@
 
     <!-- persian styles -->
     
-      
-<link rel="stylesheet" href="../../../css/rtl.css">
-
-    
     <!-- rss -->
     
     
     <link rel="canonical" href="https://tarunbatra.com/blog/comparison/How-to-choose-between-Kafka-and-RabbitMQ/"/>
-<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="atom.xml" title="Tarun Batra" type="application/atom+xml">
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="atom.xml" title="Tarun Batra" type="application/atom+xml">
 </head>
 
 <body class="max-width mx-auto px3 ltr">
     
       <div id="header-post">
-  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
-  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
-  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" "Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
   <span id="menu">
     <span id="nav">
       <ul>
@@ -84,12 +82,13 @@
     <span id="actions">
       <ul>
         
-        <li><a class="icon" href="../../decentralization/Deploy-your-website-on-IPFS-Why-and-How/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Previous post " href="../../decentralization/Deploy-your-website-on-IPFS-Why-and-How/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
         
         
-        <li><a class="icon" href="../../architecture/Polling-reliably-at-scale-using-DLQs/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Next post " href="../../architecture/Polling-reliably-at-scale-using-DLQs/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
         
-        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Back to top " href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post " href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
       </ul>
       <span id="i-prev" class="info" style="display:none;">Previous post</span>
       <span id="i-next" class="info" style="display:none;">Next post</span>
@@ -155,7 +154,7 @@
       
     <div class="article-tag">
         <i class="fas fa-tag"></i>
-        <a class="tag-link" href="../../../tags/kafka/" rel="tag">kafka</a>, <a class="tag-link" href="../../../tags/message-queue/" rel="tag">message-queue</a>, <a class="tag-link" href="../../../tags/rabbitmq/" rel="tag">rabbitmq</a>
+        <a class="tag-link-link" href="../../../tags/kafka/" rel="tag">kafka</a>, <a class="tag-link-link" href="../../../tags/message-queue/" rel="tag">message-queue</a>, <a class="tag-link-link" href="../../../tags/rabbitmq/" rel="tag">rabbitmq</a>
     </div>
 
 
@@ -164,7 +163,7 @@
   
 <div class="article-gallery">
     
-    <a class="gallery-item" href="../../../data/images/How-to-choose-between-Kafka-and-RabbitMQ/cover.jpg" rel="gallery_ckl47ueb300070ecigl2l87b0">
+    <a class="gallery-item" href="../../../data/images/How-to-choose-between-Kafka-and-RabbitMQ/cover.jpg" rel="gallery_ckq1cxj01000dggci3j223ubg">
         <img src="../../../data/images/How-to-choose-between-Kafka-and-RabbitMQ/cover.jpg" itemprop="image" />
     </a>
     
@@ -172,7 +171,7 @@
 
 
   <div class="content" itemprop="articleBody">
-    <p><sup>Image sourced from “<a href="https://www.cloudamqp.com/blog/2017-01-09-apachekafka-vs-rabbitmq.html" target="_blank" rel="noopener">Comparison: Apache Kafka VS RabbitMQ</a>“ by <a href="https://www.cloudamqp.com/" target="_blank" rel="noopener">CloudAMQP</a>.</sup></p>
+    <p><sup>Image sourced from “<a target="_blank" rel="noopener" href="https://www.cloudamqp.com/blog/2017-01-09-apachekafka-vs-rabbitmq.html">Comparison: Apache Kafka VS RabbitMQ</a>“ by <a target="_blank" rel="noopener" href="https://www.cloudamqp.com/">CloudAMQP</a>.</sup></p>
 <p>Kafka and RabbitMQ – These two terms are frequently thrown around in tech meetings discussing distributed architecture. I have been part of a series of such meetings where we discussed their pros and cons, and whether they fit our needs or not. Here’s me documenting my findings for others and my future self.</p>
 <p><em>Spoiler: We ended up using both for different use-cases.</em></p>
 <h2 id="Message-Routing"><a href="#Message-Routing" class="headerlink" title="Message Routing"></a>Message Routing</h2><p>With respect to message routing capabilities, Kafka is very light. Producers produce messages to topics. Topics can further have partitions (like sharding). Kafka logs the messages in its very simple data structure which resembles… a log! It can scale as much as the disk can.<br>Consumers connect to these partitions to read the messages. Kafka uses a pull-based approach, so the onus of fetching messages and tracking offsets of read messages lies on consumers.</p>
@@ -190,7 +189,7 @@
 <p>  In case of failure in message delivery, retries are done untill delivery is successfully acknowledged. This ensures no data is lost but this can result in duplicated delivery.</p>
 </li>
 <li><p><em>exactly-once delivery</em></p>
-<p>  Messages are ensured to be delivered exactly once. This is the most desirable delivery semantic and almost <a href="https://bravenewgeek.com/you-cannot-have-exactly-once-delivery/" target="_blank" rel="noopener">impossible to achieve</a> in a distributed enviornment.</p>
+<p>  Messages are ensured to be delivered exactly once. This is the most desirable delivery semantic and almost <a target="_blank" rel="noopener" href="https://bravenewgeek.com/you-cannot-have-exactly-once-delivery/">impossible to achieve</a> in a distributed enviornment.</p>
 </li>
 </ul>
 <blockquote>
@@ -198,7 +197,7 @@
 </blockquote>
 <p>Kafka provides exactly-once delivery between producer to the broker using idempotent producers (<code>enable.idempotence=true</code>). Exactly-once message delivery to the consumers is more complex. It is achieved at consumers end by using transactions API and only reading messages belonging to committed transactions (<code>isolation.level=read_committed</code>).<br>To truly achieve this, consumers would need to avoid non-idempotent processing of messages in case a transaction has to be aborted, which is not always possible. <strong>So, Kafka transactions are not very useful in my opinion.</strong></p>
 <p>In RabbitMQ, exactly-once delivery is not supported due to the combination of complex routing and the push-based delivery. Generally, it’s recommended to use at-least-once delivery with idempotent consumers.</p>
-<p><sub><em><br>NOTE: Kafka Streams is an example of truely idempotent system, which it achieves by eliminating non-idempotent operations in a transaction. It, however is out of the scope of this article. I recommend reading <a href="https://www.confluent.io/blog/enabling-exactly-once-kafka-streams/" target="_blank" rel="noopener">“Enabling Exactly-Once in Kafka Streams” by Confluent</a> if you want to dig in it further.<br></em></sub></p>
+<p><sub><em><br>NOTE: Kafka Streams is an example of truely idempotent system, which it achieves by eliminating non-idempotent operations in a transaction. It, however is out of the scope of this article. I recommend reading <a target="_blank" rel="noopener" href="https://www.confluent.io/blog/enabling-exactly-once-kafka-streams/">“Enabling Exactly-Once in Kafka Streams” by Confluent</a> if you want to dig in it further.<br></em></sub></p>
 <hr>
 <h2 id="Throughput"><a href="#Throughput" class="headerlink" title="Throughput"></a>Throughput</h2><p>Throughput of message queues depends on many variables like message size, number of nodes, replication configuration, delivery guarantees, etc. I will be focussing on the speed of messages produced versus consumed. The two cases which arise are:</p>
 <ul>
@@ -223,12 +222,12 @@
 <h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><blockquote>
 <p>RabbitMQ offers complex routing use-cases which can not be realized with Kafka’s simple architecture. However, Kafka provides higher throughput and persistence of messages.</p>
 </blockquote>
-<p>Apart from these differences, both of them provide similar capabilities like fault-tolerance, high availability, scalability, etc. Keeping this in mind, we at <a href="https://smallcase.com" target="_blank" rel="noopener">smallcase</a> used RabbitMQ for <a href="https://medium.com/making-smalltalk/polling-reliably-at-scale-using-dlqs-841512659c8f" target="_blank" rel="noopener">consistent polling in our transactions system</a> and Kafka for making our notifications system quick and snappy.</p>
+<p>Apart from these differences, both of them provide similar capabilities like fault-tolerance, high availability, scalability, etc. Keeping this in mind, we at <a target="_blank" rel="noopener" href="https://smallcase.com/">smallcase</a> used RabbitMQ for <a target="_blank" rel="noopener" href="https://medium.com/making-smalltalk/polling-reliably-at-scale-using-dlqs-841512659c8f">consistent polling in our transactions system</a> and Kafka for making our notifications system quick and snappy.</p>
 <h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ul>
-<li><a href="https://content.pivotal.io/blog/understanding-when-to-use-rabbitmq-or-apache-kafka" target="_blank" rel="noopener">Understanding When to Use RabbitMQ or Apache Kafka</a></li>
-<li><a href="https://blog.mavenhive.in/which-one-to-use-and-when-rabbitmq-vs-apache-kafka-7d5423301b58" target="_blank" rel="noopener">A comparison between RabbitMQ and Apache Kafka</a></li>
-<li><a href="https://www.confluent.io/blog/transactions-apache-kafka/" target="_blank" rel="noopener">Transactions in Apache Kafka</a></li>
-<li><a href="https://arxiv.org/abs/1709.00333" target="_blank" rel="noopener">Kafka versus RabbitMQ</a></li>
+<li><a target="_blank" rel="noopener" href="https://content.pivotal.io/blog/understanding-when-to-use-rabbitmq-or-apache-kafka">Understanding When to Use RabbitMQ or Apache Kafka</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.mavenhive.in/which-one-to-use-and-when-rabbitmq-vs-apache-kafka-7d5423301b58">A comparison between RabbitMQ and Apache Kafka</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.confluent.io/blog/transactions-apache-kafka/">Transactions in Apache Kafka</a></li>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1709.00333">Kafka versus RabbitMQ</a></li>
 </ul>
 
   </div>
@@ -322,24 +321,31 @@
     </div>
     <!-- styles -->
 
-<link rel="stylesheet" href="../../../lib/font-awesome/css/all.min.css">
+  
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.8.1/css/justifiedGallery.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/> 
+   
 
 
-<link rel="stylesheet" href="../../../lib/justified-gallery/css/justifiedGallery.min.css">
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
 
 
     <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
 
-<script src="../../../lib/jquery/jquery.min.js"></script>
 
 
-<script src="../../../lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js" crossorigin="anonymous"></script> 
+   
+
 
 <!-- clipboard -->
 
   
-<script src="../../../lib/clipboard/clipboard.min.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
   <script type="text/javascript">
   $(function() {
     // copy-btn HTML

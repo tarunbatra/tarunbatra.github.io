@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
     <meta name="description" content="How we bid goodbye to long waiting times during order execution on smallcase platform.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Polling reliably at scale using DLQs">
@@ -15,7 +15,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://tarunbatra.com/data/images/Polling-reliably-at-scale-using-DLQs/cover.png">
 <meta property="article:published_time" content="2019-07-16T09:00:00.000Z">
-<meta property="article:modified_time" content="2021-02-13T21:11:01.419Z">
+<meta property="article:modified_time" content="2021-06-01T18:54:48.783Z">
 <meta property="article:author" content="Tarun Batra">
 <meta property="article:tag" content="architecture">
 <meta property="article:tag" content="rabbitmq">
@@ -49,23 +49,21 @@
 
     <!-- persian styles -->
     
-      
-<link rel="stylesheet" href="../../../css/rtl.css">
-
-    
     <!-- rss -->
     
     
     <link rel="canonical" href="https://tarunbatra.com/blog/architecture/Polling-reliably-at-scale-using-DLQs/"/>
-<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="atom.xml" title="Tarun Batra" type="application/atom+xml">
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="atom.xml" title="Tarun Batra" type="application/atom+xml">
 </head>
 
 <body class="max-width mx-auto px3 ltr">
     
       <div id="header-post">
-  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
-  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
-  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" "Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
   <span id="menu">
     <span id="nav">
       <ul>
@@ -84,12 +82,13 @@
     <span id="actions">
       <ul>
         
-        <li><a class="icon" href="../../comparison/How-to-choose-between-Kafka-and-RabbitMQ/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Previous post " href="../../comparison/How-to-choose-between-Kafka-and-RabbitMQ/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
         
         
-        <li><a class="icon" href="../../data/Restore-deleted-MongoDB-documents-using-Oplog/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Next post " href="../../data/Restore-deleted-MongoDB-documents-using-Oplog/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
         
-        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Back to top " href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post " href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
       </ul>
       <span id="i-prev" class="info" style="display:none;">Previous post</span>
       <span id="i-next" class="info" style="display:none;">Next post</span>
@@ -155,7 +154,7 @@
       
     <div class="article-tag">
         <i class="fas fa-tag"></i>
-        <a class="tag-link" href="../../../tags/architecture/" rel="tag">architecture</a>, <a class="tag-link" href="../../../tags/message-queue/" rel="tag">message-queue</a>, <a class="tag-link" href="../../../tags/rabbitmq/" rel="tag">rabbitmq</a>
+        <a class="tag-link-link" href="../../../tags/architecture/" rel="tag">architecture</a>, <a class="tag-link-link" href="../../../tags/message-queue/" rel="tag">message-queue</a>, <a class="tag-link-link" href="../../../tags/rabbitmq/" rel="tag">rabbitmq</a>
     </div>
 
 
@@ -164,7 +163,7 @@
   
 <div class="article-gallery">
     
-    <a class="gallery-item" href="../../../data/images/Polling-reliably-at-scale-using-DLQs/cover.png" rel="gallery_ckl47ueb7000g0eci57pug5ch">
+    <a class="gallery-item" href="../../../data/images/Polling-reliably-at-scale-using-DLQs/cover.png" rel="gallery_ckq1cxj03000hggci9i4z9q12">
         <img src="../../../data/images/Polling-reliably-at-scale-using-DLQs/cover.png" itemprop="image" />
     </a>
     
@@ -172,7 +171,7 @@
 
 
   <div class="content" itemprop="articleBody">
-    <p><sub>Originally published at <a href="https://blog.smallcase.com/polling-reliably-at-scale-using-dlqs/" target="_blank" rel="noopener">blog.smallcase.com</a> on July 16, 2019.</sub><br><br></p>
+    <p><sub>Originally published at <a target="_blank" rel="noopener" href="https://blog.smallcase.com/polling-reliably-at-scale-using-dlqs/">blog.smallcase.com</a> on July 16, 2019.</sub><br><br></p>
 <p>Execution of computer programs is blazing fast. It’s only practical to need some delay in execution. Some of such use cases are:</p>
 <ul>
 <li>scheduling a task for sometime in future;</li>
@@ -190,16 +189,16 @@
 <li><a href="#In-memory-Timers">In-memory Timers</a></li>
 <li><a href="#Dead-Letter-Queues">Dead Letter Queues</a></li>
 </ul>
-<h3 id="Redis-Keyspace-Notifications"><a href="#Redis-Keyspace-Notifications" class="headerlink" title="Redis Keyspace Notifications"></a>Redis Keyspace Notifications</h3><p>This approach is very simple. We heavily use Redis in our stack, so it was easy for us to use it for scheduling triggers. Redis allows to set keys with expiry using its <a href="https://redis.io/commands/setex" target="_blank" rel="noopener">SETEX</a> command. For instance, setting a key <code>TESTKEY</code> with value <code>TESTVALUE</code> and expiry of 10 seconds can be achieved with:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;redis SETEX TESTKEY 10 <span class="string">"TESTVALUE"</span></span><br></pre></td></tr></table></figure>
-<p>Parallely, Redis provides <a href="https://redis.io/topics/notifications" target="_blank" rel="noopener">Keyspace notifications</a> for data changing events which can be subscribed by clients and can be used to trigger the delayed tasks. Key expiry events can be subscribed using:</p>
+<h3 id="Redis-Keyspace-Notifications"><a href="#Redis-Keyspace-Notifications" class="headerlink" title="Redis Keyspace Notifications"></a>Redis Keyspace Notifications</h3><p>This approach is very simple. We heavily use Redis in our stack, so it was easy for us to use it for scheduling triggers. Redis allows to set keys with expiry using its <a target="_blank" rel="noopener" href="https://redis.io/commands/setex">SETEX</a> command. For instance, setting a key <code>TESTKEY</code> with value <code>TESTVALUE</code> and expiry of 10 seconds can be achieved with:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;redis SETEX TESTKEY 10 <span class="string">&quot;TESTVALUE&quot;</span></span><br></pre></td></tr></table></figure>
+<p>Parallely, Redis provides <a target="_blank" rel="noopener" href="https://redis.io/topics/notifications">Keyspace notifications</a> for data changing events which can be subscribed by clients and can be used to trigger the delayed tasks. Key expiry events can be subscribed using:</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SUBSCRIBE __keyevent@0__:expired</span><br></pre></td></tr></table></figure>
 <h4 id="Pros"><a href="#Pros" class="headerlink" title="Pros:"></a>Pros:</h4><ol>
 <li><strong>Stateless application code.</strong><br> The application doesn’t need to store the tasks to perform and delays in its memory. It is outsourced to Redis.</li>
 <li><strong>Arbitrary delays.</strong><br> Delays of arbitrary length are possible without any extra configuration. Just changing the <code>ttl</code> paramter of <code>SETEX</code> command will work.</li>
 </ol>
 <h4 id="Cons"><a href="#Cons" class="headerlink" title="Cons:"></a>Cons:</h4><ol>
-<li><strong>Unscalable.</strong><br> This strategy works only till there’s only one instance of the application listening to these events. In case this application is to be horizontally scaled, each instance of the application will receive the event because of its <a href="https://redis.io/topics/pubsub" target="_blank" rel="noopener">publish-subscribe nature</a>.</li>
+<li><strong>Unscalable.</strong><br> This strategy works only till there’s only one instance of the application listening to these events. In case this application is to be horizontally scaled, each instance of the application will receive the event because of its <a target="_blank" rel="noopener" href="https://redis.io/topics/pubsub">publish-subscribe nature</a>.</li>
 <li><strong>Unreliable.</strong><br> The keyspace notifications can get highly unreliable as the number of keys increase. This is clearly mentioned in the docs:<blockquote>
 <p>If no command targets the key constantly, and there are many keys with a TTL associated, there can be a significant delay between the time the key time to live drops to zero, and the time the expired event is generated.</p>
 </blockquote>
@@ -207,8 +206,8 @@
 </ol>
 <p>This worked fine for us in the beginning. But once the orders increased, a lot of clients started reporting really long waiting periods before they could see the status of their orders. On debugging, we saw delays of the tune of 40x and this was the deal breaker for us.</p>
 <hr>
-<h3 id="In-memory-Timers"><a href="#In-memory-Timers" class="headerlink" title="In-memory Timers"></a>In-memory Timers</h3><p>As a quick fix to this we used in-process timers. Timers are defined and executed by the application code itself and can be used to manage delays. Node.js provides a variety of in-built <a href="https://nodejs.org/en/docs/guides/timers-in-node/" target="_blank" rel="noopener">timer functions</a>. Setting a 10 second timer is as simple as:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'This executes after 10 seconds'</span>);</span><br><span class="line">&#125;, <span class="number">10</span> * <span class="number">1000</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="In-memory-Timers"><a href="#In-memory-Timers" class="headerlink" title="In-memory Timers"></a>In-memory Timers</h3><p>As a quick fix to this we used in-process timers. Timers are defined and executed by the application code itself and can be used to manage delays. Node.js provides a variety of in-built <a target="_blank" rel="noopener" href="https://nodejs.org/en/docs/guides/timers-in-node/">timer functions</a>. Setting a 10 second timer is as simple as:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;This executes after 10 seconds&#x27;</span>);</span><br><span class="line">&#125;, <span class="number">10</span> * <span class="number">1000</span>);</span><br></pre></td></tr></table></figure>
 <h4 id="Pros-1"><a href="#Pros-1" class="headerlink" title="Pros:"></a>Pros:</h4><ol>
 <li><strong>Arbitrary delays.</strong><br> Delay time is controlled by the time argument only. Passing the required delay time in milliseconds is all that is required.</li>
 <li><strong>Reliability.</strong><br> Timers in code are quite reliable. Deviation of only upto few milliseconds is observed.</li>
@@ -228,15 +227,14 @@
 <h4 id="Pros-2"><a href="#Pros-2" class="headerlink" title="Pros:"></a>Pros:</h4><ol>
 <li><p><strong>Stateless application code.</strong><br> The application doesn’t need to store any state. The messages in the queue represent staete in this case.</p>
 </li>
-<li><p><strong>Scalable.</strong><br> Unlike redis events, message delivery in MQs can be configured to use <a href="https://www.rabbitmq.com/tutorials/tutorial-two-javascript.html" target="_blank" rel="noopener">worker pattern</a> which loadbalances the consumers (subscribing instances of the application)  to deliver the message.</p>
+<li><p><strong>Scalable.</strong><br> Unlike redis events, message delivery in MQs can be configured to use <a target="_blank" rel="noopener" href="https://www.rabbitmq.com/tutorials/tutorial-two-javascript.html">worker pattern</a> which loadbalances the consumers (subscribing instances of the application)  to deliver the message.</p>
 <p> <img src="https://www.rabbitmq.com/img/tutorials/python-two.png" alt="&#39;RabbitMQ worker pattern&#39;"></p>
- <div align=center><sub>Source: RabbitMQ docs</sub></div>
-</li>
+ <div align=center><sub>Source: RabbitMQ docs</sub></div></li>
 <li><p><strong>Reliability.</strong><br> Message Queues are expected to be highly reliable in delivery of messages. In our testing with RabbitMQ, the results were found to be close to in-memory timers.</p>
 </li>
 </ol>
 <h4 id="Cons-2"><a href="#Cons-2" class="headerlink" title="Cons:"></a>Cons:</h4><ol>
-<li><strong>Fixed delays.</strong><br> In RabbitMQ’s implementation of DLQs, the TTL is bound to the queue and applies to all the incoming messages. There is a way to set message level TTL but it has its own <a href="https://www.rabbitmq.com/ttl.html#per-message-ttl-caveats" target="_blank" rel="noopener">caveats</a>. One of the most serious side-effects of using message-level TTL is that a message with higher TTL will block the queue and delay the processing of messages with lower TTL behind it, which is a bigger problem. Hence, we are using DLQs with queue level TTL.</li>
+<li><strong>Fixed delays.</strong><br> In RabbitMQ’s implementation of DLQs, the TTL is bound to the queue and applies to all the incoming messages. There is a way to set message level TTL but it has its own <a target="_blank" rel="noopener" href="https://www.rabbitmq.com/ttl.html#per-message-ttl-caveats">caveats</a>. One of the most serious side-effects of using message-level TTL is that a message with higher TTL will block the queue and delay the processing of messages with lower TTL behind it, which is a bigger problem. Hence, we are using DLQs with queue level TTL.</li>
 </ol>
 <p>The chart shown below analyzes the average delay observed in resolving the orders we handled in the past year and its relation with the delay mechanism being used.<br><img src="/data/images/Polling-reliably-at-scale-using-DLQs/chart.png" alt="&#39;Result chart&#39;"></p>
 <div align=center><sub>Graph showing consistency in the polling scheduled using RabbitMQ DLQs</sub></div>
@@ -339,24 +337,31 @@
     </div>
     <!-- styles -->
 
-<link rel="stylesheet" href="../../../lib/font-awesome/css/all.min.css">
+  
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.8.1/css/justifiedGallery.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/> 
+   
 
 
-<link rel="stylesheet" href="../../../lib/justified-gallery/css/justifiedGallery.min.css">
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
 
 
     <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
 
-<script src="../../../lib/jquery/jquery.min.js"></script>
 
 
-<script src="../../../lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js" crossorigin="anonymous"></script> 
+   
+
 
 <!-- clipboard -->
 
   
-<script src="../../../lib/clipboard/clipboard.min.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
   <script type="text/javascript">
   $(function() {
     // copy-btn HTML

@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
     <meta name="description" content="JavaScript functions can be categorized into named or anonymous on the basis of the value of their name property. A named function can be declared as follows: 12345function add(a, b) &amp;#123;  return a">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Why you should use named functions in JavaScript">
@@ -15,7 +15,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://tarunbatra.com/data/images/why-you-should-use-named-functions-in-javascript/cover.jpeg">
 <meta property="article:published_time" content="2017-02-26T23:59:36.000Z">
-<meta property="article:modified_time" content="2021-02-13T21:11:01.421Z">
+<meta property="article:modified_time" content="2021-06-01T18:54:48.816Z">
 <meta property="article:author" content="Tarun Batra">
 <meta property="article:tag" content="javascript">
 <meta property="article:tag" content="styleguide">
@@ -48,23 +48,21 @@
 
     <!-- persian styles -->
     
-      
-<link rel="stylesheet" href="../../../css/rtl.css">
-
-    
     <!-- rss -->
     
     
     <link rel="canonical" href="https://tarunbatra.com/blog/javascript/why-you-should-use-named-functions-in-javascript/"/>
-<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="atom.xml" title="Tarun Batra" type="application/atom+xml">
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="atom.xml" title="Tarun Batra" type="application/atom+xml">
 </head>
 
 <body class="max-width mx-auto px3 ltr">
     
       <div id="header-post">
-  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
-  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
-  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" "Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
   <span id="menu">
     <span id="nav">
       <ul>
@@ -83,12 +81,13 @@
     <span id="actions">
       <ul>
         
-        <li><a class="icon" href="../Pitfalls-of-Mocha-s-built-in-Promise-support/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Previous post " href="../Pitfalls-of-Mocha-s-built-in-Promise-support/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
         
         
-        <li><a class="icon" href="../../cryptocurrencies/Introduction-to-Cryptocurrencies/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Next post " href="../../cryptocurrencies/Introduction-to-Cryptocurrencies/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
         
-        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Back to top " href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post " href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
       </ul>
       <span id="i-prev" class="info" style="display:none;">Previous post</span>
       <span id="i-next" class="info" style="display:none;">Next post</span>
@@ -154,7 +153,7 @@
       
     <div class="article-tag">
         <i class="fas fa-tag"></i>
-        <a class="tag-link" href="../../../tags/javascript/" rel="tag">javascript</a>, <a class="tag-link" href="../../../tags/styleguide/" rel="tag">styleguide</a>
+        <a class="tag-link-link" href="../../../tags/javascript/" rel="tag">javascript</a>, <a class="tag-link-link" href="../../../tags/styleguide/" rel="tag">styleguide</a>
     </div>
 
 
@@ -163,7 +162,7 @@
   
 <div class="article-gallery">
     
-    <a class="gallery-item" href="../../../data/images/why-you-should-use-named-functions-in-javascript/cover.jpeg" rel="gallery_ckl47uebb000s0eci7k3afpm8">
+    <a class="gallery-item" href="../../../data/images/why-you-should-use-named-functions-in-javascript/cover.jpeg" rel="gallery_ckq1cxj06000oggcie3417u27">
         <img src="../../../data/images/why-you-should-use-named-functions-in-javascript/cover.jpeg" itemprop="image" />
     </a>
     
@@ -172,34 +171,34 @@
 
   <div class="content" itemprop="articleBody">
     <p>JavaScript functions can be categorized into <em>named</em> or <em>anonymous</em> on the basis of the value of their <strong>name</strong> property. A named function can be declared as follows:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">a, b</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> a + b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(add.name) <span class="comment">// =&gt; "add"</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">a, b</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> a + b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(add.name) <span class="comment">// =&gt; &quot;add&quot;</span></span><br></pre></td></tr></table></figure>
 <br>
 All other ways, including ES2015's much-touted [Arrow functions](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Functions/Arrow_functions) produce anonymous functions. One of these ways is:
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> add = <span class="function"><span class="keyword">function</span> (<span class="params">a, b</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> a + b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(add.name) <span class="comment">// =&gt; ""</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> add = <span class="function"><span class="keyword">function</span> (<span class="params">a, b</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> a + b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(add.name) <span class="comment">// =&gt; &quot;&quot;</span></span><br></pre></td></tr></table></figure>
 __NOTE__: If you tried the above code in Chrome Dev Tools, you would've noticed that the __name__ of the function is "add" even in the case of anonymous function. That's because modern-day interpreters are smart enough to recognize the name from the expression.
 
 <p>Now, what’s special about <strong>named functions</strong>?</p>
 <h2 id="Make-sense-with-error-stacks"><a href="#Make-sense-with-error-stacks" class="headerlink" title="Make sense with error stacks"></a>Make sense with error stacks</h2><p>Error and call stacks are a great help in debugging code. But the use of anonymous functions reduces the usefulness of the call stacks. We all have seen the infamous <strong>(anonymous)</strong> littered over the stack trace.</p>
 <p>Of course, one can always look at the line number of the error, but with the ever-increasing pre-processing on the code (read Babel, WebPack, Browserify), this is not a reliable method.</p>
-<h3 id="Error-stack-using-anonymous-function"><a href="#Error-stack-using-anonymous-function" class="headerlink" title="Error stack using anonymous function"></a>Error stack using anonymous function</h3><p data-height="252" data-theme-id="dark" data-slug-hash="OpVLwZ" data-default-tab="js" data-user="tbking" data-embed-version="2" data-pen-title="Anon Func" class="codepen">See the Pen <a href="https://codepen.io/tbking/pen/OpVLwZ/" target="_blank" rel="noopener">Anon Func</a> by Tarun Batra (<a href="http://codepen.io/tbking" target="_blank" rel="noopener">@tbking</a>) on <a href="http://codepen.io" target="_blank" rel="noopener">CodePen</a>.</p>
+<h3 id="Error-stack-using-anonymous-function"><a href="#Error-stack-using-anonymous-function" class="headerlink" title="Error stack using anonymous function"></a>Error stack using anonymous function</h3><p data-height="252" data-theme-id="dark" data-slug-hash="OpVLwZ" data-default-tab="js" data-user="tbking" data-embed-version="2" data-pen-title="Anon Func" class="codepen">See the Pen <a target="_blank" rel="noopener" href="https://codepen.io/tbking/pen/OpVLwZ/">Anon Func</a> by Tarun Batra (<a target="_blank" rel="noopener" href="http://codepen.io/tbking">@tbking</a>) on <a target="_blank" rel="noopener" href="http://codepen.io">CodePen</a>.</p>
 <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
 
-<h3 id="Error-stack-using-named-function"><a href="#Error-stack-using-named-function" class="headerlink" title="Error stack using named function"></a>Error stack using named function</h3><p data-height="252" data-theme-id="dark" data-slug-hash="mWJdJK" data-default-tab="js" data-user="tbking" data-embed-version="2" data-pen-title="Named Func" class="codepen">See the Pen <a href="https://codepen.io/tbking/pen/mWJdJK/" target="_blank" rel="noopener">Named Func</a> by Tarun Batra (<a href="http://codepen.io/tbking" target="_blank" rel="noopener">@tbking</a>) on <a href="http://codepen.io" target="_blank" rel="noopener">CodePen</a>.</p>
+<h3 id="Error-stack-using-named-function"><a href="#Error-stack-using-named-function" class="headerlink" title="Error stack using named function"></a>Error stack using named function</h3><p data-height="252" data-theme-id="dark" data-slug-hash="mWJdJK" data-default-tab="js" data-user="tbking" data-embed-version="2" data-pen-title="Named Func" class="codepen">See the Pen <a target="_blank" rel="noopener" href="https://codepen.io/tbking/pen/mWJdJK/">Named Func</a> by Tarun Batra (<a target="_blank" rel="noopener" href="http://codepen.io/tbking">@tbking</a>) on <a target="_blank" rel="noopener" href="http://codepen.io">CodePen</a>.</p>
 <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script><script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
 
-<p>JavaScript ecosystem is <a href="https://hackernoon.com/how-it-feels-to-learn-javascript-in-2016-d3a717dd577f" target="_blank" rel="noopener">already confusing</a> as is and the developer can use as much help as she can get to make sense of the obscure errors.</p>
-<h2 id="Use-methods-before-declaration"><a href="#Use-methods-before-declaration" class="headerlink" title="Use methods before declaration"></a>Use methods before declaration</h2><p>While interpreting code, JavaScript looks for statements starting with <strong>function</strong> keyword (i.e. named function expressions) and move them to the top. This is called <a href="https://developer.mozilla.org/en-US/docs/Glossary/Hoisting" target="_blank" rel="noopener">Hoisting</a>.</p>
+<p>JavaScript ecosystem is <a target="_blank" rel="noopener" href="https://hackernoon.com/how-it-feels-to-learn-javascript-in-2016-d3a717dd577f">already confusing</a> as is and the developer can use as much help as she can get to make sense of the obscure errors.</p>
+<h2 id="Use-methods-before-declaration"><a href="#Use-methods-before-declaration" class="headerlink" title="Use methods before declaration"></a>Use methods before declaration</h2><p>While interpreting code, JavaScript looks for statements starting with <strong>function</strong> keyword (i.e. named function expressions) and move them to the top. This is called <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Glossary/Hoisting">Hoisting</a>.</p>
 <p>So practically, a named function is available even before it’s declared, making the following code valid.</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">add(<span class="number">1</span>, <span class="number">2</span>); <span class="comment">// =&gt; 3</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span> (<span class="params">a, b</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> a + b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>But the following code won’t work.</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">add(<span class="number">1</span>, <span class="number">2</span>); <span class="comment">// =&gt; Error</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> add = <span class="function"><span class="keyword">function</span> (<span class="params">a, b</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> a + b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="Improves-readability"><a href="#Improves-readability" class="headerlink" title="Improves readability"></a>Improves readability</h2><p>It’s fairly difficult to understand a callback function’s purpose in first glance. That’s what makes <a href="http://callbackhell.com/" target="_blank" rel="noopener">callback hell</a> the problem it is.<br>Look at the following jQuery code.</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'form'</span>).submit(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h2 id="Improves-readability"><a href="#Improves-readability" class="headerlink" title="Improves readability"></a>Improves readability</h2><p>It’s fairly difficult to understand a callback function’s purpose in first glance. That’s what makes <a target="_blank" rel="noopener" href="http://callbackhell.com/">callback hell</a> the problem it is.<br>Look at the following jQuery code.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">&#x27;form&#x27;</span>).submit(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <p>The above code provides no information on what’s going to happen to the submitted form. Adding names to callbacks improves readability and acts as implicit documentation, as the following code does.</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'form'</span>).submit(<span class="function"><span class="keyword">function</span> <span class="title">hitAPI</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">&#x27;form&#x27;</span>).submit(<span class="function"><span class="keyword">function</span> <span class="title">hitAPI</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
-<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>In my opinion, there’s no reason one should not use named functions when possible. Most of the JavaScript style guides out there don’t give due importance to them. <a href="http://eslint.org/" target="_blank" rel="noopener">ESLint</a> users can use <a href="http://eslint.org/docs/rules/func-names" target="_blank" rel="noopener">func-names</a> rule in their projects to require the use of named functions, and enjoy the benefits.</p>
+<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>In my opinion, there’s no reason one should not use named functions when possible. Most of the JavaScript style guides out there don’t give due importance to them. <a target="_blank" rel="noopener" href="http://eslint.org/">ESLint</a> users can use <a target="_blank" rel="noopener" href="http://eslint.org/docs/rules/func-names">func-names</a> rule in their projects to require the use of named functions, and enjoy the benefits.</p>
 <br>
 
 <p><strong>❤️ code</strong><br>️</p>
@@ -295,24 +294,31 @@ __NOTE__: If you tried the above code in Chrome Dev Tools, you would've noticed 
     </div>
     <!-- styles -->
 
-<link rel="stylesheet" href="../../../lib/font-awesome/css/all.min.css">
+  
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.8.1/css/justifiedGallery.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/> 
+   
 
 
-<link rel="stylesheet" href="../../../lib/justified-gallery/css/justifiedGallery.min.css">
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
 
 
     <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
 
-<script src="../../../lib/jquery/jquery.min.js"></script>
 
 
-<script src="../../../lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js" crossorigin="anonymous"></script> 
+   
+
 
 <!-- clipboard -->
 
   
-<script src="../../../lib/clipboard/clipboard.min.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
   <script type="text/javascript">
   $(function() {
     // copy-btn HTML

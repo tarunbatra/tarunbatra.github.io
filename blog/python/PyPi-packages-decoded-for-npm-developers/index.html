@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
     <meta name="description" content="Step by step guide to develop Python packages and comparisions with npm ecosystem. I deployed my package on PyPi and here&#39;s what I&#39;ve learned.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="PyPi packages decoded for npm developers">
@@ -15,7 +15,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://tarunbatra.com/data/images/PyPi-packages-decoded-for-npm-developers/cover.jpg">
 <meta property="article:published_time" content="2020-08-31T18:00:00.000Z">
-<meta property="article:modified_time" content="2021-02-13T21:11:01.419Z">
+<meta property="article:modified_time" content="2021-06-01T18:54:48.791Z">
 <meta property="article:author" content="Tarun Batra">
 <meta property="article:tag" content="python">
 <meta property="article:tag" content="npm">
@@ -49,23 +49,21 @@
 
     <!-- persian styles -->
     
-      
-<link rel="stylesheet" href="../../../css/rtl.css">
-
-    
     <!-- rss -->
     
     
     <link rel="canonical" href="https://tarunbatra.com/blog/python/PyPi-packages-decoded-for-npm-developers/"/>
-<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="atom.xml" title="Tarun Batra" type="application/atom+xml">
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="atom.xml" title="Tarun Batra" type="application/atom+xml">
 </head>
 
 <body class="max-width mx-auto px3 ltr">
     
       <div id="header-post">
-  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
-  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
-  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" "Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
   <span id="menu">
     <span id="nav">
       <ul>
@@ -84,12 +82,13 @@
     <span id="actions">
       <ul>
         
-        <li><a class="icon" href="../../x/git-before-github/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Previous post " href="../../x/git-before-github/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
         
         
-        <li><a class="icon" href="../../decentralization/Deploy-your-website-on-IPFS-Why-and-How/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Next post " href="../../decentralization/Deploy-your-website-on-IPFS-Why-and-How/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
         
-        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Back to top " href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post " href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
       </ul>
       <span id="i-prev" class="info" style="display:none;">Previous post</span>
       <span id="i-next" class="info" style="display:none;">Next post</span>
@@ -155,7 +154,7 @@
       
     <div class="article-tag">
         <i class="fas fa-tag"></i>
-        <a class="tag-link" href="../../../tags/npm/" rel="tag">npm</a>, <a class="tag-link" href="../../../tags/pip/" rel="tag">pip</a>, <a class="tag-link" href="../../../tags/python/" rel="tag">python</a>
+        <a class="tag-link-link" href="../../../tags/npm/" rel="tag">npm</a>, <a class="tag-link-link" href="../../../tags/pip/" rel="tag">pip</a>, <a class="tag-link-link" href="../../../tags/python/" rel="tag">python</a>
     </div>
 
 
@@ -164,7 +163,7 @@
   
 <div class="article-gallery">
     
-    <a class="gallery-item" href="../../../data/images/PyPi-packages-decoded-for-npm-developers/cover.jpg" rel="gallery_ckl47ueb8000h0eci1kivh8cb">
+    <a class="gallery-item" href="../../../data/images/PyPi-packages-decoded-for-npm-developers/cover.jpg" rel="gallery_ckq1cxj03000iggci0dbbfeoa">
         <img src="../../../data/images/PyPi-packages-decoded-for-npm-developers/cover.jpg" itemprop="image" />
     </a>
     
@@ -175,7 +174,7 @@
     <p>If you are a developer in Javascript / Node.js ecosystem, you have used <code>npm</code>. It’s the world’s largest software registry and the ecosystem around it is advanced and mature. I realized it when I tried to port <code>password-validator</code>, an open source npm package I maintain, to Python. I spent weeks to figure out things which were very intuitive to me in the Javascript world. This blog will list down some of the key differences I found between the two ecosystems for anybody else who treads the same path. By the end of this post, we should be able to install our package using:</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install &lt;my-awesome-package&gt;</span><br></pre></td></tr></table></figure>
 
-<h2 id="What-is-a-package"><a href="#What-is-a-package" class="headerlink" title="What is a package?"></a>What is a package?</h2><p>In <code>npm</code>, any folder which has a <code>package.json</code> file is a package. In Python world, we need a file called <code>setup.py</code> in the root folder to make our project a package for <a href="https://pypi.org/" target="_blank" rel="noopener">PyPi</a>, a common repository for Python packages. This file is used to declare meta data like name, version, author, and even dependencies (with a catch). Look at this <a href="https://github.com/pypa/sampleproject/blob/master/setup.py" target="_blank" rel="noopener">sample setup.py file</a> to get an idea.</p>
+<h2 id="What-is-a-package"><a href="#What-is-a-package" class="headerlink" title="What is a package?"></a>What is a package?</h2><p>In <code>npm</code>, any folder which has a <code>package.json</code> file is a package. In Python world, we need a file called <code>setup.py</code> in the root folder to make our project a package for <a target="_blank" rel="noopener" href="https://pypi.org/">PyPi</a>, a common repository for Python packages. This file is used to declare meta data like name, version, author, and even dependencies (with a catch). Look at this <a target="_blank" rel="noopener" href="https://github.com/pypa/sampleproject/blob/master/setup.py">sample setup.py file</a> to get an idea.</p>
 <p>Normally, the actual package code goes inside a directory with the package name and it is required to have a <code>__init__.py</code> file in it to indicate that it is a module. So the directory structure would look more or less like:</p>
 <pre>
 package-project
@@ -197,23 +196,23 @@ package-project
 
 <h3 id="Requirements-file"><a href="#Requirements-file" class="headerlink" title="Requirements file"></a>Requirements file</h3><p>Every virtual environment has its own pip and Python distribution. So it’s a clean slate when you start. When we install dependencies, we can make a log of them using:</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip freeze &gt; requirements.txt</span><br></pre></td></tr></table></figure>
-<p>This will log all the packages and their versions installed by pip in the file <code>requirements.txt</code>. The file name can be anything but it’s a convention in the Python community to use this name. There is no concept of devDependencies in Python but it’s not uncommon for some projects to have a <code>requirements-dev.txt</code> to log devDependencies of the project. Here’s a <a href="https://github.com/tarunbatra/password-validator-python/blob/master/requirements-dev.txt" target="_blank" rel="noopener">sample requirements file</a>.</p>
+<p>This will log all the packages and their versions installed by pip in the file <code>requirements.txt</code>. The file name can be anything but it’s a convention in the Python community to use this name. There is no concept of devDependencies in Python but it’s not uncommon for some projects to have a <code>requirements-dev.txt</code> to log devDependencies of the project. Here’s a <a target="_blank" rel="noopener" href="https://github.com/tarunbatra/password-validator-python/blob/master/requirements-dev.txt">sample requirements file</a>.</p>
 <p>Installing a project’s dependencies now can be done with:</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install -r requirements.txt</span><br></pre></td></tr></table></figure>
 
 <h2 id="Documentation"><a href="#Documentation" class="headerlink" title="Documentation"></a>Documentation</h2><p><code>JSDocs</code> is the most common way to document code in JavaScript and the list of documentation tools alomst stops there. Documentation in Python is taken very seriously.</p>
-<h3 id="Sphinx"><a href="#Sphinx" class="headerlink" title="Sphinx"></a>Sphinx</h3><p><a href="https://www.sphinx-doc.org/en/master/" target="_blank" rel="noopener"><code>Sphinx</code></a> is a documentation generator for Python which can be used in various ways thanks to a variety of extensions available. To get started with sphinx, we need a <code>conf.py</code> file which will have configuration for sphinx. The file can be generated using <code>sphinx-quickstart</code> CLI utility. Here’s a <a href="https://github.com/tarunbatra/password-validator-python/blob/master/docs/source/conf.py" target="_blank" rel="noopener">sample conf.py file</a> to get started.</p>
-<p>Sphinx and Python ecosystem prefers using <code>reStructuredText</code> (reST) for documentation instead of Markdown which is common in the JavaScript world. M↓ can be used with Sphinx too, but it’s a bit of work and reST is very similar to M↓. Here’s a sample <a href="https://raw.githubusercontent.com/tarunbatra/password-validator-python/master/README.rst" target="_blank" rel="noopener">README in reST</a>.</p>
+<h3 id="Sphinx"><a href="#Sphinx" class="headerlink" title="Sphinx"></a>Sphinx</h3><p><a target="_blank" rel="noopener" href="https://www.sphinx-doc.org/en/master/"><code>Sphinx</code></a> is a documentation generator for Python which can be used in various ways thanks to a variety of extensions available. To get started with sphinx, we need a <code>conf.py</code> file which will have configuration for sphinx. The file can be generated using <code>sphinx-quickstart</code> CLI utility. Here’s a <a target="_blank" rel="noopener" href="https://github.com/tarunbatra/password-validator-python/blob/master/docs/source/conf.py">sample conf.py file</a> to get started.</p>
+<p>Sphinx and Python ecosystem prefers using <code>reStructuredText</code> (reST) for documentation instead of Markdown which is common in the JavaScript world. M↓ can be used with Sphinx too, but it’s a bit of work and reST is very similar to M↓. Here’s a sample <a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/tarunbatra/password-validator-python/master/README.rst">README in reST</a>.</p>
 <h2 id="Docstrings"><a href="#Docstrings" class="headerlink" title="Docstrings"></a>Docstrings</h2><p>Sphinx can look through special comments in Python code and include them in the documentation. These comments which are called <code>Docstrings</code> are used to describe functions, classes etc. and are very similar to JSDocs in JavaScript and JavaDocs in Java. Here’s a method documented with Docstrings:</p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add</span><span class="params">(a, b)</span>:</span></span><br><span class="line">  <span class="string">''' Performs addition of 2 numbers</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">  Example:</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; res = add(1, 2)</span></span><br><span class="line"><span class="string">    3</span></span><br><span class="line"><span class="string">  Returns:</span></span><br><span class="line"><span class="string">    int: Result of addition</span></span><br><span class="line"><span class="string">  '''</span></span><br><span class="line">  <span class="keyword">return</span> a + b</span><br></pre></td></tr></table></figure>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add</span>(<span class="params">a, b</span>):</span></span><br><span class="line">  <span class="string">&#x27;&#x27;&#x27; Performs addition of 2 numbers</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">  Example:</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; res = add(1, 2)</span></span><br><span class="line"><span class="string">    3</span></span><br><span class="line"><span class="string">  Returns:</span></span><br><span class="line"><span class="string">    int: Result of addition</span></span><br><span class="line"><span class="string">  &#x27;&#x27;&#x27;</span></span><br><span class="line">  <span class="keyword">return</span> a + b</span><br></pre></td></tr></table></figure>
 
-<p>There are a number of formats for writing Docstrings, which can be a topic discussion in itself. I found myself going back to <a href="https://realpython.com/documenting-python-code/#documenting-your-python-code-base-using-docstrings" target="_blank" rel="noopener">this guide by RealPython</a> and I recommend giving it a read for a deeper understanding of Docstrings. Using the combination of reSt files and Docstrings, we can generate documentation using Sphinx in a form like PDF and HTML. Here’s a <a href="https://tarunbatra.com/password-validator-python/api_reference.html">sample HTML documentation</a> generated using Sphinx.</p>
-<p>There are less popular alternatives to Sphinx which can also be used for documentation, most notable being <a href="https://readthedocs.org/" target="_blank" rel="noopener">ReadTheDocs</a>.</p>
+<p>There are a number of formats for writing Docstrings, which can be a topic discussion in itself. I found myself going back to <a target="_blank" rel="noopener" href="https://realpython.com/documenting-python-code/#documenting-your-python-code-base-using-docstrings">this guide by RealPython</a> and I recommend giving it a read for a deeper understanding of Docstrings. Using the combination of reSt files and Docstrings, we can generate documentation using Sphinx in a form like PDF and HTML. Here’s a <a href="https://tarunbatra.com/password-validator-python/api_reference.html">sample HTML documentation</a> generated using Sphinx.</p>
+<p>There are less popular alternatives to Sphinx which can also be used for documentation, most notable being <a target="_blank" rel="noopener" href="https://readthedocs.org/">ReadTheDocs</a>.</p>
 <h2 id="Tests"><a href="#Tests" class="headerlink" title="Tests"></a>Tests</h2><p>I found writing unit tests in Python easier than in JavaScript due to the availability of mature and built-in tools.</p>
-<h3 id="unittest"><a href="#unittest" class="headerlink" title="unittest"></a>unittest</h3><p>Python has a built-in module <a href="https://docs.python.org/3/library/unittest.html" target="_blank" rel="noopener"><code>unittest</code></a> which can be used to run the tests. The syntax is very similar to Jest or Mocha. Every “test” is a class and every class method is a test case. Methods like <code>setUp()</code> and <code>teardown()</code> have special meanings and are equivalent to <code>before</code> and <code>after</code> methods seen in JavaScript testing frameworks. Here’s a <a href="https://github.com/tarunbatra/password-validator-python/blob/master/tests/test_password_validator.py" target="_blank" rel="noopener">sample test file</a>. Tests are run by:</p>
+<h3 id="unittest"><a href="#unittest" class="headerlink" title="unittest"></a>unittest</h3><p>Python has a built-in module <a target="_blank" rel="noopener" href="https://docs.python.org/3/library/unittest.html"><code>unittest</code></a> which can be used to run the tests. The syntax is very similar to Jest or Mocha. Every “test” is a class and every class method is a test case. Methods like <code>setUp()</code> and <code>teardown()</code> have special meanings and are equivalent to <code>before</code> and <code>after</code> methods seen in JavaScript testing frameworks. Here’s a <a target="_blank" rel="noopener" href="https://github.com/tarunbatra/password-validator-python/blob/master/tests/test_password_validator.py">sample test file</a>. Tests are run by:</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 -m unittest discover -s &lt;test_directory&gt;</span><br></pre></td></tr></table></figure>
-<p><a href="https://docs.pytest.org/en/stable/" target="_blank" rel="noopener">Pytest</a> and <a href="https://docs.nose2.io/en/latest/" target="_blank" rel="noopener">nose2</a> are some of the alternatives but I found <code>unittest</code> adequate.</p>
-<h3 id="Doctests"><a href="#Doctests" class="headerlink" title="Doctests"></a>Doctests</h3><p>Earlier in Documentation section, we discussed about Docstrings. The Examples section in a Docstring provide the user an understanding of how to use the function. What’s great is we can also run the example against an automated unit test, using <a href="https://docs.python.org/3/library/doctest.html" target="_blank" rel="noopener">doctest</a> (another built-in module). This can keep the documentation and implementation in sync.</p>
+<p><a target="_blank" rel="noopener" href="https://docs.pytest.org/en/stable/">Pytest</a> and <a target="_blank" rel="noopener" href="https://docs.nose2.io/en/latest/">nose2</a> are some of the alternatives but I found <code>unittest</code> adequate.</p>
+<h3 id="Doctests"><a href="#Doctests" class="headerlink" title="Doctests"></a>Doctests</h3><p>Earlier in Documentation section, we discussed about Docstrings. The Examples section in a Docstring provide the user an understanding of how to use the function. What’s great is we can also run the example against an automated unit test, using <a target="_blank" rel="noopener" href="https://docs.python.org/3/library/doctest.html">doctest</a> (another built-in module). This can keep the documentation and implementation in sync.</p>
 <h2 id="Publishing"><a href="#Publishing" class="headerlink" title="Publishing"></a>Publishing</h2><p>Packages can be publushed to PyPi after building. Earlier the builds were made in Egg format, however now it is being replaced by Wheel format. To create a wheel build, we need to install <code>setuptools</code> and <code>wheel</code>.</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 -m pip install --user --upgrade setuptools wheel</span><br></pre></td></tr></table></figure>
 <p>Now the build can be created by running:</p>
@@ -226,15 +225,15 @@ package-project
 <p>Now we need to upload the package build to PyPi. We need <code>twine</code> for that.</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 -m pip install --user --upgrade twine</span><br></pre></td></tr></table></figure>
 <p>Final step, the uploading of the build:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 -m twine upload --repository testpypi dist&#x2F;*</span><br></pre></td></tr></table></figure>
-<p><code>--repository</code> here lets you select a specific package repository like custom or private npm registeries. It can be configured with a <a href="https://packaging.python.org/specifications/pypirc/" target="_blank" rel="noopener"><code>.pypirc</code></a> file.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 -m twine upload --repository testpypi dist/*</span><br></pre></td></tr></table></figure>
+<p><code>--repository</code> here lets you select a specific package repository like custom or private npm registeries. It can be configured with a <a target="_blank" rel="noopener" href="https://packaging.python.org/specifications/pypirc/"><code>.pypirc</code></a> file.</p>
 <h2 id="Additional-resources"><a href="#Additional-resources" class="headerlink" title="Additional resources"></a>Additional resources</h2><p>Two resources which helped me a lot in fuguring out my issues were:</p>
 <ol>
-<li>The official <a href="https://packaging.python.org/" target="_blank" rel="noopener">Python Packaging User Guide</a>. I recommend going through it once.</li>
-<li><a href="https://realpython.com/" target="_blank" rel="noopener">The Real Python</a>. I recommend clicking on any link from this website which comes up in search results.</li>
+<li>The official <a target="_blank" rel="noopener" href="https://packaging.python.org/">Python Packaging User Guide</a>. I recommend going through it once.</li>
+<li><a target="_blank" rel="noopener" href="https://realpython.com/">The Real Python</a>. I recommend clicking on any link from this website which comes up in search results.</li>
 </ol>
-<p>It was an interesting experience for me to tackle all the challenges faced when I was on a journey to publish my first package on PyPi. A mature testing frameworks was a breath of fresh air while dependency management and documentation generation was a daunting task due to all the different tools to manage. In the end I published <a href="https://github.com/tarunbatra/password-validator-python/" target="_blank" rel="noopener">password_validator</a> and I am happy with the result.</p>
-<p>Do reach out in comments or on my <a href="https://twitter.com/tarunbatra/" target="_blank" rel="noopener">Twitter</a> if you have any issues with the steps I have mentioned here. Happy publishing!</p>
+<p>It was an interesting experience for me to tackle all the challenges faced when I was on a journey to publish my first package on PyPi. A mature testing frameworks was a breath of fresh air while dependency management and documentation generation was a daunting task due to all the different tools to manage. In the end I published <a target="_blank" rel="noopener" href="https://github.com/tarunbatra/password-validator-python/">password_validator</a> and I am happy with the result.</p>
+<p>Do reach out in comments or on my <a target="_blank" rel="noopener" href="https://twitter.com/tarunbatra/">Twitter</a> if you have any issues with the steps I have mentioned here. Happy publishing!</p>
 
   </div>
 </article>
@@ -327,24 +326,31 @@ package-project
     </div>
     <!-- styles -->
 
-<link rel="stylesheet" href="../../../lib/font-awesome/css/all.min.css">
+  
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.8.1/css/justifiedGallery.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/> 
+   
 
 
-<link rel="stylesheet" href="../../../lib/justified-gallery/css/justifiedGallery.min.css">
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
 
 
     <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
 
-<script src="../../../lib/jquery/jquery.min.js"></script>
 
 
-<script src="../../../lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js" crossorigin="anonymous"></script> 
+   
+
 
 <!-- clipboard -->
 
   
-<script src="../../../lib/clipboard/clipboard.min.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
   <script type="text/javascript">
   $(function() {
     // copy-btn HTML
