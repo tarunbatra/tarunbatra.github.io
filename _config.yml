@@ -74,6 +74,8 @@ theme_config:
     post_count: 10
   # highlight: dark
   projects_url: https://github.com/tarunbatra
+  page_width: 60
+  font_size: 15px
   nav:
     Home: /
     About: ./about/
