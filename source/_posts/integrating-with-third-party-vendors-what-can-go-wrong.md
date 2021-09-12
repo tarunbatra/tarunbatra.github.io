@@ -1,5 +1,5 @@
 ---
-title: 'Integrating with third-party vendors – What can go wrong'
+title: 'Integrating with third-party vendors – what can go wrong'
 date: 2021-08-30 22:07:07
 tags:
   - architecture
