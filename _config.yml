@@ -85,7 +85,6 @@ theme_config:
     # Contact: mailto:me@tarunbatra.com
   social_links:
     github-alt: https://github.com/tarunbatra
-    stack-overflow: https://stackoverflow.com/users/story/2751596
     twitter: https://twitter.com/tarunbatra
     linkedin: https://www.linkedin.com/in/tarunbatra00
     rss: ./atom.xml
