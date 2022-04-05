@@ -14,9 +14,12 @@ Hi 👋, I am a Software developer and have worked in domains like finance, logi
 
 # Work
 
-## Backend Developer at Instabox, Stockholm [July 2020 - Present]
+## Senior Software Engineer at WonderFI, Vancouver [Mar 2022 - Present]
+At [WonderFI](https://wonder.fi), we are a small team trying to build an ecosystem for DeFI within Canada and beyond.
 
-At [Instabox](https://instabox.se), I am part of the Merchants and Communications team. We are responsible for integrating with the APIs of our e-commerce partners and also maintain APIs on our end for them to consume. We also develop and maintain communication system which uses duplex channes like SMSs and emails for interacting with our users. Stability and scalability are main areas of our focus and we have been using Node.js (Express, Fastify), Postgres and Redis to get desirable perfomance.
+## Backend Developer at Instabox, Stockholm [Jul 2020 - Jan 2022]
+
+At [Instabox](https://instabox.se), I was part of the Merchants and Communications team. We were responsible for integrating with the APIs of our e-commerce partners and also maintain APIs on our end for them to consume. We also developed and maintained communication system which used duplex channels like SMSs and emails for interacting with our users. Stability and scalability were the main areas of our focus and we had been using Node.js (Express, Fastify), Postgres and Redis to get desirable perfomance.
 
 <div class="gallery row">
 
@@ -28,7 +31,7 @@ At [Instabox](https://instabox.se), I am part of the Merchants and Communication
 </div>
 
 ---
-## Senior Software Developer at Smallcase, Bangalore [Nov 2017 - July 2020]
+## Senior Software Developer at Smallcase, Bangalore [Nov 2017 - Jul 2020]
 
 At [Smallcase](https://smallcase.com), I worked closely with business and led the effort of integrating our platform with our partner stock brokers. Here, I led a team of 3 developers that made these integrations possible. I was also responsible for the core transactions system and execution of scheduled jobs. Apart from that I was involved in cross-team engineering decisions and the hiring process. Here, I used Node.js, MongoDB, Redis and RabbitMQ heavily along with some Kafka and Elasticsearch.
 
