@@ -80,6 +80,7 @@ theme_config:
     Home: /
     About: ./about/
     Blog: ./blog/
+    Resume: ./resume/
     Search: /search/
     # Projects: https://github.com/tarunbatra
     # Contact: mailto:me@tarunbatra.com
