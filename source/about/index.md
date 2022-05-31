@@ -2,7 +2,10 @@
 title: About - Tarun Batra
 date: 2018-04-08 15:00:00
 ---
-Hi 👋, I am a Software developer and have worked in domains like finance, logistics and gaming. I like to design and implement simple services which  come together to do complex things. Most of my experience is in Node.js and its ecosystem of tools. Other than tech, I like motorcycles and used to go on roaadtrips when I still had my motorcycle. These days I enjoy brewing and cooking.
+Hi 👋, I am a Software developer and have worked in domains like finance, logistics and gaming. I like to design and implement simple services which  come together to do complex things. Most of my experience is in Node.js and its ecosystem of tools. Other than tech, I like motorcycles and used to go on roaadtrips when I still had my motorcycle. These days I enjoy brewing, hiking and cooking.
+
+### [Looking for my next job. If you are hiring, check my resume and give me a shout.](https://tarunbatra.com/resume)
+<br>
 
 <div class="gallery me">
 
@@ -15,7 +18,7 @@ Hi 👋, I am a Software developer and have worked in domains like finance, logi
 # Work
 
 ## Senior Software Engineer at WonderFI, Vancouver [Mar 2022 - Present]
-At [WonderFI](https://wonder.fi), we are a small team trying to build an ecosystem for DeFI within Canada and beyond.
+At [WonderFI](https://wonder.fi), I worked as a full stack developer designing and developing services to interact with the Ethereum and Polygon blockchain using Golang, React, Postgres, MongoDB and Kubernetes.
 
 ## Backend Developer at Instabox, Stockholm [Jul 2020 - Jan 2022]
 
