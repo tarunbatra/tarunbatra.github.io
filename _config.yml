@@ -88,6 +88,7 @@ theme_config:
     github-alt: https://github.com/tarunbatra
     twitter: https://twitter.com/tarunbatra
     linkedin: https://www.linkedin.com/in/tarunbatra00
+    stack-overflow: https://stackoverflow.com/users/2751596/tbking
     rss: ./atom.xml
     ethereum: https://etherscan.io/address/0x0Df6A27fb3E68D4F329E886Ab18e44fc0dAb2918
   gravatar:
