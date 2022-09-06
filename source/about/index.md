@@ -2,23 +2,32 @@
 title: About - Tarun Batra
 date: 2018-04-08 15:00:00
 ---
-Hi 👋, I am a Software developer and have worked in domains like finance, logistics and gaming. I like to design and implement simple services which  come together to do complex things. Most of my experience is in Node.js and its ecosystem of tools. Other than tech, I like motorcycles and used to go on roaadtrips when I still had my motorcycle. These days I enjoy brewing, hiking and cooking.
+Hi 👋, I am stoked to find out that you have made to this page. I am a Software developer and while designing software I try to stick to –
 
-### [Looking for my next job. If you are hiring, check my resume and give me a shout.](https://tarunbatra.com/resume)
+> Do One Thing and Do It Well
+>
+> – Unix philosophy
+
+## Hobbies
+Other than tech, I like motorcycles and used to go on roaadtrips when I still had my motorcycle. These days I enjoy hiking, cooking and brewing coffee.
+
 <br>
 
 <div class="gallery me">
 
-![Me](https://tarunbatra.com/data/images/about/me.png)
-![Me](https://tarunbatra.com/data/images/about/me2.jpg)
-![Me](https://tarunbatra.com/data/images/about/me3.jpg)
+![Me](/data/images/about/me.jpg)
+![Me](/data/images/about/me2.jpg)
+![Me](/data/images/about/me3.jpg)
 
 </div>
 
 # Work
 
-## Senior Software Engineer at WonderFI, Vancouver [Mar 2022 - Present]
-At [WonderFI](https://wonder.fi), I worked as a full stack developer designing and developing services to interact with the Ethereum and Polygon blockchain using Golang, React, Postgres, MongoDB and Kubernetes.
+## Senior Software Engineer at Okta, Vancouver [Sept 2022 - Present]
+At [Okta](https://okta.com), I have joined the atSpoke team.
+
+## Senior Software Engineer at WonderFI, Vancouver [Mar 2022 - May 2022]
+At [WonderFI](https://wonder.fi), I worked as a full stack developer designing and developing services to interact with the Ethereum and Polygon blockchain using Golang, React, Postgres, MongoDB and Kubernetes. I was impacted by the layoffs here.
 
 ## Backend Developer at Instabox, Stockholm [Jul 2020 - Jan 2022]
 
