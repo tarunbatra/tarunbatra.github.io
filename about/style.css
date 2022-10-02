@@ -1,0 +1,14 @@
+
+.gallery p {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.me p img {
+  max-height: 200px;
+}
+
+.row p img {
+  max-height: 150px;
+}
