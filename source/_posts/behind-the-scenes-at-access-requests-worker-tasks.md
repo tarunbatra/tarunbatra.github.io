@@ -1,6 +1,6 @@
 ---
 title: 'Behind the scenes at Access Requests: Worker tasks'
-date: 2023-1-20 09:00:00
+date: 2023-11-20 09:00:00
 tags:
   - architecture
   - message-queue
@@ -88,7 +88,6 @@ Another future improvement we’ve flagged is to increase confidence around “e
 <sub>This article originally appeared on [Okta](https://www.okta.com/blog/2023/11/behind-the-scenes-at-access-requests-worker-tasks/) on November 20, 2023.</sub>
 
 [architecture-image]: /data/images/behind-the-scenes-at-access-requests-worker-tasks/architecture.png
-[code-image]: /data/images/behind-the-scenes-at-access-requests-worker-tasks/code.png
 [queue-setup-image]: /data/images/behind-the-scenes-at-access-requests-worker-tasks/queue-setup.png
 [flow-control-image]: /data/images/behind-the-scenes-at-access-requests-worker-tasks/flow-control.png
 
