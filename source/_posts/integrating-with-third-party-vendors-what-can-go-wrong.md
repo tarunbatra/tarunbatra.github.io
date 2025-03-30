@@ -7,6 +7,7 @@ category:
   - software
 photos: /data/images/integrating-with-third-party-vendors-what-can-go-wrong/cover.jpg
 ---
+<sup> Photo by [Sarah Kilian](https://unsplash.com/@rojekilian) on [Unsplash](https://unsplash.com)</sup>
 
 Things are bound to go wrong when integrating two systems, more so when one of these systems belongs to a third-party vendor that you have no control over. I have experience with integrating vendors and managing these integrations. I am ranting here about the common patterns I have noticed in such integrations.
 

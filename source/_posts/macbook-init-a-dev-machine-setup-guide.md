@@ -8,6 +8,7 @@ category:
 photos: /data/images/macbook-init-a-dev-machine-setup-guide/cover.jpg
 description: As I started my new job, I decided to log the steps to set up my system, mostly for future me, but also for anyone else.
 ---
+<sup> Photo by [Alexander Shatov](https://unsplash.com/@alexbemore) on [Unsplash](https://unsplash.com)</sup>
 
 I started a new job, and I am excited. I get a new MacBook delivered and after keeping the delicate wrapping paper intact during the intricate unboxing, it dawns upon me that it is not _my_ MacBook. It is a brand-new system devoid of all the custom tools that make my (work) life easier. On top of it, I do not even remember what those tools were, to begin with. Was it `oh-my-zsh`, or was I using `fish`? What did I do last time to get the top bar show Bluetooth? I end up setting small things like these, slowly every day, until it becomes all familiar, and I forget about them.
 

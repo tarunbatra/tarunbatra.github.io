@@ -35,6 +35,7 @@ Market sentiments greatly effect the value of the currencies, stocks and commodi
 Trust is essential for virtually all economic activity. Banknotes often have a **promissory clause** which reads like this:
 
 !['Bank note'][bank-note]
+<sup>Photo by [rupixen](https://unsplash.com/@rupixen) on [Unsplash](https://unsplash.com)</sup>
 
 without any gold or other precious resources to actually back that claim. (Earlier they used to back currency value to something like gold. Though it's discontinued now, but the idea is same).
 
@@ -67,6 +68,7 @@ When we transfer money through banks, we trust them to do so. But without any ce
 
 Blockchains, themselves are greatly hyped and are considered the biggest achievement of Bitcoin, as the idea can be used in various other industries to create trust-less systems.
 !['Dilbert'][dilbert]
+<sup>Dilbert And The Blockchain, Nov 1995</sup>
 
 ### Value of bitcoins
 
