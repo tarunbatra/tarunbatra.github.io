@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="Originally published for Codebrahma on Jul 18, 2017. Microservices is a vague term which usually points to small independent services which together form up an application. Microservices architecture">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Getting Started with Microservices">
+<meta property="og:url" content="https://tarunbatra.com/blog/architecture/Getting-Started-with-microservices/index.html">
+<meta property="og:site_name" content="Tarun Batra">
+<meta property="og:description" content="Originally published for Codebrahma on Jul 18, 2017. Microservices is a vague term which usually points to small independent services which together form up an application. Microservices architecture">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://tarunbatra.com/data/images/Getting-Started-with-microservices/cover.jpeg">
+<meta property="article:published_time" content="2017-07-17T23:00:00.000Z">
+<meta property="article:modified_time" content="2025-03-30T23:54:00.871Z">
+<meta property="article:author" content="Tarun Batra">
+<meta property="article:tag" content="architecture">
+<meta property="article:tag" content="microservices">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tarunbatra.com/data/images/Getting-Started-with-microservices/cover.jpeg">
+<meta name="twitter:creator" content="@tarunbatra">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="../../.././meta/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="../../.././meta/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="../../.././meta/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Getting Started with Microservices</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="../../../css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+    <link rel="canonical" href="https://codebrahma.com/microservices-for-beginners/"/>
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="atom.xml" title="Tarun Batra" type="application/atom+xml">
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" "Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        
+          <li><a href="../../../index.html">Home</a></li>
+        
+          <li><a href="../../.././about/">About</a></li>
+        
+          <li><a href="../../.././blog/">Blog</a></li>
+        
+          <li><a href="../../.././resume/">Resume</a></li>
+        
+          <li><a href="../../../search/">Search</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post " href="../../security/Error-messages-in-login-process-Privacy-and-Security/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post " href="../../javascript/Pitfalls-of-Mocha-s-built-in-Promise-support/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top " href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post " href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Rapid-Rise-in-popularity-of-Microservices"><span class="toc-number">1.</span> <span class="toc-text">Rapid Rise in popularity of Microservices</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Why-Microservices"><span class="toc-number">2.</span> <span class="toc-text">Why Microservices?</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Fewer-compromises-in-tech-stack"><span class="toc-number">2.1.</span> <span class="toc-text">Fewer compromises in tech stack</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Independent-teams"><span class="toc-number">3.</span> <span class="toc-text">Independent teams</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Do-one-thing-and-do-it-well"><span class="toc-number">4.</span> <span class="toc-text">Do one thing and do it well</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Fault-isolation"><span class="toc-number">5.</span> <span class="toc-text">Fault isolation</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#How-to-develop-Microservices"><span class="toc-number">6.</span> <span class="toc-text">How to develop Microservices?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#API-Gateway"><span class="toc-number">7.</span> <span class="toc-text">API Gateway</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Inter-service-communication"><span class="toc-number">8.</span> <span class="toc-text">Inter-service communication</span></a></li></ol>
+    </div>
+  </span>
+  <br/>
+  <div id="share">
+    <ul>
+  <li><a class="icon" target="_blank" href="http://www.facebook.com/sharer.php?u=https://tarunbatra.com/blog/architecture/Getting-Started-with-microservices/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="https://twitter.com/share?url=https://tarunbatra.com/blog/architecture/Getting-Started-with-microservices/&text=Getting Started with Microservices"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="http://www.linkedin.com/shareArticle?url=https://tarunbatra.com/blog/architecture/Getting-Started-with-microservices/&title=Getting Started with Microservices"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="https://pinterest.com/pin/create/bookmarklet/?url=https://tarunbatra.com/blog/architecture/Getting-Started-with-microservices/&is_video=false&description=Getting Started with Microservices"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="mailto:?subject=Getting Started with Microservices&body=Check out this article: https://tarunbatra.com/blog/architecture/Getting-Started-with-microservices/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="https://getpocket.com/save?url=https://tarunbatra.com/blog/architecture/Getting-Started-with-microservices/&title=Getting Started with Microservices"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="http://reddit.com/submit?url=https://tarunbatra.com/blog/architecture/Getting-Started-with-microservices/&title=Getting Started with Microservices"><i class="fab fa-reddit-alien " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="http://www.stumbleupon.com/submit?url=https://tarunbatra.com/blog/architecture/Getting-Started-with-microservices/&title=Getting Started with Microservices"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="http://digg.com/submit?url=https://tarunbatra.com/blog/architecture/Getting-Started-with-microservices/&title=Getting Started with Microservices"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="http://www.tumblr.com/share/link?url=https://tarunbatra.com/blog/architecture/Getting-Started-with-microservices/&name=Getting Started with Microservices&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="https://news.ycombinator.com/submitlink?u=https://tarunbatra.com/blog/architecture/Getting-Started-with-microservices/&t=Getting Started with Microservices"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+  </div>
+
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Getting Started with Microservices
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Tarun Batra</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2017-07-17T23:00:00.000Z" itemprop="datePublished">2017-07-18</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="../../../categories/architecture/">architecture</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="../../../tags/architecture/" rel="tag">architecture</a>, <a class="tag-link-link" href="../../../tags/microservices/" rel="tag">microservices</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+<div class="article-gallery">
+    
+    <a class="gallery-item" href="../../../data/images/Getting-Started-with-microservices/cover.jpeg" rel="gallery_cm8wawrzf00076wjgaqqg9vv3">
+        <img src="../../../data/images/Getting-Started-with-microservices/cover.jpeg" itemprop="image" />
+    </a>
+    
+</div>
+
+
+  <div class="content" itemprop="articleBody">
+    <p><sub>Originally published for <a target="_blank" rel="noopener" href="https://codebrahma.com/microservices-for-beginners/">Codebrahma</a> on Jul 18, 2017.</sub></p>
+<p><strong>Microservices</strong> is a vague term which usually points to small independent services which together form up an application. <a target="_blank" rel="noopener" href="https://martinfowler.com/articles/microservices.html">Microservices architecture</a> stands in contrast to Monolithic architecture, where the application is one big system. We will discuss about how to get started as a beginner and choosing the right tools for setting up microservice architechture.</p>
+<h2 id="Rapid-Rise-in-popularity-of-Microservices"><a href="#Rapid-Rise-in-popularity-of-Microservices" class="headerlink" title="Rapid Rise in popularity of Microservices"></a>Rapid Rise in popularity of Microservices</h2><p>Microservices have recently risen into popularity, as suggested by this Google trends index:</p>
+<p><img src="/data/images/Getting-Started-with-microservices/trend.png" alt="&#39;Google trends&#39;"></p>
+<p>“microservices” in Google Trends</p>
+<p>Before getting into what they are, and how to use them, let’s find out why microservices are rising into popularity even though it’s not a new concept. This can be explained by Conway’s Law which states that:</p>
+<blockquote>
+<p>Organisations which design systems … are constrained to produce designs which are copies of the communication structures of these organisations</p>
+</blockquote>
+<p>Until recently majority of companies were used to be giant enterprises, making equally giant enterprise software, or monoliths. Not anymore. Since last 5 years, companies are getting more distributed in nature. In fact, some of the new unicorns like <a target="_blank" rel="noopener" href="https://automattic.com/">Automattic</a> and <a target="_blank" rel="noopener" href="https://about.gitlab.com/">Gitlab</a> are entirely distributed. That explains why microservices are rising in popularity.</p>
+<h2 id="Why-Microservices"><a href="#Why-Microservices" class="headerlink" title="Why Microservices?"></a>Why Microservices?</h2><h3 id="Fewer-compromises-in-tech-stack"><a href="#Fewer-compromises-in-tech-stack" class="headerlink" title="Fewer compromises in tech stack"></a>Fewer compromises in tech stack</h3><p>Choosing a tech stack is always a tough call. Skills of the team, scalability, maintenance are all important factors in this choice. But many times what’s good for one portion of the app, is not good for the other.</p>
+<p>For example, a trading platform needs PostgreSQL due to support for transactions, the user specific data has to be stored in DynamoDB. Generally, a trade off is made. But in Microservices Architecture, <strong>each microservice owns a set of business logic and related data in the form it deem best</strong>, and provide an interface to interact with it. So there can be microservices for trades and users each, with data hosted on PostgreSQL and DynamoDB, and access to external services is allowed only through the interface. So a computation intensive microservice can be written in Python while the API Server remains in NodeJS, and so on.</p>
+<p>A sample architecture would look like</p>
+<p><img src="/data/images/Getting-Started-with-microservices/tech-stack.jpg" alt="&#39;Architecture&#39;"></p>
+<h2 id="Independent-teams"><a href="#Independent-teams" class="headerlink" title="Independent teams"></a>Independent teams</h2><p>In a monolithic application, most of the people in a development team needs to know all the parts of the application even to develop a small feature. They have to collaborate with other teams on deployment schedules, versioning, data migrations, etc. On the other hand, in Microservices Architecture the teams just need to know the interface provided by other services and stick to the interface provided by theirs. Each microservice should be <strong>independently deployable.</strong> CI&#x2F;CD tools like <a target="_blank" rel="noopener" href="https://circleci.com/">CirclCi</a>, <a target="_blank" rel="noopener" href="https://travis-ci.org/">Travis</a> and <a target="_blank" rel="noopener" href="https://www.heroku.com/">Heroku</a> are of great help while developing microservices. To develop&#x2F;maintain a service, a small team with limited knowledge is enough.</p>
+<h2 id="Do-one-thing-and-do-it-well"><a href="#Do-one-thing-and-do-it-well" class="headerlink" title="Do one thing and do it well"></a>Do one thing and do it well</h2><p>Microservices Architecture also resembles the Unix philosophy’s principle, Do one thing and do it well. It is a principle which has proved it’s worthiness and is one of the reasons Unix-like systems are not obsolete even after decades. Microservices should be designed to do one thing, tested to handle all the possible scenarios and then <strong>“piped” together to form a robust and flexible application.</strong></p>
+<h2 id="Fault-isolation"><a href="#Fault-isolation" class="headerlink" title="Fault isolation"></a>Fault isolation</h2><p>Imagine error in a report generation module, takes the full trading application down. It’s terrible and unnecessary. If the application is based on microservices, the report generation module will fail, taking down only that specific feature. Users who are not generating reports won’t even notice, and <strong>the critical parts of the application will still be working</strong>. That’s a result of <strong>Loose coupling</strong> between microservices, now achievable through this architecture.</p>
+<p><img src="/data/images/Getting-Started-with-microservices/fault-isolation.jpg" alt="&#39;Fault Isolation&#39;"></p>
+<h2 id="How-to-develop-Microservices"><a href="#How-to-develop-Microservices" class="headerlink" title="How to develop Microservices?"></a>How to develop Microservices?</h2><p>In Node.js, <a target="_blank" rel="noopener" href="http://senecajs.org/">Seneca</a> is a widely used framework to develop microservices. But if you want to get yours hands dirty, read on.</p>
+<h2 id="API-Gateway"><a href="#API-Gateway" class="headerlink" title="API Gateway"></a>API Gateway</h2><p>Microservices can be deployed without a main central service, but sometimes a thin central layer is usually kept to have shared libraries. Sometimes it also works as an API Gateway.<br>An API Gateway is used to provide a consistent API to the client side irrespective of the backend service, and vice versa. It is helpful when you have multiple microservices catering to clients like mobile, web, other servers, etc. Also it prevents client to make requests to multiple services by abstracting it into one request.</p>
+<h2 id="Inter-service-communication"><a href="#Inter-service-communication" class="headerlink" title="Inter-service communication"></a>Inter-service communication</h2><p>How should these services communicate to each other?</p>
+<p><strong>HTTP:</strong> Well, there are plenty of options. Most straightforward is to use HTTP&#x2F;HTTPS and the interface can be made as RESTful APIs. Though, HTTP makes service discovery difficult and less dynamic. That’s a reason I don’t prefer it.</p>
+<p><strong>Message Queues:</strong> Message Queuing protocols like AMQP, STOMP and MQTT allows the use of publish subscribe pattern for communication between microservices. Services like <a target="_blank" rel="noopener" href="https://www.rabbitmq.com/">RabbitMQ</a> and <a target="_blank" rel="noopener" href="https://kafka.apache.org/">Apache Kafka</a> are widely used for this purpose. I personally prefer using Message Queues as they are <strong>fault tolerant</strong> and support <strong>message persistence</strong>.</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/Codebrahma/microservice-template">microservice-template</a> is a basic boilerplate which we use in our projects based on Microservices. It’s in Node and has MongoDB configured as a data store. It connects to RabbitMQ for inter-service communication via <a target="_blank" rel="noopener" href="https://www.npmjs.com/package/servicebus">servicebus</a>. Here’s how it looks in it’s bare minimum:</p>
+<p><img src="/data/images/Getting-Started-with-microservices/sample-logs.png" alt="&#39;Sample logs&#39;"><br>Microservice booting up and communicating</p>
+<p>There are other concepts like <a target="_blank" rel="noopener" href="https://martinfowler.com/eaaDev/EventSourcing.html">Event Sourcing</a> and <a target="_blank" rel="noopener" href="https://martinfowler.com/bliki/CQRS.html">CQRS</a> which complement the Microservices Architecture. Event Sourcing is basically storing the changes to the data, instead of the changed state of the data. in a highly concurrent environment, <strong>event sourcing brings consistency of a higher order.</strong></p>
+<p><img src="/data/images/Getting-Started-with-microservices/fowler-graph.png" alt="&#39;Fowler Microservices Productivity graph&#39;"></p>
+<p>Productivity in Microservices vs Monolothic Architecture Source: <a target="_blank" rel="noopener" href="https://martinfowler.com/bliki/MicroservicePremium.html">Martin Fowler</a></p>
+<p>But truth be told, Microservices Architecture is no silver bullet. Using microservices for fairly small apps can lead to loss in productivity, as evident in the above graph.<br><br></p>
+<p><strong>❤️ code</strong></p>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="../../../index.html">Home</a></li>
+         
+          <li><a href="../../.././about/">About</a></li>
+         
+          <li><a href="../../.././blog/">Blog</a></li>
+         
+          <li><a href="../../.././resume/">Resume</a></li>
+         
+          <li><a href="../../../search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Rapid-Rise-in-popularity-of-Microservices"><span class="toc-number">1.</span> <span class="toc-text">Rapid Rise in popularity of Microservices</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Why-Microservices"><span class="toc-number">2.</span> <span class="toc-text">Why Microservices?</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Fewer-compromises-in-tech-stack"><span class="toc-number">2.1.</span> <span class="toc-text">Fewer compromises in tech stack</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Independent-teams"><span class="toc-number">3.</span> <span class="toc-text">Independent teams</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Do-one-thing-and-do-it-well"><span class="toc-number">4.</span> <span class="toc-text">Do one thing and do it well</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Fault-isolation"><span class="toc-number">5.</span> <span class="toc-text">Fault isolation</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#How-to-develop-Microservices"><span class="toc-number">6.</span> <span class="toc-text">How to develop Microservices?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#API-Gateway"><span class="toc-number">7.</span> <span class="toc-text">API Gateway</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Inter-service-communication"><span class="toc-number">8.</span> <span class="toc-text">Inter-service communication</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" href="http://www.facebook.com/sharer.php?u=https://tarunbatra.com/blog/architecture/Getting-Started-with-microservices/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="https://twitter.com/share?url=https://tarunbatra.com/blog/architecture/Getting-Started-with-microservices/&text=Getting Started with Microservices"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="http://www.linkedin.com/shareArticle?url=https://tarunbatra.com/blog/architecture/Getting-Started-with-microservices/&title=Getting Started with Microservices"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="https://pinterest.com/pin/create/bookmarklet/?url=https://tarunbatra.com/blog/architecture/Getting-Started-with-microservices/&is_video=false&description=Getting Started with Microservices"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="mailto:?subject=Getting Started with Microservices&body=Check out this article: https://tarunbatra.com/blog/architecture/Getting-Started-with-microservices/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="https://getpocket.com/save?url=https://tarunbatra.com/blog/architecture/Getting-Started-with-microservices/&title=Getting Started with Microservices"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="http://reddit.com/submit?url=https://tarunbatra.com/blog/architecture/Getting-Started-with-microservices/&title=Getting Started with Microservices"><i class="fab fa-reddit-alien fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="http://www.stumbleupon.com/submit?url=https://tarunbatra.com/blog/architecture/Getting-Started-with-microservices/&title=Getting Started with Microservices"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="http://digg.com/submit?url=https://tarunbatra.com/blog/architecture/Getting-Started-with-microservices/&title=Getting Started with Microservices"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="http://www.tumblr.com/share/link?url=https://tarunbatra.com/blog/architecture/Getting-Started-with-microservices/&name=Getting Started with Microservices&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="https://news.ycombinator.com/submitlink?u=https://tarunbatra.com/blog/architecture/Getting-Started-with-microservices/&t=Getting Started with Microservices"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2025
+    Tarun Batra
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="../../../index.html">Home</a></li>
+         
+          <li><a href="../../.././about/">About</a></li>
+         
+          <li><a href="../../.././blog/">Blog</a></li>
+         
+          <li><a href="../../.././resume/">Resume</a></li>
+         
+          <li><a href="../../../search/">Search</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+  
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.8.1/css/justifiedGallery.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/> 
+   
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js" crossorigin="anonymous"></script> 
+   
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="../../../js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-47797084-2"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-47797084-2');
+    </script>
+
+<!-- Microsoft clarity -->
+
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, 'clarity', 'script', '3w9d6u9uag');
+</script>
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'tarunbatra';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+
+</body>
+</html>

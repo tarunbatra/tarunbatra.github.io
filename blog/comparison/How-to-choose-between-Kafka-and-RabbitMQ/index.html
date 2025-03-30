@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="Kafka and RabbitMQ are two very popular message queues based on very different design principles. Which one of these suits your project?">
+<meta property="og:type" content="article">
+<meta property="og:title" content="How to choose between Kafka and RabbitMQ">
+<meta property="og:url" content="https://tarunbatra.com/blog/comparison/How-to-choose-between-Kafka-and-RabbitMQ/index.html">
+<meta property="og:site_name" content="Tarun Batra">
+<meta property="og:description" content="Kafka and RabbitMQ are two very popular message queues based on very different design principles. Which one of these suits your project?">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://tarunbatra.com/data/images/How-to-choose-between-Kafka-and-RabbitMQ/cover.jpg">
+<meta property="article:published_time" content="2019-10-12T02:00:00.000Z">
+<meta property="article:modified_time" content="2025-03-30T23:54:00.871Z">
+<meta property="article:author" content="Tarun Batra">
+<meta property="article:tag" content="rabbitmq">
+<meta property="article:tag" content="kafka">
+<meta property="article:tag" content="message-queue">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tarunbatra.com/data/images/How-to-choose-between-Kafka-and-RabbitMQ/cover.jpg">
+<meta name="twitter:creator" content="@tarunbatra">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="../../.././meta/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="../../.././meta/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="../../.././meta/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>How to choose between Kafka and RabbitMQ</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="../../../css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+    <link rel="canonical" href="https://tarunbatra.com/blog/comparison/How-to-choose-between-Kafka-and-RabbitMQ/"/>
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="atom.xml" title="Tarun Batra" type="application/atom+xml">
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" "Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        
+          <li><a href="../../../index.html">Home</a></li>
+        
+          <li><a href="../../.././about/">About</a></li>
+        
+          <li><a href="../../.././blog/">Blog</a></li>
+        
+          <li><a href="../../.././resume/">Resume</a></li>
+        
+          <li><a href="../../../search/">Search</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post " href="../../decentralization/Deploy-your-website-on-IPFS-Why-and-How/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post " href="../../architecture/Polling-reliably-at-scale-using-DLQs/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top " href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post " href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Message-Routing"><span class="toc-number">1.</span> <span class="toc-text">Message Routing</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Delivery-guarantee"><span class="toc-number">2.</span> <span class="toc-text">Delivery guarantee</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Throughput"><span class="toc-number">3.</span> <span class="toc-text">Throughput</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Persistence"><span class="toc-number">4.</span> <span class="toc-text">Persistence</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Conclusion"><span class="toc-number">5.</span> <span class="toc-text">Conclusion</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#References"><span class="toc-number">6.</span> <span class="toc-text">References</span></a></li></ol>
+    </div>
+  </span>
+  <br/>
+  <div id="share">
+    <ul>
+  <li><a class="icon" target="_blank" href="http://www.facebook.com/sharer.php?u=https://tarunbatra.com/blog/comparison/How-to-choose-between-Kafka-and-RabbitMQ/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="https://twitter.com/share?url=https://tarunbatra.com/blog/comparison/How-to-choose-between-Kafka-and-RabbitMQ/&text=How to choose between Kafka and RabbitMQ"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="http://www.linkedin.com/shareArticle?url=https://tarunbatra.com/blog/comparison/How-to-choose-between-Kafka-and-RabbitMQ/&title=How to choose between Kafka and RabbitMQ"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="https://pinterest.com/pin/create/bookmarklet/?url=https://tarunbatra.com/blog/comparison/How-to-choose-between-Kafka-and-RabbitMQ/&is_video=false&description=How to choose between Kafka and RabbitMQ"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="mailto:?subject=How to choose between Kafka and RabbitMQ&body=Check out this article: https://tarunbatra.com/blog/comparison/How-to-choose-between-Kafka-and-RabbitMQ/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="https://getpocket.com/save?url=https://tarunbatra.com/blog/comparison/How-to-choose-between-Kafka-and-RabbitMQ/&title=How to choose between Kafka and RabbitMQ"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="http://reddit.com/submit?url=https://tarunbatra.com/blog/comparison/How-to-choose-between-Kafka-and-RabbitMQ/&title=How to choose between Kafka and RabbitMQ"><i class="fab fa-reddit-alien " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="http://www.stumbleupon.com/submit?url=https://tarunbatra.com/blog/comparison/How-to-choose-between-Kafka-and-RabbitMQ/&title=How to choose between Kafka and RabbitMQ"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="http://digg.com/submit?url=https://tarunbatra.com/blog/comparison/How-to-choose-between-Kafka-and-RabbitMQ/&title=How to choose between Kafka and RabbitMQ"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="http://www.tumblr.com/share/link?url=https://tarunbatra.com/blog/comparison/How-to-choose-between-Kafka-and-RabbitMQ/&name=How to choose between Kafka and RabbitMQ&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="https://news.ycombinator.com/submitlink?u=https://tarunbatra.com/blog/comparison/How-to-choose-between-Kafka-and-RabbitMQ/&t=How to choose between Kafka and RabbitMQ"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+  </div>
+
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        How to choose between Kafka and RabbitMQ
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Tarun Batra</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2019-10-12T02:00:00.000Z" itemprop="datePublished">2019-10-12</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="../../../categories/comparison/">comparison</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="../../../tags/kafka/" rel="tag">kafka</a>, <a class="tag-link-link" href="../../../tags/message-queue/" rel="tag">message-queue</a>, <a class="tag-link-link" href="../../../tags/rabbitmq/" rel="tag">rabbitmq</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+<div class="article-gallery">
+    
+    <a class="gallery-item" href="../../../data/images/How-to-choose-between-Kafka-and-RabbitMQ/cover.jpg" rel="gallery_cm8wawrzi000a6wjgei8c2jo0">
+        <img src="../../../data/images/How-to-choose-between-Kafka-and-RabbitMQ/cover.jpg" itemprop="image" />
+    </a>
+    
+</div>
+
+
+  <div class="content" itemprop="articleBody">
+    <p><sup>Image sourced from “<a target="_blank" rel="noopener" href="https://www.cloudamqp.com/blog/2017-01-09-apachekafka-vs-rabbitmq.html">Comparison: Apache Kafka VS RabbitMQ</a>“ by <a target="_blank" rel="noopener" href="https://www.cloudamqp.com/">CloudAMQP</a>.</sup></p>
+<p>Kafka and RabbitMQ – These two terms are frequently thrown around in tech meetings discussing distributed architecture. I have been part of a series of such meetings where we discussed their pros and cons, and whether they fit our needs or not. Here’s me documenting my findings for others and my future self.</p>
+<p><em>Spoiler: We ended up using both for different use-cases.</em></p>
+<h2 id="Message-Routing"><a href="#Message-Routing" class="headerlink" title="Message Routing"></a>Message Routing</h2><p>With respect to message routing capabilities, Kafka is very light. Producers produce messages to topics. Topics can further have partitions (like sharding). Kafka logs the messages in its very simple data structure which resembles… a log! It can scale as much as the disk can.<br>Consumers connect to these partitions to read the messages. Kafka uses a pull-based approach, so the onus of fetching messages and tracking offsets of read messages lies on consumers.</p>
+<p><strong>RabbitMQ has very strong routing capabilities</strong>. It can route the messages through a complex system of exchanges and queues. Producers send messages to exchanges which act according to their configurations. For example, they can broadcast the message to every queue connected with them, or deliver the message to some selected queues, or even expire the messages if not read in a stipulated time.<br>Exchanges can also pass messages to other exchanges, making a wide variety of permutations possible. Consumers can listen to messages in a queue or a pattern of queues. Unlike Kafka, RabbitMQ pushes the messages to the consumers, so the consumers don’t need to keep track of what they have read.</p>
+<p><img src="/data/images/How-to-choose-between-Kafka-and-RabbitMQ/rabbitmq-system.gif" alt="&#39;RabbitMQ routing simulation&#39;"></p>
+<center><sup>RabbitMQ routing simulated using http://tryrabbitmq.com</sup></center>
+- - -
+
+<h2 id="Delivery-guarantee"><a href="#Delivery-guarantee" class="headerlink" title="Delivery guarantee"></a>Delivery guarantee</h2><p>Distributed systems can have 3 delivery semantics:</p>
+<ul>
+<li><p><em>at-most-once delivery</em></p>
+<p>  In case of failure in message delivery, no retry is done which means data loss can happen, but data duplication can not. This isn’t the most used semantic due to obvious reasons.</p>
+</li>
+<li><p><em>at-least-once delivery</em></p>
+<p>  In case of failure in message delivery, retries are done untill delivery is successfully acknowledged. This ensures no data is lost but this can result in duplicated delivery.</p>
+</li>
+<li><p><em>exactly-once delivery</em></p>
+<p>  Messages are ensured to be delivered exactly once. This is the most desirable delivery semantic and almost <a target="_blank" rel="noopener" href="https://bravenewgeek.com/you-cannot-have-exactly-once-delivery/">impossible to achieve</a> in a distributed enviornment.</p>
+</li>
+</ul>
+<blockquote>
+<p>Both Kafka and RabbitMQ offer at-most-once and at-least-once delivery guarantees.</p>
+</blockquote>
+<p>Kafka provides exactly-once delivery between producer to the broker using idempotent producers (<code>enable.idempotence=true</code>). Exactly-once message delivery to the consumers is more complex. It is achieved at consumers end by using transactions API and only reading messages belonging to committed transactions (<code>isolation.level=read_committed</code>).<br>To truly achieve this, consumers would need to avoid non-idempotent processing of messages in case a transaction has to be aborted, which is not always possible. <strong>So, Kafka transactions are not very useful in my opinion.</strong></p>
+<p>In RabbitMQ, exactly-once delivery is not supported due to the combination of complex routing and the push-based delivery. Generally, it’s recommended to use at-least-once delivery with idempotent consumers.</p>
+<p><sub><em><br>NOTE: Kafka Streams is an example of truely idempotent system, which it achieves by eliminating non-idempotent operations in a transaction. It, however is out of the scope of this article. I recommend reading <a target="_blank" rel="noopener" href="https://www.confluent.io/blog/enabling-exactly-once-kafka-streams/">“Enabling Exactly-Once in Kafka Streams” by Confluent</a> if you want to dig in it further.<br></em></sub></p>
+<hr>
+<h2 id="Throughput"><a href="#Throughput" class="headerlink" title="Throughput"></a>Throughput</h2><p>Throughput of message queues depends on many variables like message size, number of nodes, replication configuration, delivery guarantees, etc. I will be focussing on the speed of messages produced versus consumed. The two cases which arise are:</p>
+<ul>
+<li>Queue is empty due to messages being consumed as and when they are produced.</li>
+<li>Queue is backed up due to consumers being offline or producers being faster than consumers.</li>
+</ul>
+<p>RabbitMQ stores the messages in DRAM for consumption. In the case where consumers are not far behind, the messages are served quickly from the DRAM. Performance takes a hit when a lot of messages are unread and the queue is backed up. In this case, the messages are pushed to disk and reading from it is slower. So, RabbitMQ works faster with empty queues.</p>
+<p>Kafka uses sequential disk I&#x2F;O to read chunks of the log in an orderly fashion. Performance improves further in case fresh messages are being consumed, as the messages are served from the OS page cache without any I&#x2F;O reads. However, it should be noted that implementing transactions as discussed in last section will have <em>negative effect</em> on the throughput.</p>
+<blockquote>
+<p>Overall, <strong>Kafka can process millions of messages in a second and is faster than RabbitMQ</strong>. Whereas, RabbitMQ can process upwards of 20k messages per second.</p>
+</blockquote>
+<hr>
+<h2 id="Persistence"><a href="#Persistence" class="headerlink" title="Persistence"></a>Persistence</h2><p>Persistence of messages is another front where both of these tools can not be more different.</p>
+<p>Kafka is designed with persistent (or retention as they call it) in mind. A Kafka system can be configured to retain messages – both delivered and undelivered, by configuring either <code>log.retention.hours</code> or <code>log.retention.bytes</code>.<br>Retaining messages doesn’t effect the performance of Kafka. The consumers can replay retained messages by changing the offset of messages they have read.</p>
+<p>RabbitMQ on the other hand, works very differently. Messages when delivered to multiple queues, are duplicated in these queues. These copies are then governed independently of each other by the policy of the queues they are in, and the exchanges they are passing. So to persist the messages in RabbitMQ:</p>
+<ul>
+<li>queues and exchanges need to be made durable,</li>
+<li>messages produced need to be tagged as persistent by the producer</li>
+</ul>
+<p>Not to mention, this will have performance impact since disk is involved in an otherwise memory operation.</p>
+<hr>
+<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><blockquote>
+<p>RabbitMQ offers complex routing use-cases which can not be realized with Kafka’s simple architecture. However, Kafka provides higher throughput and persistence of messages.</p>
+</blockquote>
+<p>Apart from these differences, both of them provide similar capabilities like fault-tolerance, high availability, scalability, etc. Keeping this in mind, we at <a target="_blank" rel="noopener" href="https://smallcase.com/">smallcase</a> used RabbitMQ for <a target="_blank" rel="noopener" href="https://medium.com/making-smalltalk/polling-reliably-at-scale-using-dlqs-841512659c8f">consistent polling in our transactions system</a> and Kafka for making our notifications system quick and snappy.</p>
+<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://content.pivotal.io/blog/understanding-when-to-use-rabbitmq-or-apache-kafka">Understanding When to Use RabbitMQ or Apache Kafka</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.mavenhive.in/which-one-to-use-and-when-rabbitmq-vs-apache-kafka-7d5423301b58">A comparison between RabbitMQ and Apache Kafka</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.confluent.io/blog/transactions-apache-kafka/">Transactions in Apache Kafka</a></li>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1709.00333">Kafka versus RabbitMQ</a></li>
+</ul>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="../../../index.html">Home</a></li>
+         
+          <li><a href="../../.././about/">About</a></li>
+         
+          <li><a href="../../.././blog/">Blog</a></li>
+         
+          <li><a href="../../.././resume/">Resume</a></li>
+         
+          <li><a href="../../../search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Message-Routing"><span class="toc-number">1.</span> <span class="toc-text">Message Routing</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Delivery-guarantee"><span class="toc-number">2.</span> <span class="toc-text">Delivery guarantee</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Throughput"><span class="toc-number">3.</span> <span class="toc-text">Throughput</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Persistence"><span class="toc-number">4.</span> <span class="toc-text">Persistence</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Conclusion"><span class="toc-number">5.</span> <span class="toc-text">Conclusion</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#References"><span class="toc-number">6.</span> <span class="toc-text">References</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" href="http://www.facebook.com/sharer.php?u=https://tarunbatra.com/blog/comparison/How-to-choose-between-Kafka-and-RabbitMQ/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="https://twitter.com/share?url=https://tarunbatra.com/blog/comparison/How-to-choose-between-Kafka-and-RabbitMQ/&text=How to choose between Kafka and RabbitMQ"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="http://www.linkedin.com/shareArticle?url=https://tarunbatra.com/blog/comparison/How-to-choose-between-Kafka-and-RabbitMQ/&title=How to choose between Kafka and RabbitMQ"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="https://pinterest.com/pin/create/bookmarklet/?url=https://tarunbatra.com/blog/comparison/How-to-choose-between-Kafka-and-RabbitMQ/&is_video=false&description=How to choose between Kafka and RabbitMQ"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="mailto:?subject=How to choose between Kafka and RabbitMQ&body=Check out this article: https://tarunbatra.com/blog/comparison/How-to-choose-between-Kafka-and-RabbitMQ/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="https://getpocket.com/save?url=https://tarunbatra.com/blog/comparison/How-to-choose-between-Kafka-and-RabbitMQ/&title=How to choose between Kafka and RabbitMQ"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="http://reddit.com/submit?url=https://tarunbatra.com/blog/comparison/How-to-choose-between-Kafka-and-RabbitMQ/&title=How to choose between Kafka and RabbitMQ"><i class="fab fa-reddit-alien fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="http://www.stumbleupon.com/submit?url=https://tarunbatra.com/blog/comparison/How-to-choose-between-Kafka-and-RabbitMQ/&title=How to choose between Kafka and RabbitMQ"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="http://digg.com/submit?url=https://tarunbatra.com/blog/comparison/How-to-choose-between-Kafka-and-RabbitMQ/&title=How to choose between Kafka and RabbitMQ"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="http://www.tumblr.com/share/link?url=https://tarunbatra.com/blog/comparison/How-to-choose-between-Kafka-and-RabbitMQ/&name=How to choose between Kafka and RabbitMQ&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="https://news.ycombinator.com/submitlink?u=https://tarunbatra.com/blog/comparison/How-to-choose-between-Kafka-and-RabbitMQ/&t=How to choose between Kafka and RabbitMQ"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2025
+    Tarun Batra
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="../../../index.html">Home</a></li>
+         
+          <li><a href="../../.././about/">About</a></li>
+         
+          <li><a href="../../.././blog/">Blog</a></li>
+         
+          <li><a href="../../.././resume/">Resume</a></li>
+         
+          <li><a href="../../../search/">Search</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+  
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.8.1/css/justifiedGallery.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/> 
+   
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js" crossorigin="anonymous"></script> 
+   
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="../../../js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-47797084-2"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-47797084-2');
+    </script>
+
+<!-- Microsoft clarity -->
+
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, 'clarity', 'script', '3w9d6u9uag');
+</script>
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'tarunbatra';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+
+</body>
+</html>

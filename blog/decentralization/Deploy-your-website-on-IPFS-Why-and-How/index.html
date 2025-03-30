@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="I deployed my website on the Web3 using IPFS and ENS. Here I&#39;m detailing why that makes sense and how to do it.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Deploy your website on IPFS: Why and How">
+<meta property="og:url" content="https://tarunbatra.com/blog/decentralization/Deploy-your-website-on-IPFS-Why-and-How/index.html">
+<meta property="og:site_name" content="Tarun Batra">
+<meta property="og:description" content="I deployed my website on the Web3 using IPFS and ENS. Here I&#39;m detailing why that makes sense and how to do it.">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://tarunbatra.com/data/images/Deploy-your-website-on-IPFS-Why-and-How/cover.jpg">
+<meta property="article:published_time" content="2020-04-18T22:00:00.000Z">
+<meta property="article:modified_time" content="2025-03-30T23:54:00.871Z">
+<meta property="article:author" content="Tarun Batra">
+<meta property="article:tag" content="ipfs">
+<meta property="article:tag" content="web3">
+<meta property="article:tag" content="ens">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tarunbatra.com/data/images/Deploy-your-website-on-IPFS-Why-and-How/cover.jpg">
+<meta name="twitter:creator" content="@tarunbatra">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="../../.././meta/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="../../.././meta/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="../../.././meta/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Deploy your website on IPFS: Why and How</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="../../../css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+    <link rel="canonical" href="https://tarunbatra.com/blog/decentralization/Deploy-your-website-on-IPFS-Why-and-How/"/>
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="atom.xml" title="Tarun Batra" type="application/atom+xml">
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" "Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        
+          <li><a href="../../../index.html">Home</a></li>
+        
+          <li><a href="../../.././about/">About</a></li>
+        
+          <li><a href="../../.././blog/">Blog</a></li>
+        
+          <li><a href="../../.././resume/">Resume</a></li>
+        
+          <li><a href="../../../search/">Search</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post " href="../../python/PyPi-packages-decoded-for-npm-developers/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post " href="../../comparison/How-to-choose-between-Kafka-and-RabbitMQ/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top " href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post " href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#What-is-IPFS"><span class="toc-number">1.</span> <span class="toc-text">What is IPFS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hosting-on-IPFS"><span class="toc-number">2.</span> <span class="toc-text">Hosting on IPFS</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Adding-files"><span class="toc-number">2.1.</span> <span class="toc-text">Adding files</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#IPFS-Desktop"><span class="toc-number">2.1.1.</span> <span class="toc-text">IPFS Desktop</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#IPFS-CLI"><span class="toc-number">2.1.2.</span> <span class="toc-text">IPFS CLI</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Pinning"><span class="toc-number">2.2.</span> <span class="toc-text">Pinning</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Automated-deployments"><span class="toc-number">2.3.</span> <span class="toc-text">Automated deployments</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Link-to-a-domain"><span class="toc-number">2.4.</span> <span class="toc-text">Link to a domain</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#DNSLink"><span class="toc-number">2.4.1.</span> <span class="toc-text">DNSLink</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Ethereum-Name-Service"><span class="toc-number">2.4.2.</span> <span class="toc-text">Ethereum Name Service</span></a></li></ol></li></ol></li></ol>
+    </div>
+  </span>
+  <br/>
+  <div id="share">
+    <ul>
+  <li><a class="icon" target="_blank" href="http://www.facebook.com/sharer.php?u=https://tarunbatra.com/blog/decentralization/Deploy-your-website-on-IPFS-Why-and-How/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="https://twitter.com/share?url=https://tarunbatra.com/blog/decentralization/Deploy-your-website-on-IPFS-Why-and-How/&text=Deploy your website on IPFS: Why and How"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="http://www.linkedin.com/shareArticle?url=https://tarunbatra.com/blog/decentralization/Deploy-your-website-on-IPFS-Why-and-How/&title=Deploy your website on IPFS: Why and How"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="https://pinterest.com/pin/create/bookmarklet/?url=https://tarunbatra.com/blog/decentralization/Deploy-your-website-on-IPFS-Why-and-How/&is_video=false&description=Deploy your website on IPFS: Why and How"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="mailto:?subject=Deploy your website on IPFS: Why and How&body=Check out this article: https://tarunbatra.com/blog/decentralization/Deploy-your-website-on-IPFS-Why-and-How/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="https://getpocket.com/save?url=https://tarunbatra.com/blog/decentralization/Deploy-your-website-on-IPFS-Why-and-How/&title=Deploy your website on IPFS: Why and How"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="http://reddit.com/submit?url=https://tarunbatra.com/blog/decentralization/Deploy-your-website-on-IPFS-Why-and-How/&title=Deploy your website on IPFS: Why and How"><i class="fab fa-reddit-alien " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="http://www.stumbleupon.com/submit?url=https://tarunbatra.com/blog/decentralization/Deploy-your-website-on-IPFS-Why-and-How/&title=Deploy your website on IPFS: Why and How"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="http://digg.com/submit?url=https://tarunbatra.com/blog/decentralization/Deploy-your-website-on-IPFS-Why-and-How/&title=Deploy your website on IPFS: Why and How"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="http://www.tumblr.com/share/link?url=https://tarunbatra.com/blog/decentralization/Deploy-your-website-on-IPFS-Why-and-How/&name=Deploy your website on IPFS: Why and How&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="https://news.ycombinator.com/submitlink?u=https://tarunbatra.com/blog/decentralization/Deploy-your-website-on-IPFS-Why-and-How/&t=Deploy your website on IPFS: Why and How"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+  </div>
+
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Deploy your website on IPFS: Why and How
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Tarun Batra</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2020-04-18T22:00:00.000Z" itemprop="datePublished">2020-04-19</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="../../../categories/decentralization/">decentralization</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="../../../tags/ens/" rel="tag">ens</a>, <a class="tag-link-link" href="../../../tags/ipfs/" rel="tag">ipfs</a>, <a class="tag-link-link" href="../../../tags/web3/" rel="tag">web3</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+<div class="article-gallery">
+    
+    <a class="gallery-item" href="../../../data/images/Deploy-your-website-on-IPFS-Why-and-How/cover.jpg" rel="gallery_cm8wawrz200016wjgh4lahv3o">
+        <img src="../../../data/images/Deploy-your-website-on-IPFS-Why-and-How/cover.jpg" itemprop="image" />
+    </a>
+    
+</div>
+
+
+  <div class="content" itemprop="articleBody">
+    <p><sup>Photo by <a target="_blank" rel="noopener" href="https://unsplash.com/@clintadair">Clint Adair</a> on <a target="_blank" rel="noopener" href="https://unsplash.com/">Unsplash</a></sup></p>
+<p>I wanted to learn about IPFS and Web 3.0 so I started exploring it and tried to upload my site there. This is an account of the concepts I learnt along the way and how I finally got my site hosted on <a target="_blank" rel="noopener" href="http://tbking.eth.link/">tbking.eth</a>. I’ll give a brief intro about IPFS and why hosting static content there makes sense. If you are already familiar with IPFS, you can skip to the <a href="#Hosting-on-IPFS">hosting part</a>.</p>
+<h2 id="What-is-IPFS"><a href="#What-is-IPFS" class="headerlink" title="What is IPFS"></a>What is IPFS</h2><p>Inter-Planetary File System is a decentralized network of shared content. It has a very simple yet interesting design philosophy:</p>
+<blockquote>
+<p>Build a network that works inter planets, and it will be a better network for communication across Earth too.</p>
+</blockquote>
+<p>IPFS is a decentralized network where peers are connected and share files, in many ways like BitTorrent. The fundamental principle is that unlike the traditional web, where files are served based on their location, in IPFS files are served based on their content. Consider this comparison:</p>
+<p>Google’s privacy policy is identified as a file hosted on Google’s servers on the address <a target="_blank" rel="noopener" href="https://policies.google.com/privacy">https://policies.google.com/privacy</a>. The content of the policy doesn’t matter. This is called <strong><code>location-addressing</code></strong>.<br>On the other hand, IPFS identifies files by their content, using the hash of the file. Let’s say you want to read the “<em>XKCD #327 - Exploits of a Mom</em>“. Its IPFS address is <a target="_blank" rel="noopener" href="https://ipfs.io/ipfs/QmZVjV5jFV7Jo4Hfj6WPyRnHCxf8kbadkqtQBco2gef64x/">https://ipfs.io/ipfs/QmZVjV5jFV7Jo4Hfj6WPyRnHCxf8kbadkqtQBco2gef64x/</a>. This address doesn’t depend on the location of the server but the hash. This is called <strong><code>content-addressing</code></strong>. Whoever cares about XKCD, can host it. This makes <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Link_rot">broken links</a> unlikely, which is also one of the goals of IPFS.</p>
+<p><a target="_blank" rel="noopener" href="https://docs-beta.ipfs.io/concepts/">IPFS docs</a> explain these concepts well. I recommend them to anyone who wants to dig deeper.</p>
+<h2 id="Hosting-on-IPFS"><a href="#Hosting-on-IPFS" class="headerlink" title="Hosting on IPFS"></a>Hosting on IPFS</h2><p>Deploying static content such as personal websites on IPFS is easy. The steps I’m listing below can be used for any file such as a plain HTML file, a website generated by static site generators like Jekyll, Hugo, Hexo, and Gatsby or even a media file. So let’s dive in.</p>
+<h3 id="Adding-files"><a href="#Adding-files" class="headerlink" title="Adding files"></a>Adding files</h3><h4 id="IPFS-Desktop"><a href="#IPFS-Desktop" class="headerlink" title="IPFS Desktop"></a>IPFS Desktop</h4><p>If you have <a target="_blank" rel="noopener" href="https://github.com/ipfs-shipyard/ipfs-desktop">IPFS Desktop</a> installed and running, you can add your files using a normal file selector. Just import the directory which has the contents of your static website.</p>
+<p><img src="/data/images/Deploy-your-website-on-IPFS-Why-and-How/ipfs-desktop-file-add.png" alt="Adding file in IPFS Desktop"></p>
+<p>Right-click on the newly added content and select <code>Copy CID</code>. Open <code>https://ipfs.io/ipfs/&lt;cid&gt;</code> to see our files on the web! 🚀</p>
+<p>Easy right? 😀</p>
+<h4 id="IPFS-CLI"><a href="#IPFS-CLI" class="headerlink" title="IPFS CLI"></a>IPFS CLI</h4><p><a target="_blank" rel="noopener" href="https://dist.ipfs.io/#go-ipfs">IPFS CLI</a> allows adding of files and directories using <code>add</code> subcommand.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ipfs add -r ./sample_website</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">added QmaYZE5QQVR3TqQSL5WDcwuxUwBqczbMkmbHeoeNEAumbe sample_website/index.css</span><br><span class="line">added Qme5TzVW4en8HWP49N9nLHwUkAMhCn6zvWteoknmFDhwJg sample_website/index.html</span><br><span class="line">added QmThzr7LgYmUz6tfTArJK5tbrtidXSA12ZCL4ESy6HB8P2 sample_website/index.js</span><br><span class="line">added QmSYDncaMte6GPx5jC7kqeXWnrKsCp4nkLfQXPxiAKtECU sample_website/something.html</span><br><span class="line">added QmeUG2oZvyx4NzfpP9rruKbmV5UNDmTQ8MoxuhTJGVZVTW sample_website</span><br><span class="line"> 1.01 KiB / 1.01 KiB [=================================================] 100.00%</span><br></pre></td></tr></table></figure>
+
+<p> The hash printed in the last line is the CID for the whole directory and thus our website. We can see the sample website hosted on <a target="_blank" rel="noopener" href="https://ipfs.io/ipfs/QmeUG2oZvyx4NzfpP9rruKbmV5UNDmTQ8MoxuhTJGVZVTW/">https://ipfs.io/ipfs/QmeUG2oZvyx4NzfpP9rruKbmV5UNDmTQ8MoxuhTJGVZVTW/</a></p>
+<blockquote>
+<p>TIP: It is important to use relative links in your website since IPFS gateways have a URL which looks like <code>&lt;gateway&gt;/ipfs/&lt;cid&gt;/file.ext</code>.</p>
+</blockquote>
+<h3 id="Pinning"><a href="#Pinning" class="headerlink" title="Pinning"></a>Pinning</h3><p>In the last section, we added files to <strong>our</strong> IPFS node for the network to find. This is why the IPFS gateway was able to resolve it and show it in the browser. But the site will most likely become unreachable once you shut down your IPFS daemon. Even though, after requesting some content on IPFS, the receiving node also becomes a host of the content, but the content will be garbage collected after 12 hours. How to serve your site round the clock in a decentralized web without a server?</p>
+<p>Welcome, <a target="_blank" rel="noopener" href="https://docs.ipfs.io/guides/concepts/pinning/">Pinning</a>!</p>
+<p>A node that pins some content on IPFS hosts it forever (until it unpins it). There are pinning services like <a target="_blank" rel="noopener" href="https://pinata.cloud/">Pinata</a> which pin the files on their IPFS nodes. This way the website is available always.<br>In Pinata, you can either upload a file or just provide it’s hash if the content has already been uploaded to IPFS. Here’s how I pinned the sample website we uploaded above.</p>
+<p><img src="/data/images/Deploy-your-website-on-IPFS-Why-and-How/pinata-pin-example.png" alt="Pinata pinning example"></p>
+<blockquote>
+<p>TIP: It is good to pin your site using multiple pinning services for redundancy.</p>
+</blockquote>
+<h3 id="Automated-deployments"><a href="#Automated-deployments" class="headerlink" title="Automated deployments"></a>Automated deployments</h3><p>As you might have noticed already, using IPFS is very easy. I would go as far as to say it’s easier than dealing with the traditional web that we use. However, this process has to be repeated every time you want to change your files which is not very ideal. There are tools like <a target="_blank" rel="noopener" href="https://fleek.co/">Fleek</a> which help in automating all the steps listed above.</p>
+<p>Fleek is like Travis or CircleCi for IPFS deployments. You can link your Github account with it and using the Github hooks, Fleek will trigger a deployment on every push to the Github repository. They also pin everything they deploy.</p>
+<p>So I use Hexo to generate this blog and I was able to add a build step in the Fleek dashboard itself so that I don’t need to generate the HTML and push to my repository. Here’s the build command that I use:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git submodule update --recursive --init &amp;&amp; npm i &amp;&amp; npm run build</span><br></pre></td></tr></table></figure>
+<p>Yes, I needed to install the submodules myself. They don’t do that by default (yet). Check it out, it’s super easy.</p>
+<h3 id="Link-to-a-domain"><a href="#Link-to-a-domain" class="headerlink" title="Link to a domain"></a>Link to a domain</h3><p>So now we have our site up and running, but content on IPFS is not as easy to look up as on the traditional web. My site can be found at <a href="https://tarunbatra.com/">https://tarunbatra.com</a>. But on IPFS, the <em>current version</em> can be accessed at <a target="_blank" rel="noopener" href="https://ipfs.io/ipfs/QmTPTa1ddoSkuakaW56SaL9dicbC71BbwfjRbVjasshCXs/">https://ipfs.io/ipfs/QmTPTa1ddoSkuakaW56SaL9dicbC71BbwfjRbVjasshCXs/</a>.<br>You see the problem. This is not human readable. And the CID changes after every update. There are 2 solutions to this:</p>
+<h4 id="DNSLink"><a href="#DNSLink" class="headerlink" title="DNSLink"></a>DNSLink</h4><p>With <a target="_blank" rel="noopener" href="https://docs.ipfs.io/guides/concepts/dnslink/">DNSLink</a>, you can point a normal domain to an IPFS content. It can be set up on Fleek very easily. I’ve pointed <a target="_blank" rel="noopener" href="http://ipfs.tarunbatra.com/">ipfs.tarunbatra.com</a> to the IPFS version using Fleek and you’ll be able to open this site.</p>
+<p>IPNS (Inter-Planetary Name Service) also exists and is similar to DNSLink but it’s much slower right now.</p>
+<h4 id="Ethereum-Name-Service"><a href="#Ethereum-Name-Service" class="headerlink" title="Ethereum Name Service"></a>Ethereum Name Service</h4><p><a target="_blank" rel="noopener" href="https://ens.domains/">ENS</a> is a naming service that lives on Ethereum blockchain and uses smart contracts to buy domains and set resolver records to them. Since Ethereum is involved, you’d need <a target="_blank" rel="noopener" href="https://metamask.io/">MetaMask</a> to use it.</p>
+<p><img src="/data/images/Deploy-your-website-on-IPFS-Why-and-How/ens-records.png" alt="ENS records for tbking.eth"></p>
+<p>I bought the domain <code>tbking.eth</code> and pointed it to the IPFS CID of this site. With changing content, the resolver record of the domain also needs to be updated every time to point at the new CID. Good thing is, Fleek has <a target="_blank" rel="noopener" href="https://blog.fleek.co/posts/Fleek-Release-ENS-Domains">recently</a> integrated ENS. You can set Fleek as a controller for the domain and they will update the record automatically on each deploy.</p>
+<p>Sweet! This was it. IPFS is perfect as the storage layer of the <code>Web 3.0</code>. Try for yourself, and if you liked this blog, share it, and maybe pin it! :)</p>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="../../../index.html">Home</a></li>
+         
+          <li><a href="../../.././about/">About</a></li>
+         
+          <li><a href="../../.././blog/">Blog</a></li>
+         
+          <li><a href="../../.././resume/">Resume</a></li>
+         
+          <li><a href="../../../search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#What-is-IPFS"><span class="toc-number">1.</span> <span class="toc-text">What is IPFS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hosting-on-IPFS"><span class="toc-number">2.</span> <span class="toc-text">Hosting on IPFS</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Adding-files"><span class="toc-number">2.1.</span> <span class="toc-text">Adding files</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#IPFS-Desktop"><span class="toc-number">2.1.1.</span> <span class="toc-text">IPFS Desktop</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#IPFS-CLI"><span class="toc-number">2.1.2.</span> <span class="toc-text">IPFS CLI</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Pinning"><span class="toc-number">2.2.</span> <span class="toc-text">Pinning</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Automated-deployments"><span class="toc-number">2.3.</span> <span class="toc-text">Automated deployments</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Link-to-a-domain"><span class="toc-number">2.4.</span> <span class="toc-text">Link to a domain</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#DNSLink"><span class="toc-number">2.4.1.</span> <span class="toc-text">DNSLink</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Ethereum-Name-Service"><span class="toc-number">2.4.2.</span> <span class="toc-text">Ethereum Name Service</span></a></li></ol></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" href="http://www.facebook.com/sharer.php?u=https://tarunbatra.com/blog/decentralization/Deploy-your-website-on-IPFS-Why-and-How/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="https://twitter.com/share?url=https://tarunbatra.com/blog/decentralization/Deploy-your-website-on-IPFS-Why-and-How/&text=Deploy your website on IPFS: Why and How"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="http://www.linkedin.com/shareArticle?url=https://tarunbatra.com/blog/decentralization/Deploy-your-website-on-IPFS-Why-and-How/&title=Deploy your website on IPFS: Why and How"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="https://pinterest.com/pin/create/bookmarklet/?url=https://tarunbatra.com/blog/decentralization/Deploy-your-website-on-IPFS-Why-and-How/&is_video=false&description=Deploy your website on IPFS: Why and How"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="mailto:?subject=Deploy your website on IPFS: Why and How&body=Check out this article: https://tarunbatra.com/blog/decentralization/Deploy-your-website-on-IPFS-Why-and-How/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="https://getpocket.com/save?url=https://tarunbatra.com/blog/decentralization/Deploy-your-website-on-IPFS-Why-and-How/&title=Deploy your website on IPFS: Why and How"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="http://reddit.com/submit?url=https://tarunbatra.com/blog/decentralization/Deploy-your-website-on-IPFS-Why-and-How/&title=Deploy your website on IPFS: Why and How"><i class="fab fa-reddit-alien fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="http://www.stumbleupon.com/submit?url=https://tarunbatra.com/blog/decentralization/Deploy-your-website-on-IPFS-Why-and-How/&title=Deploy your website on IPFS: Why and How"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="http://digg.com/submit?url=https://tarunbatra.com/blog/decentralization/Deploy-your-website-on-IPFS-Why-and-How/&title=Deploy your website on IPFS: Why and How"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="http://www.tumblr.com/share/link?url=https://tarunbatra.com/blog/decentralization/Deploy-your-website-on-IPFS-Why-and-How/&name=Deploy your website on IPFS: Why and How&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="https://news.ycombinator.com/submitlink?u=https://tarunbatra.com/blog/decentralization/Deploy-your-website-on-IPFS-Why-and-How/&t=Deploy your website on IPFS: Why and How"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2025
+    Tarun Batra
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="../../../index.html">Home</a></li>
+         
+          <li><a href="../../.././about/">About</a></li>
+         
+          <li><a href="../../.././blog/">Blog</a></li>
+         
+          <li><a href="../../.././resume/">Resume</a></li>
+         
+          <li><a href="../../../search/">Search</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+  
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.8.1/css/justifiedGallery.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/> 
+   
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js" crossorigin="anonymous"></script> 
+   
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="../../../js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-47797084-2"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-47797084-2');
+    </script>
+
+<!-- Microsoft clarity -->
+
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, 'clarity', 'script', '3w9d6u9uag');
+</script>
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'tarunbatra';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+
+</body>
+</html>

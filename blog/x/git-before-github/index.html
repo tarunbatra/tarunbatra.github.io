@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="Have you collaborated over git without using platforms like Github? I haven&#39;t either. But git is distributed in itself so it is possible and here is how.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git before Github">
+<meta property="og:url" content="https://tarunbatra.com/blog/x/git-before-github/index.html">
+<meta property="og:site_name" content="Tarun Batra">
+<meta property="og:description" content="Have you collaborated over git without using platforms like Github? I haven&#39;t either. But git is distributed in itself so it is possible and here is how.">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://tarunbatra.com/data/images/git-before-github/cover.png">
+<meta property="article:published_time" content="2020-10-24T21:17:54.000Z">
+<meta property="article:modified_time" content="2025-03-30T23:54:00.873Z">
+<meta property="article:author" content="Tarun Batra">
+<meta property="article:tag" content="git">
+<meta property="article:tag" content="github">
+<meta property="article:tag" content="opensource">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tarunbatra.com/data/images/git-before-github/cover.png">
+<meta name="twitter:creator" content="@tarunbatra">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="../../.././meta/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="../../.././meta/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="../../.././meta/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Git before Github</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="../../../css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+    <link rel="canonical" href="https://tarunbatra.com/blog/x/git-before-github/"/>
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="atom.xml" title="Tarun Batra" type="application/atom+xml">
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" "Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        
+          <li><a href="../../../index.html">Home</a></li>
+        
+          <li><a href="../../.././about/">About</a></li>
+        
+          <li><a href="../../.././blog/">Blog</a></li>
+        
+          <li><a href="../../.././resume/">Resume</a></li>
+        
+          <li><a href="../../../search/">Search</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post " href="../publish-ebook-using-markdown/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post " href="../../python/PyPi-packages-decoded-for-npm-developers/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top " href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post " href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Git-server-access"><span class="toc-number">1.</span> <span class="toc-text">Git server access</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pull-requests"><span class="toc-number">2.</span> <span class="toc-text">Pull requests</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Patch"><span class="toc-number">2.1.</span> <span class="toc-text">Patch</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Apply"><span class="toc-number">2.2.</span> <span class="toc-text">Apply</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Sending-the-patch"><span class="toc-number">2.3.</span> <span class="toc-text">Sending the patch</span></a></li></ol></li></ol>
+    </div>
+  </span>
+  <br/>
+  <div id="share">
+    <ul>
+  <li><a class="icon" target="_blank" href="http://www.facebook.com/sharer.php?u=https://tarunbatra.com/blog/x/git-before-github/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="https://twitter.com/share?url=https://tarunbatra.com/blog/x/git-before-github/&text=Git before Github"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="http://www.linkedin.com/shareArticle?url=https://tarunbatra.com/blog/x/git-before-github/&title=Git before Github"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="https://pinterest.com/pin/create/bookmarklet/?url=https://tarunbatra.com/blog/x/git-before-github/&is_video=false&description=Git before Github"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="mailto:?subject=Git before Github&body=Check out this article: https://tarunbatra.com/blog/x/git-before-github/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="https://getpocket.com/save?url=https://tarunbatra.com/blog/x/git-before-github/&title=Git before Github"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="http://reddit.com/submit?url=https://tarunbatra.com/blog/x/git-before-github/&title=Git before Github"><i class="fab fa-reddit-alien " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="http://www.stumbleupon.com/submit?url=https://tarunbatra.com/blog/x/git-before-github/&title=Git before Github"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="http://digg.com/submit?url=https://tarunbatra.com/blog/x/git-before-github/&title=Git before Github"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="http://www.tumblr.com/share/link?url=https://tarunbatra.com/blog/x/git-before-github/&name=Git before Github&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="https://news.ycombinator.com/submitlink?u=https://tarunbatra.com/blog/x/git-before-github/&t=Git before Github"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+  </div>
+
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Git before Github
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Tarun Batra</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2020-10-24T21:17:54.000Z" itemprop="datePublished">2020-10-24</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="../../../tags/git/" rel="tag">git</a>, <a class="tag-link-link" href="../../../tags/github/" rel="tag">github</a>, <a class="tag-link-link" href="../../../tags/opensource/" rel="tag">opensource</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+<div class="article-gallery">
+    
+    <a class="gallery-item" href="../../../data/images/git-before-github/cover.png" rel="gallery_cm8waws03001q6wjg4p1afpjh">
+        <img src="../../../data/images/git-before-github/cover.png" itemprop="image" />
+    </a>
+    
+</div>
+
+
+  <div class="content" itemprop="articleBody">
+    <p>Back when I was studying CS at university, we had assignments to code various algorithms. When the assignments were due we were supposed to execute the code in laboratory systems and get the output checked by the professors. I liked coding and tinkering with the algorithms; some of my classmates didn’t. They used to copy the code from my system on a USB stick and execute them on their system and get done with it. I didn’t judge them but I was tired of giving each one their copy and sometimes also instructing them how to execute that piece of code. In one such assignment, I uploaded the code on GitHub and shared the <a target="_blank" rel="noopener" href="https://github.com/tarunbatra/re2nfa">link</a> with anybody who asked. <strong>Unknowingly, I had made my first open source contribution.</strong></p>
+<p>A lot of people have similar stories and for most, Github is synonymous with Open Source. One thing that is also used interchangeably with Github is git. Even though these are three different entities, a lot of developers including me have never contributed to open source or used git without Github. Thus I was surprised when I learned that famous open source projects like Linux were not on Github even though they used git. Also, git was around before Github, so there must be other more native ways in git to get things done. I wondered how it worked but didn’t do anything about it until recently when I decided to experience a git only development workflow.</p>
+<h2 id="Git-server-access"><a href="#Git-server-access" class="headerlink" title="Git server access"></a>Git server access</h2><p>We use version control systems broadly for two use cases – to contribute to a repository where we have write access; to contribute to a public repository where we don’t have write access. To collaborate with developers to whom access can be given, Github or other platforms are not necessary. Anybody can host a <a target="_blank" rel="noopener" href="https://git-scm.com/book/en/v2/Git-on-the-Server-Setting-Up-the-Server">Git server</a> that can be used to host repositories. Developers can clone, push to, and pull from these remote repositories once access is granted to their ssh identity.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone origin git@&lt;host&gt;/&lt;repo&gt;.git</span><br></pre></td></tr></table></figure>
+
+<p>This is similar to how we upload our SSH keys to Github or other platforms for being able to clone the repositories using SSH.</p>
+<h2 id="Pull-requests"><a href="#Pull-requests" class="headerlink" title="Pull requests"></a>Pull requests</h2><p>One thing which is missing in the above-mentioned method is the ability to create Pull Requests, get them reviewed and merged into the code. It becomes a big issue when the developers don’t have write access to the repositories as is the case in open source development. General open source flow is to fork a repository, push the changes in your forked repositories, and create a <strong>pull request</strong> to the original repository from where the maintainers can review and merge. Pull request is not a feature of git, but of platforms like Github. Collaborative development in git has the following steps:</p>
+<ol>
+<li>Clone the original repository</li>
+<li>Create a patch</li>
+<li>Send the patch to the maintainer</li>
+<li>The maintainer applies the patch and pushes the code</li>
+</ol>
+<p>We introduced two new processes in this workflow – creating a patch and applying a patch. Let’s discuss them further.</p>
+<hr>
+<h3 id="Patch"><a href="#Patch" class="headerlink" title="Patch"></a>Patch</h3><p>A patch is a diff of code and metadata around it. A diff is the actual code change which can be viewed using the command <code>git diff</code>. It is a Unix concept that is way older than git and Unix systems even have a builtin tool, <a target="_blank" rel="noopener" href="https://man7.org/linux/man-pages/man1/diff.1.html"><code>diff</code></a> which compares changes between two files. Its output can then be saved to a file that can be processed by another utility tool called <code>patch</code> which updates one of the files to make its content identical to another file.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">touch</span> original.txt new.txt</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;New addition&quot;</span> &gt; new.txt</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">diff original.txt new.txt -u &gt; changes.patch</span><br></pre></td></tr></table></figure>
+<figure class="highlight patch"><figcaption><span>changes.patch</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--- original.txt	2020-10-18 23:43:32.000000000 +0200</span></span><br><span class="line"><span class="comment">+++ new.txt	2020-10-18 23:43:32.000000000 +0200</span></span><br><span class="line">@@ -0,0 +1 @@</span><br><span class="line"><span class="addition">+New addition</span></span><br></pre></td></tr></table></figure>
+<p>If we want to update the original file with the contents of the new one, we need to “patch” it.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">patch original.txt changes.patch</span><br></pre></td></tr></table></figure>
+<p><strong>NOTE:</strong> <em>Use <a target="_blank" rel="noopener" href="https://github.com/tarunbatra/git-before-github">git-before-github repository</a> to practice this example and all the ones which are to follow.</em></p>
+<p>Now that we understand the concepts of diff and patch, we can proceed with using them in git. To generate a patch file in git, we need to use <code>git format-patch</code> command.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git format-patch HEAD~1..HEAD</span><br></pre></td></tr></table></figure>
+
+<p>This will create a patch file for the latest commit. Tinker with the argument to produce patch files for other commits too. By default, each file represents a single commit and the file name is of the format <code>0001-&lt;commit message&gt;.patch</code>. Interestingly, it is in <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Mbox">Unix mbox</a> format which means it has some email-like metadata (from, subject, etc.) followed by the patch data.</p>
+<figure class="highlight patch"><figcaption><span>0001-Added-Tarun-Batra-to-contributors.patch</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">From 619814a3ac21012580e725136864e8397c14e20b Mon Sep 17 00:00:00 2001</span><br><span class="line">From: Tarun Batra &lt;tarun.batra00@gmail.com&gt;</span><br><span class="line">Date: Tue, 20 Oct 2020 23:15:32 +0200</span><br><span class="line">Subject: [PATCH] Added Tarun Batra to contributors</span><br><span class="line"></span><br><span class="line"><span class="comment">---</span></span><br><span class="line"> CONTRIBUTORS.txt | 1 +</span><br><span class="line"> 1 file changed, 1 insertion(+)</span><br><span class="line"></span><br><span class="line"><span class="comment">diff --git a/CONTRIBUTORS.txt b/CONTRIBUTORS.txt</span></span><br><span class="line"><span class="comment">index e69de29..1d12219 100644</span></span><br><span class="line"><span class="comment">--- a/CONTRIBUTORS.txt</span></span><br><span class="line"><span class="comment">+++ b/CONTRIBUTORS.txt</span></span><br><span class="line">@@ -0,0 +1 @@</span><br><span class="line"><span class="addition">+Tarun Batra &lt;tarun.batra00@gmail.com&gt;</span></span><br><span class="line"><span class="deletion">--</span></span><br><span class="line">2.28.0</span><br></pre></td></tr></table></figure>
+<p>This is the patch file I created to add my name to the contributors’ list of the <a target="_blank" rel="noopener" href="https://github.com/tarunbatra/git-before-github">git-before-github</a> repository as an exercise for myself.</p>
+<hr>
+<h3 id="Apply"><a href="#Apply" class="headerlink" title="Apply"></a>Apply</h3><p>We have a patch file which we can send to the maintainers so that they can apply the patch. We can either use traditional ways to send the patch or use git itself, but more on it later. In this section, we will explore the process to apply a patch.</p>
+<p><code>git apply &lt;patch file&gt;</code> is a command which applies the changes described in the patch file locally but does not commit them. They will appear in our workspace and we can stage them and commit them. This is not ideal as even though we get the changes, the commit metadata like author name and message is lost. A better way to apply patches is <code>git am</code> (abbrev. for “apply mailbox”).</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git am --signoff &lt;patch file&gt;</span><br></pre></td></tr></table></figure>
+<p>The flag <code>--signoff</code> is used if the commit message needs to be appended with a “Signed-off-by” line to indicate who applied the commit. Below is the signed-off and applied commit for the patch we generated as an exercise in the last section.</p>
+<figure class="highlight sh"><figcaption><span>git log</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Author: Tarun Batra &lt;tarun.batra00@gmail.com&gt;</span><br><span class="line">Date:   Tue Oct 20 23:15:32 2020 +0200</span><br><span class="line"></span><br><span class="line">    Added Tarun Batra to contributors</span><br><span class="line"></span><br><span class="line">    Signed-off-by: Tarun Batra &lt;tarun.batra00@gmail.com&gt;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="Sending-the-patch"><a href="#Sending-the-patch" class="headerlink" title="Sending the patch"></a>Sending the patch</h3><p>Now we can explore how to send a patch file to a maintainer in the “git” way. There are two ways that I know of –</p>
+<ol>
+<li>imap-send</li>
+</ol>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git imap-send &lt;patch file&gt;</span><br></pre></td></tr></table></figure>
+<p>It will upload the email to an IMAP folder from where it can be sent. To use it we need to add IMAP server details in our <code>~/.gitconfig</code> file. I use Gmail so my IMAP details look like:</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[imap]</span></span><br><span class="line">	<span class="attr">folder</span> = <span class="string">&quot;[Gmail]/Drafts&quot;</span></span><br><span class="line">	<span class="attr">host</span> = imaps://imap.gmail.com</span><br><span class="line">	<span class="attr">user</span> = email@gmail.com</span><br><span class="line">	<span class="attr">pass</span> = yourpassword</span><br><span class="line">	<span class="attr">port</span> = <span class="number">993</span></span><br></pre></td></tr></table></figure>
+<p>Gmail allows its IMAP server to be used if the <a target="_blank" rel="noopener" href="https://myaccount.google.com/lesssecureapps">Less secure app access</a> setting is turned on.</p>
+<ol>
+<li>send-email</li>
+</ol>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git send-email --to=&lt;email&gt; &lt;patch file&gt;</span><br></pre></td></tr></table></figure>
+<p>It will use an SMTP server to send email. The corresponding config to use this command is:</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[sendemail]</span></span><br><span class="line">	<span class="attr">smtpEncryption</span> = tls</span><br><span class="line">	<span class="attr">smtpServer</span> = &lt;host&gt;</span><br><span class="line">	<span class="attr">smtpUser</span> = &lt;user&gt;</span><br><span class="line">	<span class="attr">smtpServerPort</span> = <span class="number">587</span></span><br></pre></td></tr></table></figure>
+<p>Both of these methods can be used to send an email per patch file. The subject of the commit by default is of the format <code>[PATCH] &lt;commit message&gt;</code>.</p>
+<p><strong>NOTE:</strong> <em>Sender email addresses can be spoofed quite easily and this raises the question of authentication and authorization when submitting patches. I tried creating patches of PGP signed git commits but the patch doesn’t retain the PGP signature. We could encrypt the email itself using PGP but that’s a lot of extra work for both the contributor and the maintainer.</em></p>
+<p>So what can we do with this newly acquired knowledge?</p>
+<ol>
+<li>Git patches often <a target="_blank" rel="noopener" href="https://lkml.org/lkml/2020/10/16/629">float</a> <a target="_blank" rel="noopener" href="https://lkml.org/lkml/2020/10/19/82">around</a> in the Linux development mailing list and it gives me satisfaction that I understand how they work a little better now than before.</li>
+<li>When platforms like Github and Gitlab have an outage, work in most of the development teams stall. Now I know a way to get my code reviewed even in these situations. (Okay, that might be a stretch)</li>
+<li>EDIT: About when this article was published, <a target="_blank" rel="noopener" href="https://yt-dl.org/about.html"><code>youtube-dl</code></a> was taken down by Github due to <a target="_blank" rel="noopener" href="https://github.com/github/dmca/blob/master/2020/10/2020-10-23-RIAA.md">a DMCA request</a>. The whole episode brings to light that Github being a platform is subject to censorship, unlike git which is distributed.</li>
+</ol>
+<p>You can practice for yourself by adding your name to the <code>CONTRIBUTORS.txt</code> file of the <a target="_blank" rel="noopener" href="https://github.com/tarunbatra/git-before-github">git-before-github</a> repository, committing it, and then sending me the patch. I would readily <del>merge</del> apply it. 😀</p>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="../../../index.html">Home</a></li>
+         
+          <li><a href="../../.././about/">About</a></li>
+         
+          <li><a href="../../.././blog/">Blog</a></li>
+         
+          <li><a href="../../.././resume/">Resume</a></li>
+         
+          <li><a href="../../../search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Git-server-access"><span class="toc-number">1.</span> <span class="toc-text">Git server access</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pull-requests"><span class="toc-number">2.</span> <span class="toc-text">Pull requests</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Patch"><span class="toc-number">2.1.</span> <span class="toc-text">Patch</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Apply"><span class="toc-number">2.2.</span> <span class="toc-text">Apply</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Sending-the-patch"><span class="toc-number">2.3.</span> <span class="toc-text">Sending the patch</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" href="http://www.facebook.com/sharer.php?u=https://tarunbatra.com/blog/x/git-before-github/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="https://twitter.com/share?url=https://tarunbatra.com/blog/x/git-before-github/&text=Git before Github"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="http://www.linkedin.com/shareArticle?url=https://tarunbatra.com/blog/x/git-before-github/&title=Git before Github"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="https://pinterest.com/pin/create/bookmarklet/?url=https://tarunbatra.com/blog/x/git-before-github/&is_video=false&description=Git before Github"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="mailto:?subject=Git before Github&body=Check out this article: https://tarunbatra.com/blog/x/git-before-github/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="https://getpocket.com/save?url=https://tarunbatra.com/blog/x/git-before-github/&title=Git before Github"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="http://reddit.com/submit?url=https://tarunbatra.com/blog/x/git-before-github/&title=Git before Github"><i class="fab fa-reddit-alien fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="http://www.stumbleupon.com/submit?url=https://tarunbatra.com/blog/x/git-before-github/&title=Git before Github"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="http://digg.com/submit?url=https://tarunbatra.com/blog/x/git-before-github/&title=Git before Github"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="http://www.tumblr.com/share/link?url=https://tarunbatra.com/blog/x/git-before-github/&name=Git before Github&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="https://news.ycombinator.com/submitlink?u=https://tarunbatra.com/blog/x/git-before-github/&t=Git before Github"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2025
+    Tarun Batra
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="../../../index.html">Home</a></li>
+         
+          <li><a href="../../.././about/">About</a></li>
+         
+          <li><a href="../../.././blog/">Blog</a></li>
+         
+          <li><a href="../../.././resume/">Resume</a></li>
+         
+          <li><a href="../../../search/">Search</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+  
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.8.1/css/justifiedGallery.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/> 
+   
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js" crossorigin="anonymous"></script> 
+   
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="../../../js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-47797084-2"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-47797084-2');
+    </script>
+
+<!-- Microsoft clarity -->
+
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, 'clarity', 'script', '3w9d6u9uag');
+</script>
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'tarunbatra';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+
+</body>
+</html>

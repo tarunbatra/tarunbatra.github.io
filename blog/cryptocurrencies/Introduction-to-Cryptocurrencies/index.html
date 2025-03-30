@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="Originally published for Codebrahma on Aug 17, 2016. Unless you’ve been living under a rock, you’d have heard about cryptocurrencies or Bitcoin atleast. There’s a lot of buzz around it, but disproport">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Introduction to Cryptocurrencies">
+<meta property="og:url" content="https://tarunbatra.com/blog/cryptocurrencies/Introduction-to-Cryptocurrencies/index.html">
+<meta property="og:site_name" content="Tarun Batra">
+<meta property="og:description" content="Originally published for Codebrahma on Aug 17, 2016. Unless you’ve been living under a rock, you’d have heard about cryptocurrencies or Bitcoin atleast. There’s a lot of buzz around it, but disproport">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://tarunbatra.com/data/images/Introduction-to-Cryptocurrencies/cover.jpeg">
+<meta property="article:published_time" content="2016-08-16T22:50:00.000Z">
+<meta property="article:modified_time" content="2025-03-30T23:54:00.872Z">
+<meta property="article:author" content="Tarun Batra">
+<meta property="article:tag" content="cryptocurrencies">
+<meta property="article:tag" content="blockchain">
+<meta property="article:tag" content="bitcoin">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tarunbatra.com/data/images/Introduction-to-Cryptocurrencies/cover.jpeg">
+<meta name="twitter:creator" content="@tarunbatra">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="../../.././meta/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="../../.././meta/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="../../.././meta/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Introduction to Cryptocurrencies</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="../../../css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+    <link rel="canonical" href="https://codebrahma.com/introduction-to-cryptocurrencies/"/>
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="atom.xml" title="Tarun Batra" type="application/atom+xml">
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" "Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        
+          <li><a href="../../../index.html">Home</a></li>
+        
+          <li><a href="../../.././about/">About</a></li>
+        
+          <li><a href="../../.././blog/">Blog</a></li>
+        
+          <li><a href="../../.././resume/">Resume</a></li>
+        
+          <li><a href="../../../search/">Search</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post " href="../../javascript/why-you-should-use-named-functions-in-javascript/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post " href="../../javascript/Meteor-Publications-and-Subscriptions/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top " href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post " href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Principles-governing-currencies"><span class="toc-number">1.</span> <span class="toc-text">Principles governing currencies</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Demand-and-supply"><span class="toc-number">1.1.</span> <span class="toc-text">Demand and supply</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Market-sentiments"><span class="toc-number">1.2.</span> <span class="toc-text">Market sentiments</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Trust"><span class="toc-number">1.3.</span> <span class="toc-text">Trust</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Why-cryptocurrencies"><span class="toc-number">2.</span> <span class="toc-text">Why cryptocurrencies?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Bitcoin"><span class="toc-number">3.</span> <span class="toc-text">Bitcoin</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Eliminating-central-authority"><span class="toc-number">3.1.</span> <span class="toc-text">Eliminating central authority</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Eliminating-trust"><span class="toc-number">3.2.</span> <span class="toc-text">Eliminating trust</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Value-of-bitcoins"><span class="toc-number">3.3.</span> <span class="toc-text">Value of bitcoins</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Verification-of-transactions"><span class="toc-number">3.4.</span> <span class="toc-text">Verification of transactions</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Double-spending"><span class="toc-number">3.5.</span> <span class="toc-text">Double spending</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Anonymity"><span class="toc-number">3.6.</span> <span class="toc-text">Anonymity</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Fun-facts-about-Bitcoin"><span class="toc-number">3.7.</span> <span class="toc-text">Fun facts about Bitcoin</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Altcoins"><span class="toc-number">4.</span> <span class="toc-text">Altcoins</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Conclusion"><span class="toc-number">5.</span> <span class="toc-text">Conclusion</span></a></li></ol>
+    </div>
+  </span>
+  <br/>
+  <div id="share">
+    <ul>
+  <li><a class="icon" target="_blank" href="http://www.facebook.com/sharer.php?u=https://tarunbatra.com/blog/cryptocurrencies/Introduction-to-Cryptocurrencies/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="https://twitter.com/share?url=https://tarunbatra.com/blog/cryptocurrencies/Introduction-to-Cryptocurrencies/&text=Introduction to Cryptocurrencies"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="http://www.linkedin.com/shareArticle?url=https://tarunbatra.com/blog/cryptocurrencies/Introduction-to-Cryptocurrencies/&title=Introduction to Cryptocurrencies"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="https://pinterest.com/pin/create/bookmarklet/?url=https://tarunbatra.com/blog/cryptocurrencies/Introduction-to-Cryptocurrencies/&is_video=false&description=Introduction to Cryptocurrencies"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="mailto:?subject=Introduction to Cryptocurrencies&body=Check out this article: https://tarunbatra.com/blog/cryptocurrencies/Introduction-to-Cryptocurrencies/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="https://getpocket.com/save?url=https://tarunbatra.com/blog/cryptocurrencies/Introduction-to-Cryptocurrencies/&title=Introduction to Cryptocurrencies"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="http://reddit.com/submit?url=https://tarunbatra.com/blog/cryptocurrencies/Introduction-to-Cryptocurrencies/&title=Introduction to Cryptocurrencies"><i class="fab fa-reddit-alien " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="http://www.stumbleupon.com/submit?url=https://tarunbatra.com/blog/cryptocurrencies/Introduction-to-Cryptocurrencies/&title=Introduction to Cryptocurrencies"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="http://digg.com/submit?url=https://tarunbatra.com/blog/cryptocurrencies/Introduction-to-Cryptocurrencies/&title=Introduction to Cryptocurrencies"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="http://www.tumblr.com/share/link?url=https://tarunbatra.com/blog/cryptocurrencies/Introduction-to-Cryptocurrencies/&name=Introduction to Cryptocurrencies&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="https://news.ycombinator.com/submitlink?u=https://tarunbatra.com/blog/cryptocurrencies/Introduction-to-Cryptocurrencies/&t=Introduction to Cryptocurrencies"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+  </div>
+
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Introduction to Cryptocurrencies
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Tarun Batra</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2016-08-16T22:50:00.000Z" itemprop="datePublished">2016-08-17</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="../../../categories/cryptocurrencies/">cryptocurrencies</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="../../../tags/bitcoin/" rel="tag">bitcoin</a>, <a class="tag-link-link" href="../../../tags/blockchain/" rel="tag">blockchain</a>, <a class="tag-link-link" href="../../../tags/cryptocurrencies/" rel="tag">cryptocurrencies</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+<div class="article-gallery">
+    
+    <a class="gallery-item" href="../../../data/images/Introduction-to-Cryptocurrencies/cover.jpeg" rel="gallery_cm8wawrzt00176wjggzzudh1w">
+        <img src="../../../data/images/Introduction-to-Cryptocurrencies/cover.jpeg" itemprop="image" />
+    </a>
+    
+</div>
+
+
+  <div class="content" itemprop="articleBody">
+    <p><sub>Originally published for <a target="_blank" rel="noopener" href="https://codebrahma.com/introduction-to-cryptocurrencies/">Codebrahma</a> on Aug 17, 2016.</sub></p>
+<p>Unless you’ve been living under a rock, you’d have heard about cryptocurrencies or Bitcoin atleast. There’s a lot of buzz around it, but disproportionately less clarity regarding what it actually is. In this article we’ll introduce ourselves to the fundamental principles of cryptocurrencies, clear the mist of confusion which surrounds them, and debunking some myths along the way too.</p>
+<p>It’s human nature to compare everything new with something familiar. In case of cryptocurrencies, it’s the fiat money. Money is so fundamental to our daily lives that we always manage to see through them, and seldom do we try to understand the reason we need it and the unique purpose the serve.</p>
+<blockquote>
+<p>Look at those paper and plastic sheets, do you feel they’re worth it?</p>
+</blockquote>
+<p>Now I’m not an economist, but I know few common principles which make currencies what they are.</p>
+<h2 id="Principles-governing-currencies"><a href="#Principles-governing-currencies" class="headerlink" title="Principles governing currencies"></a>Principles governing currencies</h2><h3 id="Demand-and-supply"><a href="#Demand-and-supply" class="headerlink" title="Demand and supply"></a>Demand and supply</h3><p>Almost every financial and economic activity is affected by this principle. The more the ratio of demand and supply of a commodity, more is it’s value.</p>
+<h3 id="Market-sentiments"><a href="#Market-sentiments" class="headerlink" title="Market sentiments"></a>Market sentiments</h3><p>Market sentiments greatly effect the value of the currencies, stocks and commodities. If the investors of a company think the company shares are going to be worth less, they are worth less.</p>
+<h3 id="Trust"><a href="#Trust" class="headerlink" title="Trust"></a>Trust</h3><p>Trust is essential for virtually all economic activity. Banknotes often have a <strong>promissory clause</strong> which reads like this:</p>
+<p><img src="/data/images/Introduction-to-Cryptocurrencies/bank-note.jpg" alt="&#39;Bank note&#39;"><br><sup>Photo by <a target="_blank" rel="noopener" href="https://unsplash.com/@rupixen">rupixen</a> on <a target="_blank" rel="noopener" href="https://unsplash.com/">Unsplash</a></sup></p>
+<p>without any gold or other precious resources to actually back that claim. (Earlier they used to back currency value to something like gold. Though it’s discontinued now, but the idea is same).</p>
+<h2 id="Why-cryptocurrencies"><a href="#Why-cryptocurrencies" class="headerlink" title="Why cryptocurrencies?"></a>Why cryptocurrencies?</h2><p>So we already have things in place to keep the system running, why do we need these cryptocurrencies? What problems do they solve, if any? Well the features of fiat money are also it’s limitations.</p>
+<ol>
+<li>The banks represent <strong>a single point of control</strong> which can deem a currency illegitimate, refuting our claims to our wealth.</li>
+<li>Apart from being a single point of control, they also represent <strong>a single point of failure</strong>. Banks have failed in the past, and can certainly fail in the future due to various reasons, which puts our wealth at risk.<br>  <img src="/data/images/Introduction-to-Cryptocurrencies/bank-failures-graph.png" alt="&#39;Bank failures Graph&#39;"></li>
+<li>We have to trust the system with our wealth without any satisfactory assurance against a fraud, intentional or otherwise.</li>
+</ol>
+<p>Cryptocurrenies are an attempt towards liberating the monetary system, something so essential to our lives, from these issues, in a way that one can be in absolute control of one’s wealth without trusting the system.</p>
+<p>Any discussion about cryptocurrencies is incomplete without <strong>Bitcoin</strong>. Bitcoin is to cryptocurrencies what PowerPoint is to presentation programs, Ubuntu is to Linux and Xerox is to photocopying. We will try to understand cryptocurrencies with a case study of Bitcoin, which is not very much different from other cryptocurrencies.</p>
+<h2 id="Bitcoin"><a href="#Bitcoin" class="headerlink" title="Bitcoin"></a>Bitcoin</h2><p>Bitcoin is one of the first and certainly the most popular cryptocurrency, created by <strong>Satoshi Nakamoto</strong>(a pseudonym) in 2009. Many of the challenges which Bitcoin faced were first of their kind and success of Bitcoin paved the way for other cryptocurrencies.</p>
+<p>Let’s see some of these challenges:</p>
+<h3 id="Eliminating-central-authority"><a href="#Eliminating-central-authority" class="headerlink" title="Eliminating central authority"></a>Eliminating central authority</h3><p>Bitcoin protocol is based on a Peer-to-peer (P2P) network to eliminate the need of any central authority, just like how BitTorrent protocol, based on a P2P network, eliminated the need of any central authority for file sharing.</p>
+<h3 id="Eliminating-trust"><a href="#Eliminating-trust" class="headerlink" title="Eliminating trust"></a>Eliminating trust</h3><p>When we transfer money through banks, we trust them to do so. But without any central authority, or nodes which one could trust, it was necessary to create a trust-less system. Bitcoin used <strong>blockchains</strong> to achieve this. Blockchains are a type of distributed database which lives on ever node and are used as immutable public ledger for the transactions. Blockchains are made of blocks which further consist of bitcoin transactions.  Blockchains are similar to a linked list of blocks where every block refer to it’s parent block and this fact makes old transactions very secure and incorruptible as we’ll see later.</p>
+<p>Blockchains, themselves are greatly hyped and are considered the biggest achievement of Bitcoin, as the idea can be used in various other industries to create trust-less systems.<br><img src="/data/images/Introduction-to-Cryptocurrencies/dilbert.png" alt="&#39;Dilbert&#39;"><br><sup>Dilbert And The Blockchain, Nov 1995</sup></p>
+<h3 id="Value-of-bitcoins"><a href="#Value-of-bitcoins" class="headerlink" title="Value of bitcoins"></a>Value of bitcoins</h3><p>If there’s no central authority, who decides the value of the currency?</p>
+<p>Well, as we discussed earlier, the golden rule of <strong>demand and supply</strong> comes to play here too. Satoshi made the protocol in such a way that the maximum number of bitcoins that can ever be generated (minted) is fixed at <strong>21 million</strong>.</p>
+<p><img src="/data/images/Introduction-to-Cryptocurrencies/bitcoin-price-chart.png" alt="&#39;Bitcoin price chart&#39;"></p>
+<p><strong>Market sentiments</strong> also play a vital role. Recently bitcoin prices plunged when Bitfinex, a Hong Kong based cryptocurrecncy exchange was hacked and $65 million worth bitcoins were stolen.</p>
+<h3 id="Verification-of-transactions"><a href="#Verification-of-transactions" class="headerlink" title="Verification of transactions"></a>Verification of transactions</h3><p>Banks have interest in processing only valid transactions and keeping fraudulent transactions out of the system. This role is played by <strong>miners</strong> collectively.</p>
+<blockquote>
+<p>Miners are the nodes which generate blocks for blockchains by verifying the unverified transactions and including them in their block.</p>
+</blockquote>
+<p>The verification is done by adding <strong>Proof of work</strong> (POW) to the block data. Block data generally contains the transactions which form the block including the coinbase transaction and the hash of previous block.</p>
+<blockquote>
+<p>Proof of work is a piece of data which is difficult to produce but easy to verify.</p>
+</blockquote>
+<p>It’s generally the hash of block data with n number of leading zeroes. Miners append a value called <strong>nonce</strong> to the block data to change it’s hash value and keep changing the nonce until the desired hash is found.</p>
+<p>So if the block data is <code>Hello, world!</code>, and the number of zeroes required is 4, it takes 4251 tries (nonce is incremented from 0) to find the desired hash:</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0000c3af42fc31103f1fdc0151fa747ff87349a4714df7cc52ea464e12dcd4e9.</span><br></pre></td></tr></table></figure>
+
+<p>Now anyone can verify that this is a valid hash of <code>Hello, world!4251</code>, but if someone tries to change a transaction in the block, the hash will be invalidated, and a new POW has to be generated, which is impractical.</p>
+<p>We saw, finding POW can be a complex and a resource hungry process. So why do miners do that? Miners are incentivized for every block they generate. At the end of the block, the miner adds a special transaction called <strong>coinbase transaction</strong> which writes off a certain amount of bitcoins to the miner’s address from thin air, and that’s how new bitcoins are minted. Miners also get some money from the transactions, called <strong>transaction fee</strong>. The block, which is first to arrive, gets placed in blockchain, and other miners have to scrap their work, and start again after syncing with the blockchain.</p>
+<h3 id="Double-spending"><a href="#Double-spending" class="headerlink" title="Double spending"></a>Double spending</h3><p>Let’s say Alice bought something from Bob, and paid him in bitcoins. What if:</p>
+<p>Alice broadcasts the transaction, but alters the transaction in her own copy of blockchain to pay herself instead of Bob.<br>Upon the verification of the transaction by the network, Bob ships the item.<br>Now Alice broadcasts her own version of the blockchain.</p>
+<blockquote>
+<p>Which version of blockchain should the nodes trust?</p>
+</blockquote>
+<p>If Alice manages to convince the nodes that her version (without Bob’s transaction) is valid, she gets to <strong>buy the item without paying anything</strong>.</p>
+<p>Various elements of Bitcoin protocol come at play to stop this from happening.</p>
+<p>Bitcoin nodes <strong>trust the longest blockchain</strong> and build their blocks on it. If Alice wants to invalidate the current longest blockchain, she has to re-generate the blocks after her fraudulent transaction at such a speed that her blockchain becomes the longest one. As long as most nodes in the network are honest (they should be, they’re getting paid for it!), Alice can’t corrupt the blockhain, and this is why we introduced blockhains as immutable public ledgers earlier in the article. The number of blocks a transaction is buried under, is called the <strong>confirmations</strong> of that particular transaction. Most exchanges deem a  transaction verified after 6 confirmations.</p>
+<blockquote>
+<p>More the confirmations of a transaction, more difficult it is to alter it.</p>
+</blockquote>
+<h3 id="Anonymity"><a href="#Anonymity" class="headerlink" title="Anonymity"></a>Anonymity</h3><p>Many people hail Bitcoin as an anonymous mode of payment. But the reality is quite the opposite. Every transaction made on Bitcoin is visible to everyone. Having said that, bitcoin transactions don’t necessarily link to the real identity of the user, but to a pseudonym, much like writing a book with a pen name. Thus, Bitcoin is <strong>pseudonymous</strong>.</p>
+<h3 id="Fun-facts-about-Bitcoin"><a href="#Fun-facts-about-Bitcoin" class="headerlink" title="Fun facts about Bitcoin"></a>Fun facts about Bitcoin</h3><p>The first block of the blockchain is called the Genesis Block. Every bitcoin in circulation is either derived from a coinbase transaction or the Genesis block. See how it looked like <a target="_blank" rel="noopener" href="https://blockexplorer.com/block/000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f">here</a>.</p>
+<p>Rewards from coinbase transactions are halved after every 210,000 transactions. In fact, the latest <strong>halving event</strong> occurred recently on 9th July 2016, reducing the reward amount from BTC 25 to BTC 12.5. Check when’s the next halving event <a target="_blank" rel="noopener" href="http://www.coindesk.com/51-attacks-real-threat-bitcoin/">here</a>.</p>
+<p><strong>51% attack</strong> is a largely feared attack in Bitcoin, where an attacker controls 51% of the computational resources of the network, allowing it to alter the “immutable” blockchain. It ain’t plain theory, Read about Bitcoin’s brush with it <a target="_blank" rel="noopener" href="http://www.coindesk.com/51-attacks-real-threat-bitcoin/">here</a>.</p>
+<h2 id="Altcoins"><a href="#Altcoins" class="headerlink" title="Altcoins"></a>Altcoins</h2><p>Cryptocurrencies other than Bitcoin are know as <strong>altcoins</strong>, or alternative to Bitcoin. Most of the altcoins are similar in principle to Bitcoin with some minor differences. <a target="_blank" rel="noopener" href="https://litecoin.org/">Litecoin</a>, <a target="_blank" rel="noopener" href="http://dogecoin.com/">Dogecoin</a>, <a target="_blank" rel="noopener" href="https://www.namecoin.org/">Namecoin</a> and Nxt are some prominent altcoins.</p>
+<p>The altcoins vary in terms of under lying principles. For example, <a target="_blank" rel="noopener" href="http://primecoin.io/">Primecoin</a> is a cryptocurrency which makes use of the vast amount of computational resources to find long chains of prime numbers which can contribute in advancement of cryptography as a science.</p>
+<p><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Ethereum">Ethereum</a> is a disruptive <a href="/financial-software-development-company">blockchain-based platform</a>, the highlight of which is <strong>smart contracts</strong>. Smart contracts are contracts enforced by computer code, instead of institutions set up by humans. This way, we can port whole economies and governments to digital ecosystem, let alone currencies. The possibilities are endless and out of the scope of this article.</p>
+<p>Cryptocurrencies also vary in terms of user friendliness. More popular ones, like Bitcoin are very user friendly, while others are not so.</p>
+<p><img src="/data/images/Introduction-to-Cryptocurrencies/mobile-wallet.png" alt="&#39;Mobile wallet - bitcoin&#39;"><br>My bitcoin wallet app</p>
+<p>You can see stark difference in my bitcoin wallet app shown above, and my Ethereum wallet shown below.</p>
+<p><img src="/data/images/Introduction-to-Cryptocurrencies/cli-wallet.png" alt="&#39;CLI wallet - ethereum&#39;"></p>
+<p>My Ethereum wallet</p>
+<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>Cryptocurrencies are really trending and have a lot of buzz. The future of cryptocurrencies is very promising. Many people have made a fortune out of cryptocurrencies, however they should not be looked merely as an investment. The ideas which these cryptocurrencies represent and the future possibilities they hold are of far greater value than their monetary value.</p>
+<p>If you’re thrilled and want to involve in bitcoins or cryptocurrencies in general, you may like the following links:</p>
+<p>Original <a target="_blank" rel="noopener" href="https://bitcoin.org/bitcoin.pdf">bitcoin paper</a> by Satoshi Nakamoto.</p>
+<p><a target="_blank" rel="noopener" href="https://shapeshift.io/">Shapeshift</a> is a site to convert one cryptocurrency to another.</p>
+<p><a target="_blank" rel="noopener" href="https://poloniex.com/">Poloniex</a> is an exchange &#x2F; trading site for cryptocurrencies.</p>
+<p><a target="_blank" rel="noopener" href="https://www.coinbase.com/">Coinbase</a> is the PayPal of cryptocurrencies.</p>
+<p>If you liked the article and feel generous, or just want to hone your newly acquired bitcoin skills, feel free to send me some bitcoins at the following address.</p>
+<p>17ULzN8PCaCtE16WKtBhMYc28DQxxt4ja<br><img src="/data/images/Introduction-to-Cryptocurrencies/qr-code.png" alt="&#39;QR code&#39;"></p>
+<br>
+
+<p><strong>❤️ code</strong></p>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="../../../index.html">Home</a></li>
+         
+          <li><a href="../../.././about/">About</a></li>
+         
+          <li><a href="../../.././blog/">Blog</a></li>
+         
+          <li><a href="../../.././resume/">Resume</a></li>
+         
+          <li><a href="../../../search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Principles-governing-currencies"><span class="toc-number">1.</span> <span class="toc-text">Principles governing currencies</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Demand-and-supply"><span class="toc-number">1.1.</span> <span class="toc-text">Demand and supply</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Market-sentiments"><span class="toc-number">1.2.</span> <span class="toc-text">Market sentiments</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Trust"><span class="toc-number">1.3.</span> <span class="toc-text">Trust</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Why-cryptocurrencies"><span class="toc-number">2.</span> <span class="toc-text">Why cryptocurrencies?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Bitcoin"><span class="toc-number">3.</span> <span class="toc-text">Bitcoin</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Eliminating-central-authority"><span class="toc-number">3.1.</span> <span class="toc-text">Eliminating central authority</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Eliminating-trust"><span class="toc-number">3.2.</span> <span class="toc-text">Eliminating trust</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Value-of-bitcoins"><span class="toc-number">3.3.</span> <span class="toc-text">Value of bitcoins</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Verification-of-transactions"><span class="toc-number">3.4.</span> <span class="toc-text">Verification of transactions</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Double-spending"><span class="toc-number">3.5.</span> <span class="toc-text">Double spending</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Anonymity"><span class="toc-number">3.6.</span> <span class="toc-text">Anonymity</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Fun-facts-about-Bitcoin"><span class="toc-number">3.7.</span> <span class="toc-text">Fun facts about Bitcoin</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Altcoins"><span class="toc-number">4.</span> <span class="toc-text">Altcoins</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Conclusion"><span class="toc-number">5.</span> <span class="toc-text">Conclusion</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" href="http://www.facebook.com/sharer.php?u=https://tarunbatra.com/blog/cryptocurrencies/Introduction-to-Cryptocurrencies/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="https://twitter.com/share?url=https://tarunbatra.com/blog/cryptocurrencies/Introduction-to-Cryptocurrencies/&text=Introduction to Cryptocurrencies"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="http://www.linkedin.com/shareArticle?url=https://tarunbatra.com/blog/cryptocurrencies/Introduction-to-Cryptocurrencies/&title=Introduction to Cryptocurrencies"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="https://pinterest.com/pin/create/bookmarklet/?url=https://tarunbatra.com/blog/cryptocurrencies/Introduction-to-Cryptocurrencies/&is_video=false&description=Introduction to Cryptocurrencies"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="mailto:?subject=Introduction to Cryptocurrencies&body=Check out this article: https://tarunbatra.com/blog/cryptocurrencies/Introduction-to-Cryptocurrencies/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="https://getpocket.com/save?url=https://tarunbatra.com/blog/cryptocurrencies/Introduction-to-Cryptocurrencies/&title=Introduction to Cryptocurrencies"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="http://reddit.com/submit?url=https://tarunbatra.com/blog/cryptocurrencies/Introduction-to-Cryptocurrencies/&title=Introduction to Cryptocurrencies"><i class="fab fa-reddit-alien fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="http://www.stumbleupon.com/submit?url=https://tarunbatra.com/blog/cryptocurrencies/Introduction-to-Cryptocurrencies/&title=Introduction to Cryptocurrencies"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="http://digg.com/submit?url=https://tarunbatra.com/blog/cryptocurrencies/Introduction-to-Cryptocurrencies/&title=Introduction to Cryptocurrencies"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="http://www.tumblr.com/share/link?url=https://tarunbatra.com/blog/cryptocurrencies/Introduction-to-Cryptocurrencies/&name=Introduction to Cryptocurrencies&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="https://news.ycombinator.com/submitlink?u=https://tarunbatra.com/blog/cryptocurrencies/Introduction-to-Cryptocurrencies/&t=Introduction to Cryptocurrencies"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2025
+    Tarun Batra
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="../../../index.html">Home</a></li>
+         
+          <li><a href="../../.././about/">About</a></li>
+         
+          <li><a href="../../.././blog/">Blog</a></li>
+         
+          <li><a href="../../.././resume/">Resume</a></li>
+         
+          <li><a href="../../../search/">Search</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+  
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.8.1/css/justifiedGallery.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/> 
+   
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js" crossorigin="anonymous"></script> 
+   
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="../../../js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-47797084-2"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-47797084-2');
+    </script>
+
+<!-- Microsoft clarity -->
+
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, 'clarity', 'script', '3w9d6u9uag');
+</script>
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'tarunbatra';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+
+</body>
+</html>

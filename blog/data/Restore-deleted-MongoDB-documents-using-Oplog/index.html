@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="Source: Dilbert Recently I found myself trying to restore corrupted data to it’s original form. A query gone wrong had erased valuable data from a MongoDB collection and it needed to be restored. This">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Restore deleted MongoDB documents using Oplog">
+<meta property="og:url" content="https://tarunbatra.com/blog/data/Restore-deleted-MongoDB-documents-using-Oplog/index.html">
+<meta property="og:site_name" content="Tarun Batra">
+<meta property="og:description" content="Source: Dilbert Recently I found myself trying to restore corrupted data to it’s original form. A query gone wrong had erased valuable data from a MongoDB collection and it needed to be restored. This">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://tarunbatra.com/data/images/Restore-deleted-MongoDB-documents-using-Oplog/cover.png">
+<meta property="article:published_time" content="2018-06-14T23:05:00.000Z">
+<meta property="article:modified_time" content="2025-03-30T23:54:00.872Z">
+<meta property="article:author" content="Tarun Batra">
+<meta property="article:tag" content="data">
+<meta property="article:tag" content="mongo">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tarunbatra.com/data/images/Restore-deleted-MongoDB-documents-using-Oplog/cover.png">
+<meta name="twitter:creator" content="@tarunbatra">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="../../.././meta/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="../../.././meta/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="../../.././meta/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Restore deleted MongoDB documents using Oplog</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="../../../css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+    <link rel="canonical" href="https://tarunbatra.com/blog/data/Restore-deleted-MongoDB-documents-using-Oplog/"/>
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="atom.xml" title="Tarun Batra" type="application/atom+xml">
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" "Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        
+          <li><a href="../../../index.html">Home</a></li>
+        
+          <li><a href="../../.././about/">About</a></li>
+        
+          <li><a href="../../.././blog/">Blog</a></li>
+        
+          <li><a href="../../.././resume/">Resume</a></li>
+        
+          <li><a href="../../../search/">Search</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post " href="../../architecture/Polling-reliably-at-scale-using-DLQs/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post " href="../../security/Error-messages-in-login-process-Privacy-and-Security/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top " href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post " href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#Oplog-is-amazing"><span class="toc-number">1.</span> <span class="toc-text">Oplog is amazing</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Restore-backup"><span class="toc-number"></span> <span class="toc-text">Restore backup</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Find-the-faulty-query-queries"><span class="toc-number"></span> <span class="toc-text">Find the faulty query&#x2F;queries</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Take-a-dump-of-oplog"><span class="toc-number"></span> <span class="toc-text">Take a dump of oplog</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Restore-from-Oplog"><span class="toc-number"></span> <span class="toc-text">Restore from Oplog</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Selective-restore"><span class="toc-number"></span> <span class="toc-text">Selective restore</span></a>
+    </div>
+  </span>
+  <br/>
+  <div id="share">
+    <ul>
+  <li><a class="icon" target="_blank" href="http://www.facebook.com/sharer.php?u=https://tarunbatra.com/blog/data/Restore-deleted-MongoDB-documents-using-Oplog/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="https://twitter.com/share?url=https://tarunbatra.com/blog/data/Restore-deleted-MongoDB-documents-using-Oplog/&text=Restore deleted MongoDB documents using Oplog"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="http://www.linkedin.com/shareArticle?url=https://tarunbatra.com/blog/data/Restore-deleted-MongoDB-documents-using-Oplog/&title=Restore deleted MongoDB documents using Oplog"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="https://pinterest.com/pin/create/bookmarklet/?url=https://tarunbatra.com/blog/data/Restore-deleted-MongoDB-documents-using-Oplog/&is_video=false&description=Restore deleted MongoDB documents using Oplog"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="mailto:?subject=Restore deleted MongoDB documents using Oplog&body=Check out this article: https://tarunbatra.com/blog/data/Restore-deleted-MongoDB-documents-using-Oplog/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="https://getpocket.com/save?url=https://tarunbatra.com/blog/data/Restore-deleted-MongoDB-documents-using-Oplog/&title=Restore deleted MongoDB documents using Oplog"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="http://reddit.com/submit?url=https://tarunbatra.com/blog/data/Restore-deleted-MongoDB-documents-using-Oplog/&title=Restore deleted MongoDB documents using Oplog"><i class="fab fa-reddit-alien " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="http://www.stumbleupon.com/submit?url=https://tarunbatra.com/blog/data/Restore-deleted-MongoDB-documents-using-Oplog/&title=Restore deleted MongoDB documents using Oplog"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="http://digg.com/submit?url=https://tarunbatra.com/blog/data/Restore-deleted-MongoDB-documents-using-Oplog/&title=Restore deleted MongoDB documents using Oplog"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="http://www.tumblr.com/share/link?url=https://tarunbatra.com/blog/data/Restore-deleted-MongoDB-documents-using-Oplog/&name=Restore deleted MongoDB documents using Oplog&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="https://news.ycombinator.com/submitlink?u=https://tarunbatra.com/blog/data/Restore-deleted-MongoDB-documents-using-Oplog/&t=Restore deleted MongoDB documents using Oplog"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+  </div>
+
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Restore deleted MongoDB documents using Oplog
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Tarun Batra</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2018-06-14T23:05:00.000Z" itemprop="datePublished">2018-06-15</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="../../../categories/data/">data</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="../../../tags/data/" rel="tag">data</a>, <a class="tag-link-link" href="../../../tags/mongo/" rel="tag">mongo</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+<div class="article-gallery">
+    
+    <a class="gallery-item" href="../../../data/images/Restore-deleted-MongoDB-documents-using-Oplog/cover.png" rel="gallery_cm8waws01001l6wjgb02wfl4a">
+        <img src="../../../data/images/Restore-deleted-MongoDB-documents-using-Oplog/cover.png" itemprop="image" />
+    </a>
+    
+</div>
+
+
+  <div class="content" itemprop="articleBody">
+    <p><sup>Source: <a target="_blank" rel="noopener" href="http://dilbert.com/strip/2013-07-05">Dilbert</a></sup></p>
+<p>Recently I found myself trying to restore corrupted data to it’s original form. A query gone wrong had erased valuable data from a MongoDB collection and it needed to be restored. This blog is a means to note my learnings from that incident for my future self and others.</p>
+<h4 id="Oplog-is-amazing"><a href="#Oplog-is-amazing" class="headerlink" title="Oplog is amazing"></a>Oplog is amazing</h4><p>If you’re using a MongoDB replica set, you can use MongoDB Oplog to undo almost any type of <em>recent</em> data loss. If you never heard of it, go read the docs as I’ll skip to the restoring part.</p>
+<blockquote><p>The oplog is a special capped collection that keeps a rolling record of all operations that modify the data stored in your databases.</p>
+<footer><strong>MongoDB</strong><cite><a target="_blank" rel="noopener" href="https://docs.mongodb.com/manual/core/replica-set-oplog/">Official docs</a></cite></footer></blockquote>
+
+<h2 id="Restore-backup"><a href="#Restore-backup" class="headerlink" title="Restore backup"></a>Restore backup</h2><p>Restore whatever latest backup you have before the the data was corrupted. It’ll be used as a base. Make sure the oplog has operations from or before the time the backup was taken, otherwise the restore may not work.</p>
+<h2 id="Find-the-faulty-query-queries"><a href="#Find-the-faulty-query-queries" class="headerlink" title="Find the faulty query&#x2F;queries"></a>Find the faulty query&#x2F;queries</h2><p>Now you need to browse the contents of the Oplog and look for the query which corrupted the data in the first place. Oplog is a special collection, but still a collection. So, you can query it to narrow down your results like this:</p>
+<figure class="highlight plaintext"><figcaption><span>mongodb shell</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Replica:PRIMARY&gt; use local</span><br><span class="line">switched to db local</span><br><span class="line">Replica:PRIMARY&gt; db.oplog.rs.find()</span><br></pre></td></tr></table></figure>
+<p>Let’s say you found the query and it looked like:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">...</span><br><span class="line">&#123; <span class="string">&quot;ts&quot;</span> : <span class="title class_">Timestamp</span>(<span class="number">1528225054</span>, <span class="number">1</span>), <span class="string">&quot;t&quot;</span> : <span class="title class_">NumberLong</span>(<span class="number">1</span>), <span class="string">&quot;h&quot;</span> : <span class="title class_">NumberLong</span>(<span class="string">&quot;3208671813197906204&quot;</span>), <span class="string">&quot;v&quot;</span> : <span class="number">2</span>, <span class="string">&quot;op&quot;</span> : <span class="string">&quot;d&quot;</span>, <span class="string">&quot;ns&quot;</span> : <span class="string">&quot;test.foo&quot;</span>, <span class="string">&quot;ui&quot;</span> : <span class="title function_">UUID</span>(<span class="string">&quot;348dd681-e0df-4d6b-bd69-304d21cf8235&quot;</span>), <span class="string">&quot;wall&quot;</span> : <span class="title class_">ISODate</span>(<span class="string">&quot;2018-06-05T18:57:34.245Z&quot;</span>), <span class="string">&quot;o&quot;</span> : &#123; <span class="string">&quot;_id&quot;</span> : <span class="title class_">ObjectId</span>(<span class="string">&quot;5b16dd0d5861982c59fedefe&quot;</span>) &#125; &#125;</span><br><span class="line">...</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>Note down the value of field <code>ts</code>. It will be needed later.</p>
+<h2 id="Take-a-dump-of-oplog"><a href="#Take-a-dump-of-oplog" class="headerlink" title="Take a dump of oplog"></a>Take a dump of oplog</h2><p>Before you can restore your your from oplog, you need to dump it to a file.</p>
+<figure class="highlight sh"><figcaption><span>mongodump</span><a target="_blank" rel="noopener" href="https://docs.mongodb.com/manual/reference/program/mongodump/">docs</a></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mongodump -d &lt;DBNAME&gt; -c oplog.rs -o oplogD</span><br><span class="line"><span class="built_in">mkdir</span> oplogR</span><br><span class="line"><span class="built_in">mv</span> oplogD/&lt;DBNAME&gt;/oplog.rs.bson oplogR/oplog.bson</span><br></pre></td></tr></table></figure>
+<p>Now you have a dump of the oplog in <code>oplogR/oplog.bson</code>.</p>
+<h2 id="Restore-from-Oplog"><a href="#Restore-from-Oplog" class="headerlink" title="Restore from Oplog"></a>Restore from Oplog</h2><p>You want to restore the data prior to the faulty write operation.</p>
+<figure class="highlight sh"><figcaption><span>mongorestore</span><a target="_blank" rel="noopener" href="https://docs.mongodb.com/manual/reference/program/mongorestore/">docs</a></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongorestore --oplogReplay --oplogLimit 1528225054:1 oplogR</span><br></pre></td></tr></table></figure>
+<p>The value of <code>oplogLimit</code> paramter is the <code>ts</code> property of the faulty query you noted earier.</p>
+<p><strong>Mongo oplog is <em>idempotent</em>, i.e. it can be applied multiple times without duplicating data. This is why you need not give <code>mongorestore</code> a start time.</strong></p>
+<h2 id="Selective-restore"><a href="#Selective-restore" class="headerlink" title="Selective restore"></a>Selective restore</h2><p>The previous method helps when the good and bad operations are clearly separated by time. But that’s not the case mostly. It’s likely that the good and bad writes happened around the same time.</p>
+<p>Here, you need to remember that Oplog is a collection too, and in addition to be queried on, it can also be modified. You need to copy oplog to an uncapped collection and delete the bad write operations.</p>
+<p>After you’ve removed all bad operations you can continue the restoration process from <a href="#Take-a-dump-of-oplog">a dump of the modified oplog</a>. But this time, no limit argument would be required.</p>
+<p>Hope this helps!<br><br></p>
+<p><strong>❤️ code</strong><br><br></p>
+<hr>
+<p><sub><em>This post is inpired from resources like <a target="_blank" rel="noopener" href="https://stackoverflow.com/a/15451297/2751596">Asya’s stackoverflow answer</a> which was used to solve the problem at hand.</em></sub></p>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="../../../index.html">Home</a></li>
+         
+          <li><a href="../../.././about/">About</a></li>
+         
+          <li><a href="../../.././blog/">Blog</a></li>
+         
+          <li><a href="../../.././resume/">Resume</a></li>
+         
+          <li><a href="../../../search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#Oplog-is-amazing"><span class="toc-number">1.</span> <span class="toc-text">Oplog is amazing</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Restore-backup"><span class="toc-number"></span> <span class="toc-text">Restore backup</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Find-the-faulty-query-queries"><span class="toc-number"></span> <span class="toc-text">Find the faulty query&#x2F;queries</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Take-a-dump-of-oplog"><span class="toc-number"></span> <span class="toc-text">Take a dump of oplog</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Restore-from-Oplog"><span class="toc-number"></span> <span class="toc-text">Restore from Oplog</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Selective-restore"><span class="toc-number"></span> <span class="toc-text">Selective restore</span></a>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" href="http://www.facebook.com/sharer.php?u=https://tarunbatra.com/blog/data/Restore-deleted-MongoDB-documents-using-Oplog/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="https://twitter.com/share?url=https://tarunbatra.com/blog/data/Restore-deleted-MongoDB-documents-using-Oplog/&text=Restore deleted MongoDB documents using Oplog"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="http://www.linkedin.com/shareArticle?url=https://tarunbatra.com/blog/data/Restore-deleted-MongoDB-documents-using-Oplog/&title=Restore deleted MongoDB documents using Oplog"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="https://pinterest.com/pin/create/bookmarklet/?url=https://tarunbatra.com/blog/data/Restore-deleted-MongoDB-documents-using-Oplog/&is_video=false&description=Restore deleted MongoDB documents using Oplog"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="mailto:?subject=Restore deleted MongoDB documents using Oplog&body=Check out this article: https://tarunbatra.com/blog/data/Restore-deleted-MongoDB-documents-using-Oplog/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="https://getpocket.com/save?url=https://tarunbatra.com/blog/data/Restore-deleted-MongoDB-documents-using-Oplog/&title=Restore deleted MongoDB documents using Oplog"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="http://reddit.com/submit?url=https://tarunbatra.com/blog/data/Restore-deleted-MongoDB-documents-using-Oplog/&title=Restore deleted MongoDB documents using Oplog"><i class="fab fa-reddit-alien fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="http://www.stumbleupon.com/submit?url=https://tarunbatra.com/blog/data/Restore-deleted-MongoDB-documents-using-Oplog/&title=Restore deleted MongoDB documents using Oplog"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="http://digg.com/submit?url=https://tarunbatra.com/blog/data/Restore-deleted-MongoDB-documents-using-Oplog/&title=Restore deleted MongoDB documents using Oplog"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="http://www.tumblr.com/share/link?url=https://tarunbatra.com/blog/data/Restore-deleted-MongoDB-documents-using-Oplog/&name=Restore deleted MongoDB documents using Oplog&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="https://news.ycombinator.com/submitlink?u=https://tarunbatra.com/blog/data/Restore-deleted-MongoDB-documents-using-Oplog/&t=Restore deleted MongoDB documents using Oplog"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2025
+    Tarun Batra
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="../../../index.html">Home</a></li>
+         
+          <li><a href="../../.././about/">About</a></li>
+         
+          <li><a href="../../.././blog/">Blog</a></li>
+         
+          <li><a href="../../.././resume/">Resume</a></li>
+         
+          <li><a href="../../../search/">Search</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+  
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.8.1/css/justifiedGallery.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/> 
+   
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js" crossorigin="anonymous"></script> 
+   
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="../../../js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-47797084-2"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-47797084-2');
+    </script>
+
+<!-- Microsoft clarity -->
+
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, 'clarity', 'script', '3w9d6u9uag');
+</script>
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'tarunbatra';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+
+</body>
+</html>

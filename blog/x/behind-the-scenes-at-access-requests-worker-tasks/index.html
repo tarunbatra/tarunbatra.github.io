@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="Okta&#39;s Inbox platform provides base for products like Access Requests and PAM. This post describes the trade-offs in the pubsub infra that supports the Inbox platform.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Behind the scenes at Access Requests: Worker tasks">
+<meta property="og:url" content="https://tarunbatra.com/blog/x/behind-the-scenes-at-access-requests-worker-tasks/index.html">
+<meta property="og:site_name" content="Tarun Batra">
+<meta property="og:description" content="Okta&#39;s Inbox platform provides base for products like Access Requests and PAM. This post describes the trade-offs in the pubsub infra that supports the Inbox platform.">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://tarunbatra.com/data/images/behind-the-scenes-at-access-requests-worker-tasks/cover.png">
+<meta property="article:published_time" content="2023-11-20T08:00:00.000Z">
+<meta property="article:modified_time" content="2025-03-30T23:54:00.873Z">
+<meta property="article:author" content="Tarun Batra">
+<meta property="article:tag" content="architecture">
+<meta property="article:tag" content="message-queue">
+<meta property="article:tag" content="pubsub">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tarunbatra.com/data/images/behind-the-scenes-at-access-requests-worker-tasks/cover.png">
+<meta name="twitter:creator" content="@tarunbatra">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="../../.././meta/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="../../.././meta/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="../../.././meta/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Behind the scenes at Access Requests: Worker tasks</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="../../../css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+    <link rel="canonical" href="https://www.okta.com/blog/2023/11/behind-the-scenes-at-access-requests-worker-tasks/"/>
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="atom.xml" title="Tarun Batra" type="application/atom+xml">
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" "Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        
+          <li><a href="../../../index.html">Home</a></li>
+        
+          <li><a href="../../.././about/">About</a></li>
+        
+          <li><a href="../../.././blog/">Blog</a></li>
+        
+          <li><a href="../../.././resume/">Resume</a></li>
+        
+          <li><a href="../../../search/">Search</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post " href="../macbook-init-a-dev-machine-setup-guide/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top " href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post " href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Background"><span class="toc-number">1.</span> <span class="toc-text">Background</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Worker-tasks"><span class="toc-number">2.</span> <span class="toc-text">Worker tasks</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Queue-setup"><span class="toc-number">3.</span> <span class="toc-text">Queue setup</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Flow-control"><span class="toc-number">4.</span> <span class="toc-text">Flow control</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Trade-offs"><span class="toc-number">5.</span> <span class="toc-text">Trade-offs</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Extensibility"><span class="toc-number">5.1.</span> <span class="toc-text">+ Extensibility</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Reliability"><span class="toc-number">5.2.</span> <span class="toc-text">+ Reliability</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Granular-scalability"><span class="toc-number">5.3.</span> <span class="toc-text">+ Granular scalability</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Retrying-failed-tasks"><span class="toc-number">5.4.</span> <span class="toc-text">- Retrying failed tasks</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#What%E2%80%99s-next"><span class="toc-number">6.</span> <span class="toc-text">What’s next</span></a></li></ol>
+    </div>
+  </span>
+  <br/>
+  <div id="share">
+    <ul>
+  <li><a class="icon" target="_blank" href="http://www.facebook.com/sharer.php?u=https://tarunbatra.com/blog/x/behind-the-scenes-at-access-requests-worker-tasks/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="https://twitter.com/share?url=https://tarunbatra.com/blog/x/behind-the-scenes-at-access-requests-worker-tasks/&text=Behind the scenes at Access Requests: Worker tasks"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="http://www.linkedin.com/shareArticle?url=https://tarunbatra.com/blog/x/behind-the-scenes-at-access-requests-worker-tasks/&title=Behind the scenes at Access Requests: Worker tasks"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="https://pinterest.com/pin/create/bookmarklet/?url=https://tarunbatra.com/blog/x/behind-the-scenes-at-access-requests-worker-tasks/&is_video=false&description=Behind the scenes at Access Requests: Worker tasks"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="mailto:?subject=Behind the scenes at Access Requests: Worker tasks&body=Check out this article: https://tarunbatra.com/blog/x/behind-the-scenes-at-access-requests-worker-tasks/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="https://getpocket.com/save?url=https://tarunbatra.com/blog/x/behind-the-scenes-at-access-requests-worker-tasks/&title=Behind the scenes at Access Requests: Worker tasks"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="http://reddit.com/submit?url=https://tarunbatra.com/blog/x/behind-the-scenes-at-access-requests-worker-tasks/&title=Behind the scenes at Access Requests: Worker tasks"><i class="fab fa-reddit-alien " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="http://www.stumbleupon.com/submit?url=https://tarunbatra.com/blog/x/behind-the-scenes-at-access-requests-worker-tasks/&title=Behind the scenes at Access Requests: Worker tasks"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="http://digg.com/submit?url=https://tarunbatra.com/blog/x/behind-the-scenes-at-access-requests-worker-tasks/&title=Behind the scenes at Access Requests: Worker tasks"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="http://www.tumblr.com/share/link?url=https://tarunbatra.com/blog/x/behind-the-scenes-at-access-requests-worker-tasks/&name=Behind the scenes at Access Requests: Worker tasks&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="https://news.ycombinator.com/submitlink?u=https://tarunbatra.com/blog/x/behind-the-scenes-at-access-requests-worker-tasks/&t=Behind the scenes at Access Requests: Worker tasks"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+  </div>
+
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Behind the scenes at Access Requests: Worker tasks
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Tarun Batra</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2023-11-20T08:00:00.000Z" itemprop="datePublished">2023-11-20</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="../../../tags/architecture/" rel="tag">architecture</a>, <a class="tag-link-link" href="../../../tags/message-queue/" rel="tag">message-queue</a>, <a class="tag-link-link" href="../../../tags/pubsub/" rel="tag">pubsub</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+<div class="article-gallery">
+    
+    <a class="gallery-item" href="../../../data/images/behind-the-scenes-at-access-requests-worker-tasks/cover.png" rel="gallery_cm8wawrzy001e6wjgh4qlh2ss">
+        <img src="../../../data/images/behind-the-scenes-at-access-requests-worker-tasks/cover.png" itemprop="image" />
+    </a>
+    
+</div>
+
+
+  <div class="content" itemprop="articleBody">
+    <h3 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h3><p>Okta’s inbox platform supports various products in Okta’s Workforce Identity Cloud, where human input is required. It is most notably instrumental in the Access Request flow of Okta Identity Governance.</p>
+<p>A lot of what we do is trigger-based. These triggers can be a human action — “grant access <strong>when the manager approves” —</strong> or a time event — “revoke access <strong>after 24 hours.</strong>” This post will explain how we leverage asynchronous tasks using message brokers like Google Pub&#x2F;Sub and Google Cloud Tasks to take actions based on these triggers.</p>
+<h3 id="Worker-tasks"><a href="#Worker-tasks" class="headerlink" title="Worker tasks"></a>Worker tasks</h3><p>Internally, we call all asynchronous tasks “worker tasks.” We have an internal framework that exposes an interface to create and execute tasks while abstracting away the details of which message broker the task is sent to.</p>
+<p><img src="/data/images/behind-the-scenes-at-access-requests-worker-tasks/architecture.png" alt="&#39;Architecture&#39;"></p>
+<p>For us, a task is a function that needs to run, along with the metadata that dictates how it runs, in the worker tasks framework. From a conceptual perspective, a task is a collection of certain properties that determine its lifecycle and execution, as shown below:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;id&quot;</span>: yet_another_important_task,   <span class="comment">// Identifier</span></span><br><span class="line">  <span class="string">&quot;driver&quot;</span>: <span class="title function_">gcp_pubub</span>(<span class="string">&quot;fast_queue&quot;</span>),</span><br><span class="line">  <span class="string">&quot;retries&quot;</span>: <span class="number">3</span>,                       <span class="comment">// Max retries</span></span><br><span class="line">  <span class="string">&quot;idempotent&quot;</span>: <span class="literal">false</span>,</span><br><span class="line">  <span class="string">&quot;execute&quot;</span>: <span class="function">() =&gt;</span> &#123;...&#125;              <span class="comment">// Task code to execute</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Most of the metadata is self-explanatory. The <strong>driver</strong> defines the queue service to route the task from the publisher to the subscriber. In the above example, we are using GCP PubSub with the “fast_queue.”</p>
+<p><em><strong>NOTE:</strong></em> <em>We use Google Cloud Tasks because of its built-in capability to delay the execution of tasks. In all other respects, our Google Cloud Tasks setup is similar to that of Google Pub&#x2F;Sub. From here, the article focuses on Google Pub&#x2F;Sub, and similar principles apply to Google Cloud Tasks as well.</em></p>
+<h3 id="Queue-setup"><a href="#Queue-setup" class="headerlink" title="Queue setup"></a>Queue setup</h3><p>Our Pub&#x2F;Sub setup handles a diverse set of tasks. We’ve set up multiple GCP PubSub queues that allow us to segment the workloads based on traffic characteristics, priority, and the domain of the workload. We do this to ensure:</p>
+<ol>
+<li><p>High-priority tasks get executed faster.</p>
+</li>
+<li><p>Backlog in processing one domain’s tasks does not affect those of another.</p>
+</li>
+</ol>
+<p><img src="/data/images/behind-the-scenes-at-access-requests-worker-tasks/queue-setup.png" alt="&#39;Queue setup&#39;"></p>
+<p>This allows us to <strong>scale selectively</strong> depending on the task priority. In high-traffic situations, we can easily scale the subscribers for essential tasks and ensure stable platform health while allowing the existing number of notification subscribers to process through the notifications, resulting in slightly delayed notifications.</p>
+<h3 id="Flow-control"><a href="#Flow-control" class="headerlink" title="Flow control"></a>Flow control</h3><p>In the previous example, we saw how the queue setup allowed us to scale in certain situations and accept delays in others. Practically, it’s likely that without scaling, the subscribers would get overwhelmed with the increased number of tasks and crash. We solve this by using flow control in various steps. The queues are configured with a maximum number of pending messages they can deliver at a time. This setting allows our subscribers to gracefully handle traffic bursts by managing the flow of incoming tasks.</p>
+<p>Unfortunately, it’s hard to nail a magic number of tasks subscribers can handle. Other factors, besides the quantity of tasks, may affect the load, like the complexity of a particular task. Hence, as a failsafe measure, the subscribers are forced to stop accepting more tasks if resources like CPU and memory surpass a certain threshold. In such an event, the PubSub retries exponentially. It’s a naive but effective way to handle as many tasks as possible without crashing the subscribers or scaling up the number of active subscribers.</p>
+<p><img src="/data/images/behind-the-scenes-at-access-requests-worker-tasks/flow-control.png" alt="&#39;Flow control&#39;"></p>
+<h3 id="Trade-offs"><a href="#Trade-offs" class="headerlink" title="Trade-offs"></a>Trade-offs</h3><p>Like any other system, there are trade-offs in this architecture. Customers choose Okta because it’s a reliable and neutral vendor. We have the following expectations from our asynchronous task infrastructure.</p>
+<h4 id="Extensibility"><a href="#Extensibility" class="headerlink" title="+ Extensibility"></a>+ Extensibility</h4><p>The framework is highly extensible. We can add a new queue service like RabbitMQ, AWS SQS, etc, by adding a driver, making all our tasks compatible with the new services.</p>
+<h4 id="Reliability"><a href="#Reliability" class="headerlink" title="+ Reliability"></a>+ Reliability</h4><p>Having a central framework designed with reliability in mind means every new kind of task added to the system gets <strong>alerts on failures, dashboard reports, and anomaly detection</strong> by default without the task developer needing to do anything.</p>
+<h4 id="Granular-scalability"><a href="#Granular-scalability" class="headerlink" title="+ Granular scalability"></a>+ Granular scalability</h4><p>With our tasks organized into queues based on priorities and domain, we can identify the patterns in delays and make informed decisions about which subscribers need to scale.  This process frees our users from staring at loading screens while keeping our infrastructure spending in check.</p>
+<h4 id="Retrying-failed-tasks"><a href="#Retrying-failed-tasks" class="headerlink" title="- Retrying failed tasks"></a>- Retrying failed tasks</h4><p>Many tasks in our system have side effects and are not idempotent. Such a task is challenging to recover in case of failure. We run the risk of having double side effects. The framework does not currently have a way to recover or retry these tasks. </p>
+<h3 id="What’s-next"><a href="#What’s-next" class="headerlink" title="What’s next"></a>What’s next</h3><p>Our current asynchronous task setup works for our current scale and infrastructure needs. In the future, we’ll be looking to use Google Cloud Functions, which will take the flow control out of the equation. Cloud Functions can scale as needed to process the number of tasks.</p>
+<p>Another future improvement we’ve flagged is to increase confidence around “exactly-once” execution of tasks with side effects, like sending emails, which would require using idempotent vendor APIs and more granular checkpoints throughout task execution. Our current architecture provides a good base for these improvements to come.</p>
+<p><sub>This article originally appeared on <a target="_blank" rel="noopener" href="https://www.okta.com/blog/2023/11/behind-the-scenes-at-access-requests-worker-tasks/">Okta</a> on November 20, 2023.</sub></p>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="../../../index.html">Home</a></li>
+         
+          <li><a href="../../.././about/">About</a></li>
+         
+          <li><a href="../../.././blog/">Blog</a></li>
+         
+          <li><a href="../../.././resume/">Resume</a></li>
+         
+          <li><a href="../../../search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Background"><span class="toc-number">1.</span> <span class="toc-text">Background</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Worker-tasks"><span class="toc-number">2.</span> <span class="toc-text">Worker tasks</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Queue-setup"><span class="toc-number">3.</span> <span class="toc-text">Queue setup</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Flow-control"><span class="toc-number">4.</span> <span class="toc-text">Flow control</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Trade-offs"><span class="toc-number">5.</span> <span class="toc-text">Trade-offs</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Extensibility"><span class="toc-number">5.1.</span> <span class="toc-text">+ Extensibility</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Reliability"><span class="toc-number">5.2.</span> <span class="toc-text">+ Reliability</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Granular-scalability"><span class="toc-number">5.3.</span> <span class="toc-text">+ Granular scalability</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Retrying-failed-tasks"><span class="toc-number">5.4.</span> <span class="toc-text">- Retrying failed tasks</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#What%E2%80%99s-next"><span class="toc-number">6.</span> <span class="toc-text">What’s next</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" href="http://www.facebook.com/sharer.php?u=https://tarunbatra.com/blog/x/behind-the-scenes-at-access-requests-worker-tasks/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="https://twitter.com/share?url=https://tarunbatra.com/blog/x/behind-the-scenes-at-access-requests-worker-tasks/&text=Behind the scenes at Access Requests: Worker tasks"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="http://www.linkedin.com/shareArticle?url=https://tarunbatra.com/blog/x/behind-the-scenes-at-access-requests-worker-tasks/&title=Behind the scenes at Access Requests: Worker tasks"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="https://pinterest.com/pin/create/bookmarklet/?url=https://tarunbatra.com/blog/x/behind-the-scenes-at-access-requests-worker-tasks/&is_video=false&description=Behind the scenes at Access Requests: Worker tasks"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="mailto:?subject=Behind the scenes at Access Requests: Worker tasks&body=Check out this article: https://tarunbatra.com/blog/x/behind-the-scenes-at-access-requests-worker-tasks/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="https://getpocket.com/save?url=https://tarunbatra.com/blog/x/behind-the-scenes-at-access-requests-worker-tasks/&title=Behind the scenes at Access Requests: Worker tasks"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="http://reddit.com/submit?url=https://tarunbatra.com/blog/x/behind-the-scenes-at-access-requests-worker-tasks/&title=Behind the scenes at Access Requests: Worker tasks"><i class="fab fa-reddit-alien fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="http://www.stumbleupon.com/submit?url=https://tarunbatra.com/blog/x/behind-the-scenes-at-access-requests-worker-tasks/&title=Behind the scenes at Access Requests: Worker tasks"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="http://digg.com/submit?url=https://tarunbatra.com/blog/x/behind-the-scenes-at-access-requests-worker-tasks/&title=Behind the scenes at Access Requests: Worker tasks"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="http://www.tumblr.com/share/link?url=https://tarunbatra.com/blog/x/behind-the-scenes-at-access-requests-worker-tasks/&name=Behind the scenes at Access Requests: Worker tasks&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="https://news.ycombinator.com/submitlink?u=https://tarunbatra.com/blog/x/behind-the-scenes-at-access-requests-worker-tasks/&t=Behind the scenes at Access Requests: Worker tasks"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2025
+    Tarun Batra
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="../../../index.html">Home</a></li>
+         
+          <li><a href="../../.././about/">About</a></li>
+         
+          <li><a href="../../.././blog/">Blog</a></li>
+         
+          <li><a href="../../.././resume/">Resume</a></li>
+         
+          <li><a href="../../../search/">Search</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+  
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.8.1/css/justifiedGallery.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/> 
+   
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js" crossorigin="anonymous"></script> 
+   
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="../../../js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-47797084-2"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-47797084-2');
+    </script>
+
+<!-- Microsoft clarity -->
+
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, 'clarity', 'script', '3w9d6u9uag');
+</script>
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'tarunbatra';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+
+</body>
+</html>

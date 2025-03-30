@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="Mocha is the leader when it comes to testing frameworks in Node, and it’s great. I use it in all my projects, and I’m sure many others do too. Mocha added support for Promises back in version 1.18.0.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Pitfalls of Mocha&#39;s built-in Promise support">
+<meta property="og:url" content="https://tarunbatra.com/blog/javascript/Pitfalls-of-Mocha-s-built-in-Promise-support/index.html">
+<meta property="og:site_name" content="Tarun Batra">
+<meta property="og:description" content="Mocha is the leader when it comes to testing frameworks in Node, and it’s great. I use it in all my projects, and I’m sure many others do too. Mocha added support for Promises back in version 1.18.0.">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://tarunbatra.com/data/images/Pitfalls-of-Mocha-s-built-in-Promise-support/cover.png">
+<meta property="article:published_time" content="2017-04-19T00:11:12.000Z">
+<meta property="article:modified_time" content="2025-03-30T23:54:00.872Z">
+<meta property="article:author" content="Tarun Batra">
+<meta property="article:tag" content="javascript">
+<meta property="article:tag" content="tests">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tarunbatra.com/data/images/Pitfalls-of-Mocha-s-built-in-Promise-support/cover.png">
+<meta name="twitter:creator" content="@tarunbatra">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="../../.././meta/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="../../.././meta/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="../../.././meta/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Pitfalls of Mocha&#39;s built-in Promise support</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="../../../css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+    <link rel="canonical" href="https://tarunbatra.com/blog/javascript/Pitfalls-of-Mocha-s-built-in-Promise-support/"/>
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="atom.xml" title="Tarun Batra" type="application/atom+xml">
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" "Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        
+          <li><a href="../../../index.html">Home</a></li>
+        
+          <li><a href="../../.././about/">About</a></li>
+        
+          <li><a href="../../.././blog/">Blog</a></li>
+        
+          <li><a href="../../.././resume/">Resume</a></li>
+        
+          <li><a href="../../../search/">Search</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post " href="../../architecture/Getting-Started-with-microservices/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post " href="../why-you-should-use-named-functions-in-javascript/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top " href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post " href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Problem"><span class="toc-number">1.</span> <span class="toc-text">Problem</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Case-1"><span class="toc-number">1.1.</span> <span class="toc-text">Case 1</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Test-status-PASS"><span class="toc-number">1.1.1.</span> <span class="toc-text">Test status: PASS</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Case-2"><span class="toc-number">1.2.</span> <span class="toc-text">Case 2</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Test-status-FAIL"><span class="toc-number">1.2.1.</span> <span class="toc-text">Test status: FAIL</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Case-3"><span class="toc-number">1.3.</span> <span class="toc-text">Case 3</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Test-status-PASS-1"><span class="toc-number">1.3.1.</span> <span class="toc-text">Test status: PASS</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Case-4"><span class="toc-number">1.4.</span> <span class="toc-text">Case 4</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Test-status-FAIL-PASS"><span class="toc-number">1.4.1.</span> <span class="toc-text">Test status: FAIL PASS</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Solution"><span class="toc-number">2.</span> <span class="toc-text">Solution</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Good-ol%E2%80%99-done-callback"><span class="toc-number">2.1.</span> <span class="toc-text">Good ol’ done callback</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Test-status-FAIL-1"><span class="toc-number">2.1.1.</span> <span class="toc-text">Test status: FAIL</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Chained-then-block"><span class="toc-number">2.2.</span> <span class="toc-text">Chained then block</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Test-status-FAIL-2"><span class="toc-number">2.2.1.</span> <span class="toc-text">Test status: FAIL</span></a></li></ol></li></ol></li></ol>
+    </div>
+  </span>
+  <br/>
+  <div id="share">
+    <ul>
+  <li><a class="icon" target="_blank" href="http://www.facebook.com/sharer.php?u=https://tarunbatra.com/blog/javascript/Pitfalls-of-Mocha-s-built-in-Promise-support/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="https://twitter.com/share?url=https://tarunbatra.com/blog/javascript/Pitfalls-of-Mocha-s-built-in-Promise-support/&text=Pitfalls of Mocha&#39;s built-in Promise support"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="http://www.linkedin.com/shareArticle?url=https://tarunbatra.com/blog/javascript/Pitfalls-of-Mocha-s-built-in-Promise-support/&title=Pitfalls of Mocha&#39;s built-in Promise support"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="https://pinterest.com/pin/create/bookmarklet/?url=https://tarunbatra.com/blog/javascript/Pitfalls-of-Mocha-s-built-in-Promise-support/&is_video=false&description=Pitfalls of Mocha&#39;s built-in Promise support"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="mailto:?subject=Pitfalls of Mocha&#39;s built-in Promise support&body=Check out this article: https://tarunbatra.com/blog/javascript/Pitfalls-of-Mocha-s-built-in-Promise-support/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="https://getpocket.com/save?url=https://tarunbatra.com/blog/javascript/Pitfalls-of-Mocha-s-built-in-Promise-support/&title=Pitfalls of Mocha&#39;s built-in Promise support"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="http://reddit.com/submit?url=https://tarunbatra.com/blog/javascript/Pitfalls-of-Mocha-s-built-in-Promise-support/&title=Pitfalls of Mocha&#39;s built-in Promise support"><i class="fab fa-reddit-alien " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="http://www.stumbleupon.com/submit?url=https://tarunbatra.com/blog/javascript/Pitfalls-of-Mocha-s-built-in-Promise-support/&title=Pitfalls of Mocha&#39;s built-in Promise support"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="http://digg.com/submit?url=https://tarunbatra.com/blog/javascript/Pitfalls-of-Mocha-s-built-in-Promise-support/&title=Pitfalls of Mocha&#39;s built-in Promise support"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="http://www.tumblr.com/share/link?url=https://tarunbatra.com/blog/javascript/Pitfalls-of-Mocha-s-built-in-Promise-support/&name=Pitfalls of Mocha&#39;s built-in Promise support&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="https://news.ycombinator.com/submitlink?u=https://tarunbatra.com/blog/javascript/Pitfalls-of-Mocha-s-built-in-Promise-support/&t=Pitfalls of Mocha&#39;s built-in Promise support"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+  </div>
+
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Pitfalls of Mocha&#39;s built-in Promise support
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Tarun Batra</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2017-04-19T00:11:12.000Z" itemprop="datePublished">2017-04-19</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="../../../categories/javascript/">javascript</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="../../../tags/javascript/" rel="tag">javascript</a>, <a class="tag-link-link" href="../../../tags/tests/" rel="tag">tests</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+<div class="article-gallery">
+    
+    <a class="gallery-item" href="../../../data/images/Pitfalls-of-Mocha-s-built-in-Promise-support/cover.png" rel="gallery_cm8wawrzv00196wjg9efacgy1">
+        <img src="../../../data/images/Pitfalls-of-Mocha-s-built-in-Promise-support/cover.png" itemprop="image" />
+    </a>
+    
+</div>
+
+
+  <div class="content" itemprop="articleBody">
+    <p><a target="_blank" rel="noopener" href="https://mochajs.org/">Mocha</a> is the leader when it comes to testing frameworks in <a target="_blank" rel="noopener" href="https://nodejs.org/">Node</a>, and it’s great. I use it in all my projects, and I’m sure many others do too.</p>
+<p>Mocha added support for Promises back in version <code>1.18.0</code>. Recently while testing asynchronous code written using Promises, I was using the <a target="_blank" rel="noopener" href="https://mochajs.org/#working-with-promises">built-in promise support</a> instead of the old-fashioned callbacks oriented <a target="_blank" rel="noopener" href="https://mochajs.org/#asynchronous-code"><code>done</code> callback</a> and I found my tests were resulting in <strong>false positives</strong>. So here I’m explaining what happened and how to avoid it.</p>
+<h2 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h2><p>It’s easy to see that there are four possible cases when testing Promises:</p>
+<table>
+<thead>
+<tr>
+<th align="center">Case</th>
+<th align="center">Expectation</th>
+<th align="center">Actual</th>
+<th align="center">Expected test status</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1</td>
+<td align="center">Resolved</td>
+<td align="center">Resolved</td>
+<td align="center">Pass</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">Resolved</td>
+<td align="center">Rejected</td>
+<td align="center">Fail</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center">Rejected</td>
+<td align="center">Rejected</td>
+<td align="center">Pass</td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td align="center">Rejected</td>
+<td align="center">Resolved</td>
+<td align="center">Fail</td>
+</tr>
+</tbody></table>
+<h3 id="Case-1"><a href="#Case-1" class="headerlink" title="Case 1"></a>Case 1</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> promise = <span class="title class_">Promise</span>.<span class="title function_">resolve</span>();</span><br><span class="line"></span><br><span class="line"><span class="title function_">describe</span>(<span class="string">&#x27;the promise resolves expectedly&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="title function_">it</span>(<span class="string">&#x27;should PASS the test&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> promise.<span class="title function_">then</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Promise resolved!&#x27;</span>) <span class="comment">//  Called</span></span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h4 id="Test-status-PASS"><a href="#Test-status-PASS" class="headerlink" title="Test status: PASS"></a>Test status: <strong>PASS</strong></h4><p>The test expects the promise to resolve and so it does. The snippet above shows that the test passes expectedly.</p>
+<h3 id="Case-2"><a href="#Case-2" class="headerlink" title="Case 2"></a>Case 2</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> promise = <span class="title class_">Promise</span>.<span class="title function_">reject</span>(<span class="keyword">new</span> <span class="title class_">Error</span>(<span class="string">&#x27;some-error&#x27;</span>));</span><br><span class="line"></span><br><span class="line"><span class="title function_">describe</span>(<span class="string">&#x27;the promise rejects unexpectedly&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="title function_">it</span>(<span class="string">&#x27;should FAIL the test&#x27;</span>, <span class="function">() =&gt;</span> &#123; <span class="comment">// =&gt; Error: some-error</span></span><br><span class="line">    <span class="keyword">return</span> promise.<span class="title function_">then</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Promise resolved!&#x27;</span>) <span class="comment">// Not called</span></span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h4 id="Test-status-FAIL"><a href="#Test-status-FAIL" class="headerlink" title="Test status: FAIL"></a>Test status: <strong>FAIL</strong></h4><p>In the case when test expects the promise to resolve, but it doesn’t, Mocha gracefully fails the test. In the snippet above, the <code>then</code> block was never executed and Mocha detected the error rejected by the code and failed the test.</p>
+<h3 id="Case-3"><a href="#Case-3" class="headerlink" title="Case 3"></a>Case 3</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> promise = <span class="title class_">Promise</span>.<span class="title function_">reject</span>(<span class="keyword">new</span> <span class="title class_">Error</span>(<span class="string">&#x27;some-error&#x27;</span>));</span><br><span class="line"><span class="title function_">describe</span>(<span class="string">&#x27;the promise rejects expectedly&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="title function_">it</span>(<span class="string">&#x27;should PASS the test&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> promise.<span class="title function_">catch</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Rejected promise caught!&#x27;</span>);  <span class="comment">// Called</span></span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h4 id="Test-status-PASS-1"><a href="#Test-status-PASS-1" class="headerlink" title="Test status: PASS"></a>Test status: <strong>PASS</strong></h4><p>The test expects the promise to be rejected and it is caught by the <code>catch</code> block, which results in this test passing as expected.</p>
+<h3 id="Case-4"><a href="#Case-4" class="headerlink" title="Case 4"></a>Case 4</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> promise = <span class="title class_">Promise</span>.<span class="title function_">resolve</span>();</span><br><span class="line"></span><br><span class="line"><span class="title function_">describe</span>(<span class="string">&#x27;the promise resolves unexpectedly&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="title function_">it</span>(<span class="string">&#x27;should FAIL the test&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> promise.<span class="title function_">catch</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Rejected promise caught!&#x27;</span>) <span class="comment">// Not called</span></span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h4 id="Test-status-FAIL-PASS"><a href="#Test-status-FAIL-PASS" class="headerlink" title="Test status: FAIL PASS"></a>Test status: <del>FAIL</del> <strong>PASS</strong></h4><p>In this case, the test expects the promise to be rejected and the catch block to execute but instead, it doesn’t. The promise resolves. Mocha doesn’t throw an error here!</p>
+<p>So while doing <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Negative_Testing">Negative Testing</a>, the built-in promises support doesn’t hold up well and can result in <strong>false positives</strong>. This is not a bug and the reason behind this behavior totally makes sense, once given a careful thought, but at the very least, it’s not intuitive and causes the tests to pass even when they shouldn’t.</p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><h3 id="Good-ol’-done-callback"><a href="#Good-ol’-done-callback" class="headerlink" title="Good ol’ done callback"></a>Good ol’ done callback</h3><p>The simplest way to avoid this situation is to always handle the rejection scenarios yourself, rather than asking Mocha to do it. Here’s how:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> promise = <span class="title class_">Promise</span>.<span class="title function_">resolve</span>();</span><br><span class="line"></span><br><span class="line"><span class="title function_">describe</span>(<span class="string">&#x27;the promise resolves unexpectedly&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="title function_">it</span>(<span class="string">&#x27;should FAIL the test&#x27;</span>, <span class="function">(<span class="params">done</span>) =&gt;</span> &#123;</span><br><span class="line">    promise.<span class="title function_">catch</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Rejected promise caught!&#x27;</span>) <span class="comment">// Not called</span></span><br><span class="line">      <span class="title function_">done</span>();                                 <span class="comment">// Timeout!</span></span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h4 id="Test-status-FAIL-1"><a href="#Test-status-FAIL-1" class="headerlink" title="Test status: FAIL"></a>Test status: <strong>FAIL</strong></h4><p>The above test will fail due to timeout as Mocha waits for <code>done</code> to be called but it doesn’t, and times out eventually.</p>
+<h3 id="Chained-then-block"><a href="#Chained-then-block" class="headerlink" title="Chained then block"></a>Chained then block</h3><p>Another way to avoid this situation is to chain a <code>then</code> block to the existing <code>catch</code> block and assert that the catch was called.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> expect = <span class="built_in">require</span>(<span class="string">&#x27;chai&#x27;</span>).<span class="property">expect</span>;</span><br><span class="line"><span class="keyword">var</span> spy = <span class="built_in">require</span>(<span class="string">&#x27;sinon&#x27;</span>).<span class="property">spy</span>;</span><br><span class="line"><span class="keyword">var</span> exceptionHandler = <span class="title function_">spy</span>();</span><br><span class="line"><span class="keyword">var</span> promise = <span class="title class_">Promise</span>.<span class="title function_">resolve</span>();</span><br><span class="line"><span class="title function_">describe</span>(<span class="string">&#x27;the promise resolves unexpectedly&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="title function_">it</span>(<span class="string">&#x27;should FAIL the test&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> promise.<span class="title function_">catch</span>(exceptionHandler)</span><br><span class="line">    .<span class="title function_">then</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="comment">// Assert that catch block was called</span></span><br><span class="line">      <span class="title function_">expect</span>(exceptionHandler.<span class="property">calledOnce</span>).<span class="property">to</span>.<span class="property">be</span>.<span class="property">true</span>;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h4 id="Test-status-FAIL-2"><a href="#Test-status-FAIL-2" class="headerlink" title="Test status: FAIL"></a>Test status: <strong>FAIL</strong></h4><p>The above test tries to assert that the catch block was called using <a target="_blank" rel="noopener" href="http://chaijs.com/">Chai</a> and <a target="_blank" rel="noopener" href="http://sinonjs.org/">Sinon</a>, and fails.</p>
+<p>If you know other elegant ways to avoid this behavior, please let me know in the comments!</p>
+<br>
+
+<p><strong>❤️ code</strong></p>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="../../../index.html">Home</a></li>
+         
+          <li><a href="../../.././about/">About</a></li>
+         
+          <li><a href="../../.././blog/">Blog</a></li>
+         
+          <li><a href="../../.././resume/">Resume</a></li>
+         
+          <li><a href="../../../search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Problem"><span class="toc-number">1.</span> <span class="toc-text">Problem</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Case-1"><span class="toc-number">1.1.</span> <span class="toc-text">Case 1</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Test-status-PASS"><span class="toc-number">1.1.1.</span> <span class="toc-text">Test status: PASS</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Case-2"><span class="toc-number">1.2.</span> <span class="toc-text">Case 2</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Test-status-FAIL"><span class="toc-number">1.2.1.</span> <span class="toc-text">Test status: FAIL</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Case-3"><span class="toc-number">1.3.</span> <span class="toc-text">Case 3</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Test-status-PASS-1"><span class="toc-number">1.3.1.</span> <span class="toc-text">Test status: PASS</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Case-4"><span class="toc-number">1.4.</span> <span class="toc-text">Case 4</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Test-status-FAIL-PASS"><span class="toc-number">1.4.1.</span> <span class="toc-text">Test status: FAIL PASS</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Solution"><span class="toc-number">2.</span> <span class="toc-text">Solution</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Good-ol%E2%80%99-done-callback"><span class="toc-number">2.1.</span> <span class="toc-text">Good ol’ done callback</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Test-status-FAIL-1"><span class="toc-number">2.1.1.</span> <span class="toc-text">Test status: FAIL</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Chained-then-block"><span class="toc-number">2.2.</span> <span class="toc-text">Chained then block</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Test-status-FAIL-2"><span class="toc-number">2.2.1.</span> <span class="toc-text">Test status: FAIL</span></a></li></ol></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" href="http://www.facebook.com/sharer.php?u=https://tarunbatra.com/blog/javascript/Pitfalls-of-Mocha-s-built-in-Promise-support/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="https://twitter.com/share?url=https://tarunbatra.com/blog/javascript/Pitfalls-of-Mocha-s-built-in-Promise-support/&text=Pitfalls of Mocha&#39;s built-in Promise support"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="http://www.linkedin.com/shareArticle?url=https://tarunbatra.com/blog/javascript/Pitfalls-of-Mocha-s-built-in-Promise-support/&title=Pitfalls of Mocha&#39;s built-in Promise support"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="https://pinterest.com/pin/create/bookmarklet/?url=https://tarunbatra.com/blog/javascript/Pitfalls-of-Mocha-s-built-in-Promise-support/&is_video=false&description=Pitfalls of Mocha&#39;s built-in Promise support"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="mailto:?subject=Pitfalls of Mocha&#39;s built-in Promise support&body=Check out this article: https://tarunbatra.com/blog/javascript/Pitfalls-of-Mocha-s-built-in-Promise-support/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="https://getpocket.com/save?url=https://tarunbatra.com/blog/javascript/Pitfalls-of-Mocha-s-built-in-Promise-support/&title=Pitfalls of Mocha&#39;s built-in Promise support"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="http://reddit.com/submit?url=https://tarunbatra.com/blog/javascript/Pitfalls-of-Mocha-s-built-in-Promise-support/&title=Pitfalls of Mocha&#39;s built-in Promise support"><i class="fab fa-reddit-alien fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="http://www.stumbleupon.com/submit?url=https://tarunbatra.com/blog/javascript/Pitfalls-of-Mocha-s-built-in-Promise-support/&title=Pitfalls of Mocha&#39;s built-in Promise support"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="http://digg.com/submit?url=https://tarunbatra.com/blog/javascript/Pitfalls-of-Mocha-s-built-in-Promise-support/&title=Pitfalls of Mocha&#39;s built-in Promise support"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="http://www.tumblr.com/share/link?url=https://tarunbatra.com/blog/javascript/Pitfalls-of-Mocha-s-built-in-Promise-support/&name=Pitfalls of Mocha&#39;s built-in Promise support&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" href="https://news.ycombinator.com/submitlink?u=https://tarunbatra.com/blog/javascript/Pitfalls-of-Mocha-s-built-in-Promise-support/&t=Pitfalls of Mocha&#39;s built-in Promise support"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2025
+    Tarun Batra
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="../../../index.html">Home</a></li>
+         
+          <li><a href="../../.././about/">About</a></li>
+         
+          <li><a href="../../.././blog/">Blog</a></li>
+         
+          <li><a href="../../.././resume/">Resume</a></li>
+         
+          <li><a href="../../../search/">Search</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+  
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.8.1/css/justifiedGallery.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/> 
+   
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js" crossorigin="anonymous"></script> 
+   
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="../../../js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-47797084-2"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-47797084-2');
+    </script>
+
+<!-- Microsoft clarity -->
+
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, 'clarity', 'script', '3w9d6u9uag');
+</script>
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'tarunbatra';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+
+</body>
+</html>
