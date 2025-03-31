@@ -27,7 +27,9 @@ Other than tech, I like motorcycles and used to go on roaadtrips when I still ha
 At [Okta](https://okta.com), I am part of the OIG team and is directly involved in shipping access requests and governance related features. Other than working on my familiar tech-stack of Node.js and MongoDB, I picked up Terraform and GCP services like GCP Pub/Sub and GCP Cloud Tasks as well. I enjoy the challenges around K8s scaling and asynchronous task procesing here. Outside work, I am also active with Okta 4 Good and regularly volunteers at the GVFB food bank.
 
 <div class="gallery row">
+
   ![okta](https://tarunbatra.com/data/images/about/okta1.jpg)
+
 </div>
 
 ## Senior Software Engineer at WonderFI, Vancouver [Mar 2022 - May 2022]
