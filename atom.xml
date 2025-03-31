@@ -277,9 +277,9 @@
     <category term="security" scheme="https://tarunbatra.com/categories/security/"/>
     
     
-    <category term="security" scheme="https://tarunbatra.com/tags/security/"/>
-    
     <category term="architecture" scheme="https://tarunbatra.com/tags/architecture/"/>
+    
+    <category term="security" scheme="https://tarunbatra.com/tags/security/"/>
     
   </entry>
   
@@ -304,9 +304,9 @@
     <category term="architecture" scheme="https://tarunbatra.com/categories/architecture/"/>
     
     
-    <category term="architecture" scheme="https://tarunbatra.com/tags/architecture/"/>
-    
     <category term="microservices" scheme="https://tarunbatra.com/tags/microservices/"/>
+    
+    <category term="architecture" scheme="https://tarunbatra.com/tags/architecture/"/>
     
   </entry>
   
@@ -410,9 +410,9 @@
     <category term="javascript" scheme="https://tarunbatra.com/categories/javascript/"/>
     
     
-    <category term="meteor" scheme="https://tarunbatra.com/tags/meteor/"/>
-    
     <category term="javascript" scheme="https://tarunbatra.com/tags/javascript/"/>
+    
+    <category term="meteor" scheme="https://tarunbatra.com/tags/meteor/"/>
     
   </entry>
   

@@ -274,9 +274,9 @@
       
         <tags>
             
-            <tag> security </tag>
-            
             <tag> architecture </tag>
+            
+            <tag> security </tag>
             
         </tags>
       
@@ -301,9 +301,9 @@
       
         <tags>
             
-            <tag> architecture </tag>
-            
             <tag> microservices </tag>
+            
+            <tag> architecture </tag>
             
         </tags>
       
@@ -411,9 +411,9 @@
       
         <tags>
             
-            <tag> meteor </tag>
-            
             <tag> javascript </tag>
+            
+            <tag> meteor </tag>
             
         </tags>
       
