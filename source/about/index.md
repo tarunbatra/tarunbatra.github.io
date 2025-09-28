@@ -29,6 +29,7 @@ At [Okta](https://okta.com), I am part of the OIG team and is directly involved 
 <div class="gallery row">
 
   ![okta](https://tarunbatra.com/data/images/about/okta1.jpg)
+  ![okta](https://tarunbatra.com/data/images/about/okta2.jpg)
 
 </div>
 

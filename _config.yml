@@ -5,10 +5,10 @@
 # Site
 title: Tarun Batra
 subtitle: Developer
-description: Backend developer slaying problems with OSS ⚔️.
+description: Engineering distributed services that scale.
 author: Tarun Batra
 language: en
-timezone: Europe/Stockholm
+timezone: America/Vancouver
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
@@ -86,7 +86,6 @@ theme_config:
     # Contact: mailto:me@tarunbatra.com
   social_links:
     github-alt: https://github.com/tarunbatra
-    twitter: https://twitter.com/tarunbatra
     linkedin: https://www.linkedin.com/in/tarunbatra00
     stack-overflow: https://stackoverflow.com/users/2751596/tbking
     rss: ./atom.xml
