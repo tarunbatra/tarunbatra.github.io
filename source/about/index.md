@@ -23,7 +23,7 @@ Other than tech, I like motorcycles and used to go on roaadtrips when I still ha
 
 # Work
 
-## Senior Software Engineer at Okta, Vancouver [Sept 2022 - Present]
+## Staff/Senior Software Engineer at Okta, Vancouver [Sept 2022 - Present]
 At [Okta](https://okta.com), I am part of the OIG team and is directly involved in shipping access requests and governance related features. Other than working on my familiar tech-stack of Node.js and MongoDB, I picked up Terraform and GCP services like GCP Pub/Sub and GCP Cloud Tasks as well. I enjoy the challenges around K8s scaling and asynchronous task procesing here. Outside work, I am also active with Okta 4 Good and regularly volunteer at the GVFB food bank.
 
 <div class="gallery row">
@@ -45,7 +45,6 @@ At [Instabox](https://instabox.se), I was part of the Merchants and Communicatio
   ![instabox](https://tarunbatra.com/data/images/about/instabox1.jpg)
   ![instabox](https://tarunbatra.com/data/images/about/instabox2.jpg)
   ![instabox](https://tarunbatra.com/data/images/about/instabox3.jpg)
-  ![instabox](https://tarunbatra.com/data/images/about/instabox4.jpg)
 
 </div>
 
