@@ -54,7 +54,7 @@
     <link rel="canonical" href="https://tarunbatra.com/blog/data/Restore-deleted-MongoDB-documents-using-Oplog/"/>
 	<!-- mathjax -->
 	
-<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="atom.xml" title="Tarun Batra" type="application/atom+xml">
+<meta name="generator" content="Hexo 8.1.1"><link rel="alternate" href="atom.xml" title="Tarun Batra" type="application/atom+xml">
 </head>
 
 <body class="max-width mx-auto px3 ltr">
@@ -97,7 +97,7 @@
       <span id="i-share" class="info" style="display:none;">Share post</span>
     </span>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#Oplog-is-amazing"><span class="toc-number">1.</span> <span class="toc-text">Oplog is amazing</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Restore-backup"><span class="toc-number"></span> <span class="toc-text">Restore backup</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Find-the-faulty-query-queries"><span class="toc-number"></span> <span class="toc-text">Find the faulty query&#x2F;queries</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Take-a-dump-of-oplog"><span class="toc-number"></span> <span class="toc-text">Take a dump of oplog</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Restore-from-Oplog"><span class="toc-number"></span> <span class="toc-text">Restore from Oplog</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Selective-restore"><span class="toc-number"></span> <span class="toc-text">Selective restore</span></a>
+      <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#Oplog-is-amazing"><span class="toc-number">1.</span> <span class="toc-text">Oplog is amazing</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Restore-backup"><span class="toc-number">2.</span> <span class="toc-text">Restore backup</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Find-the-faulty-query-queries"><span class="toc-number">3.</span> <span class="toc-text">Find the faulty query&#x2F;queries</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Take-a-dump-of-oplog"><span class="toc-number">4.</span> <span class="toc-text">Take a dump of oplog</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Restore-from-Oplog"><span class="toc-number">5.</span> <span class="toc-text">Restore from Oplog</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Selective-restore"><span class="toc-number">6.</span> <span class="toc-text">Selective restore</span></a></li></ol>
     </div>
   </span>
   <br/>
@@ -233,7 +233,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#Oplog-is-amazing"><span class="toc-number">1.</span> <span class="toc-text">Oplog is amazing</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Restore-backup"><span class="toc-number"></span> <span class="toc-text">Restore backup</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Find-the-faulty-query-queries"><span class="toc-number"></span> <span class="toc-text">Find the faulty query&#x2F;queries</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Take-a-dump-of-oplog"><span class="toc-number"></span> <span class="toc-text">Take a dump of oplog</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Restore-from-Oplog"><span class="toc-number"></span> <span class="toc-text">Restore from Oplog</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Selective-restore"><span class="toc-number"></span> <span class="toc-text">Selective restore</span></a>
+      <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#Oplog-is-amazing"><span class="toc-number">1.</span> <span class="toc-text">Oplog is amazing</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Restore-backup"><span class="toc-number">2.</span> <span class="toc-text">Restore backup</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Find-the-faulty-query-queries"><span class="toc-number">3.</span> <span class="toc-text">Find the faulty query&#x2F;queries</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Take-a-dump-of-oplog"><span class="toc-number">4.</span> <span class="toc-text">Take a dump of oplog</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Restore-from-Oplog"><span class="toc-number">5.</span> <span class="toc-text">Restore from Oplog</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Selective-restore"><span class="toc-number">6.</span> <span class="toc-text">Selective restore</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
@@ -269,7 +269,7 @@
     Copyright &copy;
     
     
-    2016-2025
+    2016-2026
     Tarun Batra
   </div>
   <div class="footer-right">
