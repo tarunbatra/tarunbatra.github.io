@@ -4,27 +4,6 @@
   
     
     <entry>
-      <title>Smart Home: For those who live in it / that only connect with you</title>
-      <link href="/blog/x/smart-home-for-those-who-live-in-it/"/>
-      <url>/blog/x/smart-home-for-those-who-live-in-it/</url>
-      
-        <content type="html"><![CDATA[<p>Smart homes are where the home knows what’s haeppening and adjusts itself to suit those conditions. We visualize it as blinds automatically getting rolled up to wkae us up; lights turn on as we walk in a room; temperature changes as the day pass by.</p><p>The way to achieve this vision is to buy into ecosystems like Google Home, Apple Home, Amazon Echo - all of which are essentially a bunch of devices connected to a controller in your home.</p><p>Struggle b&#x2F;w control and features</p><p>Risks of the ecosystem</p><ul><li>bricked devices</li><li>locked out of accounts</li></ul><p>Alternative</p><ul><li>Open Home Foundation - HomeAssistant</li><li>Tools<ul><li>Raspberry Pi</li><li>protocol</li><li>sensors</li></ul></li></ul><p>Cost comparison</p><p>Bonus edition: AdGuard</p>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> tools </tag>
-            
-            <tag> thoughts </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>Behind the scenes at Access Requests: Worker tasks</title>
       <link href="/blog/x/behind-the-scenes-at-access-requests-worker-tasks/"/>
       <url>/blog/x/behind-the-scenes-at-access-requests-worker-tasks/</url>

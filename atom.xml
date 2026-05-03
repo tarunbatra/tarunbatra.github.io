@@ -10,23 +10,7 @@
   <rights>All rights reserved 2026, Tarun Batra</rights>
   <subtitle>Developer</subtitle>
   <title>Tarun Batra</title>
-  <updated>2026-04-15T05:34:19.256Z</updated>
-  <entry>
-    <author>
-      <name>Tarun Batra</name>
-    </author>
-    <category term="tools" scheme="https://tarunbatra.com/tags/tools/"/>
-    <category term="thoughts" scheme="https://tarunbatra.com/tags/thoughts/"/>
-    <content>
-      <![CDATA[<p>Smart homes are where the home knows what’s haeppening and adjusts itself to suit those conditions. We visualize it as blinds automatically getting rolled up to wkae us up; lights turn on as we walk in a room; temperature changes as the day pass by.</p><p>The way to achieve this vision is to buy into ecosystems like Google Home, Apple Home, Amazon Echo - all of which are essentially a bunch of devices connected to a controller in your home.</p><p>Struggle b&#x2F;w control and features</p><p>Risks of the ecosystem</p><ul><li>bricked devices</li><li>locked out of accounts</li></ul><p>Alternative</p><ul><li>Open Home Foundation - HomeAssistant</li><li>Tools<ul><li>Raspberry Pi</li><li>protocol</li><li>sensors</li></ul></li></ul><p>Cost comparison</p><p>Bonus edition: AdGuard</p>]]>
-    </content>
-    <id>https://tarunbatra.com/blog/x/smart-home-for-those-who-live-in-it/</id>
-    <link href="https://tarunbatra.com/blog/x/smart-home-for-those-who-live-in-it/"/>
-    <published>2026-04-14T16:00:00.000Z</published>
-    <summary>TBD</summary>
-    <title>Smart Home: For those who live in it / that only connect with you</title>
-    <updated>2026-04-15T05:34:19.256Z</updated>
-  </entry>
+  <updated>2025-12-11T05:44:35.640Z</updated>
   <entry>
     <author>
       <name>Tarun Batra</name>
